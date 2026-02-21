@@ -19,12 +19,14 @@
   let visibleCount = 0;
   let currentCategory = 'all';
   let showFavoritesOnly = false;
+  var serverFavoritesIds = null;
 
   function getFavorites() {
+    if (window.getCurrentUser && window.getCurrentUser() && Array.isArray(serverFavoritesIds)) return serverFavoritesIds;
     try {
-      const raw = localStorage.getItem(FAVORITES_KEY);
+      var raw = localStorage.getItem(FAVORITES_KEY);
       return raw ? JSON.parse(raw) : [];
-    } catch {
+    } catch (e) {
       return [];
     }
   }
@@ -33,9 +35,43 @@
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids));
   }
 
+  function fetchServerFavorites() {
+    if (!window.getCurrentUser || !window.getCurrentUser()) return Promise.resolve();
+    return fetch('/api/favorites', { credentials: 'include' })
+      .then(function (r) {
+        if (r.ok) return r.json();
+        return [];
+      })
+      .then(function (ids) {
+        serverFavoritesIds = ids;
+        renderVisibleCards();
+      })
+      .catch(function () {
+        serverFavoritesIds = [];
+      });
+  }
+
   function toggleFavorite(id) {
-    const fav = getFavorites();
-    const idx = fav.indexOf(id);
+    if (window.getCurrentUser && window.getCurrentUser()) {
+      fetch('/api/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ shopId: id })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && Array.isArray(serverFavoritesIds)) {
+            if (data.favorited) serverFavoritesIds.push(id);
+            else serverFavoritesIds = serverFavoritesIds.filter(function (x) { return x !== id; });
+          }
+          renderVisibleCards();
+        })
+        .catch(function () { renderVisibleCards(); });
+      return;
+    }
+    var fav = getFavorites();
+    var idx = fav.indexOf(id);
     if (idx === -1) fav.push(id);
     else fav.splice(idx, 1);
     setFavorites(fav);
@@ -43,7 +79,7 @@
   }
 
   function isFavorited(id) {
-    return getFavorites().includes(id);
+    return getFavorites().indexOf(id) !== -1;
   }
 
   function getComments(shopId) {
@@ -92,6 +128,7 @@
     var sidebar = document.getElementById('comment-sidebar');
     var titleEl = document.getElementById('comment-sidebar-title');
     var overlay = document.getElementById('comment-sidebar-overlay');
+    var commentForm = document.getElementById('comment-form');
     if (titleEl) titleEl.textContent = 'Comments – ' + (shop.name || 'Shop');
     if (sidebar) {
       sidebar.classList.add('is-open');
@@ -101,7 +138,16 @@
       overlay.classList.add('is-open');
       overlay.setAttribute('aria-hidden', 'false');
     }
-    renderCommentList(shop.id);
+    if (window.getCurrentUser && window.getCurrentUser()) {
+      if (commentForm) commentForm.style.display = '';
+      fetch('/api/shops/' + encodeURIComponent(shop.id) + '/comments', { credentials: 'include' })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (comments) { renderCommentListFromApi(shop.id, comments); })
+        .catch(function () { renderCommentListFromApi(shop.id, []); });
+    } else {
+      if (commentForm) commentForm.style.display = 'none';
+      renderCommentList(shop.id);
+    }
     var input = document.getElementById('comment-input');
     if (input) input.value = '';
   }
@@ -125,11 +171,30 @@
     if (!listEl) return;
     var comments = getComments(shopId);
     listEl.innerHTML = '';
+    var signInMsg = document.createElement('p');
+    signInMsg.className = 'comment-signin-msg';
+    signInMsg.textContent = 'Sign in to comment.';
+    listEl.appendChild(signInMsg);
     comments.forEach(function (c) {
       var div = document.createElement('div');
       div.className = 'comment-item';
-      var dateStr = (c.date) ? new Date(c.date).toLocaleDateString() : '';
-      div.innerHTML = '<p class="comment-item-text">' + escapeHtml(c.text) + '</p><p class="comment-item-date">' + escapeHtml(dateStr) + '</p>';
+      var dateStr = (c.date || c.created_at) ? new Date(c.date || c.created_at).toLocaleDateString() : '';
+      var by = (c.username) ? ' <span class="comment-item-by">' + escapeHtml(c.username) + '</span>' : '';
+      div.innerHTML = '<p class="comment-item-text">' + escapeHtml(c.text) + by + '</p><p class="comment-item-date">' + escapeHtml(dateStr) + '</p>';
+      listEl.appendChild(div);
+    });
+  }
+
+  function renderCommentListFromApi(shopId, comments) {
+    var listEl = document.getElementById('comment-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+    (comments || []).forEach(function (c) {
+      var div = document.createElement('div');
+      div.className = 'comment-item';
+      var dateStr = (c.created_at) ? new Date(c.created_at).toLocaleDateString() : '';
+      var by = (c.username) ? ' <span class="comment-item-by">' + escapeHtml(c.username) + '</span>' : '';
+      div.innerHTML = '<p class="comment-item-text">' + escapeHtml(c.text) + by + '</p><p class="comment-item-date">' + escapeHtml(dateStr) + '</p>';
       listEl.appendChild(div);
     });
   }
@@ -376,6 +441,34 @@
       var input = document.getElementById('comment-input');
       var text = (input && input.value && input.value.trim()) || '';
       if (!text) return;
+      if (window.getCurrentUser && window.getCurrentUser()) {
+        fetch('/api/shops/' + encodeURIComponent(currentCommentShopId) + '/comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ text: text })
+        })
+          .then(function (r) {
+            if (r.ok) return r.json();
+            throw new Error('Failed to post');
+          })
+          .then(function (newComment) {
+            var listEl = document.getElementById('comment-list');
+            if (listEl && newComment) {
+              var div = document.createElement('div');
+              div.className = 'comment-item';
+              var dateStr = (newComment.created_at) ? new Date(newComment.created_at).toLocaleDateString() : '';
+              var by = (newComment.username) ? ' <span class="comment-item-by">' + escapeHtml(newComment.username) + '</span>' : '';
+              div.innerHTML = '<p class="comment-item-text">' + escapeHtml(newComment.text) + by + '</p><p class="comment-item-date">' + escapeHtml(dateStr) + '</p>';
+              listEl.appendChild(div);
+            }
+            if (input) input.value = '';
+          })
+          .catch(function () {
+            if (input) input.value = '';
+          });
+        return;
+      }
       var comments = getComments(currentCommentShopId);
       comments.push({ text: text, date: new Date().toISOString() });
       setComments(currentCommentShopId, comments);
@@ -385,16 +478,29 @@
   }
 
   function init() {
-    fetch('/api/shops')
+    fetch('/api/shops', { credentials: 'include' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
         allShops = Array.isArray(data) ? data : [];
-        renderVisibleCards();
+        if (window.getCurrentUser && window.getCurrentUser()) {
+          fetchServerFavorites();
+        } else {
+          renderVisibleCards();
+        }
       })
       .catch(function () {
         noResults.hidden = false;
         noResults.textContent = 'Could not load shops.';
       });
+    window.addEventListener('auth-change', function () {
+      if (window.getCurrentUser && window.getCurrentUser()) {
+        serverFavoritesIds = null;
+        fetchServerFavorites();
+      } else {
+        serverFavoritesIds = null;
+        renderVisibleCards();
+      }
+    });
   }
 
   init();
