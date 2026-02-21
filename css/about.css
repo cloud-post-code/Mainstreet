@@ -1,0 +1,220 @@
+/* About Us page – mission, how it works, testimonial, history */
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.about-section {
+  margin-bottom: 3rem;
+}
+
+.about-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Mission (top slogan) */
+.about-mission {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.about-section-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(29, 118, 30, 0.12);
+  border-radius: 50%;
+  color: var(--brand-green);
+}
+
+.about-section-icon .material-icons {
+  font-size: 2rem;
+}
+
+.about-mission-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: var(--text-dark);
+}
+
+.about-mission-statement {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section titles with icon */
+.about-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--text-dark);
+}
+
+.about-title-icon {
+  font-size: 1.75rem;
+  color: var(--brand-green);
+}
+
+/* Image placeholders */
+.about-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 280px;
+  background: rgba(29, 118, 30, 0.1);
+  border: 2px dashed rgba(29, 118, 30, 0.3);
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Testimonials 2×2 grid */
+.about-testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.about-testimonial-card {
+  padding: 1.25rem;
+  background: rgba(29, 118, 30, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(29, 118, 30, 0.15);
+}
+
+.about-testimonial-card .about-quote {
+  margin-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.about-testimonial-card .about-quote-attribution {
+  font-size: 0.85rem;
+}
+
+.about-testimonial-image {
+  aspect-ratio: 1;
+  width: 80px;
+  height: 80px;
+  max-width: none;
+  max-height: none;
+  margin-bottom: 0.75rem;
+  border-radius: 50%;
+}
+
+@media (max-width: 560px) {
+  .about-testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Body text */
+.about-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin: 0 0 1rem;
+}
+
+.about-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Testimonial quote */
+.about-quote {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--brand-gold);
+  font-style: italic;
+}
+
+.about-quote-attribution {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Team (3 people) */
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.about-team-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: rgba(29, 118, 30, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(29, 118, 30, 0.15);
+}
+
+.about-team-image {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 160px;
+  margin: 0 auto 1rem;
+  background: rgba(29, 118, 30, 0.1);
+  border: 2px dashed rgba(29, 118, 30, 0.3);
+  border-radius: 50%;
+}
+
+.about-team-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: var(--text-dark);
+}
+
+.about-team-role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand-green);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.about-team-bio {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .about-team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About Us button yellow only on about page – independent from Favorites */
+.site-header .header-actions a.about-link.active {
+  background: var(--brand-gold);
+  color: var(--text-dark);
+  border-color: var(--brand-gold);
+}
+

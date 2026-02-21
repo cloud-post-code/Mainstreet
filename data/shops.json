@@ -1,0 +1,162 @@
+[
+  {
+    "id": "1",
+    "name": "Lorem Ipsum",
+    "address": "123 Main Street",
+    "city": "Downtown",
+    "category": "Clothing Boutique",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nulla dolor. Vivamus feugiat justo ipsum, pharetra rutrum neque pharetra eget. Nulla placerat imperdiet mauris, ac iaculis leo luctus at.",
+    "link": "https://example.com/shop1",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Shop",
+    "productPhotos": [
+      "https://placehold.co/200x200/1d761e/fefff5?text=1",
+      "https://placehold.co/200x200/1d761e/fefff5?text=2",
+      "https://placehold.co/200x200/1d761e/fefff5?text=3",
+      "https://placehold.co/200x200/1d761e/fefff5?text=4"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "The Gift Nook",
+    "address": "456 Oak Ave",
+    "city": "Midtown",
+    "category": "Gifts",
+    "description": "Mauris convallis felis nec mollis mollis. Sed risus enim, facilisis in lobortis nec, venenatis non est. Proin pretium lectus tempor tortor facilisis, at interdum nunc congue.",
+    "link": "https://example.com/shop2",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Gifts",
+    "productPhotos": [
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=A",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=B",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=C",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=D"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Vintage Finds",
+    "address": "789 Elm St",
+    "city": "Old Town",
+    "category": "Vintage / Thrift",
+    "description": "Suspendisse maximus enim et dolor maximus cursus. Quisque non nibh feugiat, scelerisque ipsum at, facilisis lacus. Discover unique vintage pieces for your home and wardrobe.",
+    "link": "https://example.com/shop3",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Vintage",
+    "productPhotos": [
+      "https://placehold.co/200x200/fefff5/1d761e?text=V1",
+      "https://placehold.co/200x200/fefff5/1d761e?text=V2",
+      "https://placehold.co/200x200/fefff5/1d761e?text=V3",
+      "https://placehold.co/200x200/fefff5/1d761e?text=V4"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Paper & Pen",
+    "address": "321 Maple Dr",
+    "city": "Arts District",
+    "category": "Stationary",
+    "description": "Fine stationery and writing supplies. Nulla placerat imperdiet mauris, ac iaculis leo luctus at. Mauris convallis felis nec mollis mollis.",
+    "link": "https://example.com/shop4",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Stationary",
+    "productPhotos": [
+      "https://placehold.co/200x200/1d761e/fefff5?text=P1",
+      "https://placehold.co/200x200/1d761e/fefff5?text=P2",
+      "https://placehold.co/200x200/1d761e/fefff5?text=P3",
+      "https://placehold.co/200x200/1d761e/fefff5?text=P4"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Home & Hearth",
+    "address": "555 Cedar Ln",
+    "city": "Downtown",
+    "category": "Home Good",
+    "description": "Curated home goods and decor. Suspendisse maximus enim et dolor maximus cursus. Quisque non nibh feugiat, scelerisque ipsum at, facilisis lacus.",
+    "link": "https://example.com/shop5",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Home",
+    "productPhotos": [
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=H1",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=H2",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=H3",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=H4"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Bella Boutique",
+    "address": "100 Fashion Way",
+    "city": "Midtown",
+    "category": "Clothing Boutique",
+    "description": "Contemporary women's fashion and accessories. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nulla dolor.",
+    "link": "https://example.com/shop6",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Bella",
+    "productPhotos": [
+      "https://placehold.co/200x200/1d761e/fefff5?text=B1",
+      "https://placehold.co/200x200/1d761e/fefff5?text=B2",
+      "https://placehold.co/200x200/1d761e/fefff5?text=B3",
+      "https://placehold.co/200x200/1d761e/fefff5?text=B4"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Treasure Chest Gifts",
+    "address": "222 Present Blvd",
+    "city": "Old Town",
+    "category": "Gifts",
+    "description": "Unique gifts for every occasion. Vivamus feugiat justo ipsum, pharetra rutrum neque pharetra eget. Nulla placerat imperdiet mauris.",
+    "link": "https://example.com/shop7",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Treasure",
+    "productPhotos": [
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=T1",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=T2",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=T3",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=T4"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Retro Revival",
+    "address": "888 Nostalgia Rd",
+    "city": "Downtown",
+    "category": "Vintage / Thrift",
+    "description": "Vintage clothing and thrift treasures. Mauris convallis felis nec mollis mollis. Sed risus enim, facilisis in lobortis nec.",
+    "link": "https://example.com/shop8",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Retro",
+    "productPhotos": [
+      "https://placehold.co/200x200/fefff5/1d761e?text=R1",
+      "https://placehold.co/200x200/fefff5/1d761e?text=R2",
+      "https://placehold.co/200x200/fefff5/1d761e?text=R3",
+      "https://placehold.co/200x200/fefff5/1d761e?text=R4"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Ink & Paper Co",
+    "address": "777 Script St",
+    "city": "Arts District",
+    "category": "Stationary",
+    "description": "Artisan stationery and custom invitations. Proin pretium lectus tempor tortor facilisis, at interdum nunc congue.",
+    "link": "https://example.com/shop9",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Ink",
+    "productPhotos": [
+      "https://placehold.co/200x200/1d761e/fefff5?text=I1",
+      "https://placehold.co/200x200/1d761e/fefff5?text=I2",
+      "https://placehold.co/200x200/1d761e/fefff5?text=I3",
+      "https://placehold.co/200x200/1d761e/fefff5?text=I4"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Cozy Living",
+    "address": "999 Comfort Ave",
+    "city": "Midtown",
+    "category": "Home Good",
+    "description": "Furniture and home accents for modern living. Suspendisse maximus enim et dolor maximus cursus. Quisque non nibh feugiat.",
+    "link": "https://example.com/shop10",
+    "shopImage": "https://placehold.co/800x500/1d761e/fefff5?text=Cozy",
+    "productPhotos": [
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=C1",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=C2",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=C3",
+      "https://placehold.co/200x200/f8cf0a/1d761e?text=C4"
+    ]
+  }
+]

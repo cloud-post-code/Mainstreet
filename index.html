@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main St. – Shop Profiles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <a href="#" class="logo-link" id="logo-link" aria-label="Main St. Home">
+        <span class="header-title">MAIN ST.</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a href="about.html" class="header-btn about-link">
+        <span class="material-icons">info</span>
+        <span class="header-btn-label">About Us</span>
+      </a>
+      <a href="#" class="header-btn favorites-link" id="favorites-link">
+        <span class="material-icons">favorite</span>
+        <span class="header-btn-label">Favorites</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="controls">
+      <div class="search-wrap">
+        <span class="search-icon material-icons" aria-hidden="true">search</span>
+        <label for="search-input" class="visually-hidden">Search by name</label>
+        <input type="search" id="search-input" class="search-input" placeholder="Search by name" autocomplete="off">
+      </div>
+      <div class="filters" role="group" aria-label="Shop category filters">
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="Clothing Boutique">Clothing Boutique</button>
+        <button type="button" class="filter-btn" data-filter="Gifts">Gifts</button>
+        <button type="button" class="filter-btn" data-filter="Vintage / Thrift">Vintage / Thrift</button>
+        <button type="button" class="filter-btn" data-filter="Stationary">Stationary</button>
+        <button type="button" class="filter-btn" data-filter="Home Good">Home Good</button>
+      </div>
+    </section>
+
+    <div class="shop-grid" id="shop-grid"></div>
+    <div class="scroll-sentinel" id="scroll-sentinel" aria-hidden="true"></div>
+    <p class="loading-indicator" id="loading-indicator" hidden>Loading more shops…</p>
+    <p class="no-results" id="no-results" hidden>No shops match your search or filters.</p>
+  </main>
+
+  <!-- Share modal (per-card: Copy link = shop link, optional Share via) -->
+  <div class="share-modal-overlay" id="share-modal-overlay" aria-hidden="true">
+    <div class="share-modal" role="dialog" aria-label="Share options">
+      <button type="button" class="share-modal-close" id="share-modal-close" aria-label="Close">
+        <span class="material-icons">close</span>
+      </button>
+      <h3 class="share-modal-title">Share this shop</h3>
+      <div class="share-modal-actions">
+        <button type="button" class="share-copy-btn" id="share-copy-btn">Copy link</button>
+        <button type="button" class="share-via-btn" id="share-via-btn" style="display:none">Share via…</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment sidebar -->
+  <div class="comment-sidebar-overlay" id="comment-sidebar-overlay" aria-hidden="true"></div>
+  <aside class="comment-sidebar" id="comment-sidebar" aria-label="Comments">
+    <div class="comment-sidebar-header">
+      <h3 class="comment-sidebar-title" id="comment-sidebar-title">Comments</h3>
+      <button type="button" class="comment-sidebar-close" id="comment-sidebar-close" aria-label="Close">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="comment-list" id="comment-list"></div>
+    <form class="comment-form" id="comment-form">
+      <textarea id="comment-input" class="comment-input" placeholder="Write a comment…" rows="3" required></textarea>
+      <button type="submit" class="comment-submit">Submit</button>
+    </form>
+  </aside>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
