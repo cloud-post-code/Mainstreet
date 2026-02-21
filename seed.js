@@ -9,9 +9,16 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
+const useSsl =
+  process.env.DISABLE_SSL === '1' ||
+  DATABASE_URL.includes('localhost') ||
+  DATABASE_URL.includes('rlwy.net')
+    ? false
+    : { rejectUnauthorized: false };
+
 const pool = new Pool({
   connectionString: DATABASE_URL,
-  ssl: DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
+  ssl: useSsl
 });
 
 const CREATE_TABLE = `

@@ -2,6 +2,6 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "npm start"
+startCommand = "npm run seed && npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
