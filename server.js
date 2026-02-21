@@ -2,6 +2,7 @@ const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -10,6 +11,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'mainstreet-dev-secret-change-in-production';
 
+// Security headers (common on Railway: HSTS, X-Content-Type-Options, etc.)
+app.use(helmet({ contentSecurityPolicy: false }));
 // CORS: allow credentials (cookies) from same origin; adjust origin in production
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
