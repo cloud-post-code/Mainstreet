@@ -400,11 +400,26 @@ body {
   margin-bottom: 2rem;
 }
 
+.shop-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.shop-card-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
 .shop-card-title {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 700;
-  margin: 0 0 0.5rem;
+  margin: 0;
   color: var(--text-dark);
 }
 
@@ -541,29 +556,6 @@ body {
 
 .product-cell:hover img {
   transform: scale(1.1);
-}
-
-.product-cell-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s;
-  display: flex;
-  align-items: flex-end;
-  padding: 0.5rem;
-}
-
-.product-cell:hover .product-cell-overlay {
-  opacity: 1;
-}
-
-.product-cell-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #fff;
 }
 
 .view-more-btn {

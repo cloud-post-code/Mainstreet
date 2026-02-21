@@ -48,6 +48,7 @@ const CREATE_SHOPS = `
     description TEXT,
     link TEXT,
     shop_image TEXT,
+    logo TEXT,
     product_photos JSONB
   );
 `;
@@ -84,8 +85,8 @@ const CREATE_FAVORITES = `
 `;
 
 const SHOP_UPSERT = `
-  INSERT INTO shops (id, name, address, city, category, description, link, shop_image, product_photos)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  INSERT INTO shops (id, name, address, city, category, description, link, shop_image, logo, product_photos)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
   ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     address = EXCLUDED.address,
@@ -94,6 +95,7 @@ const SHOP_UPSERT = `
     description = EXCLUDED.description,
     link = EXCLUDED.link,
     shop_image = EXCLUDED.shop_image,
+    logo = EXCLUDED.logo,
     product_photos = EXCLUDED.product_photos;
 `;
 
@@ -127,10 +129,11 @@ function loadShopsFromCsv(csvPath) {
     name: (row['Boutique Name'] || '').trim() || null,
     address: (row.Address || '').trim() || null,
     city: parseCityFromAddress(row.Address),
-    category: null,
+    category: (row.Category || '').trim() || null,
     description: (row['50-Word Description'] || '').trim() || null,
     link: (row.Website || '').trim() || null,
     shop_image: (row['Hero Image'] || '').trim() || null,
+    logo: (row.Logo || '').trim() || null,
     product_photos: productPhotosFromRow(row)
   })).filter((s) => s.id);
 }
@@ -147,6 +150,7 @@ function loadShopsFromJson(jsonPath) {
     description: s.description ?? null,
     link: s.link ?? null,
     shop_image: s.shopImage ?? null,
+    logo: s.logo ?? null,
     product_photos: s.productPhotos || null
   }));
 }
@@ -172,6 +176,7 @@ async function runSeedShops() {
       s.description,
       s.link,
       s.shop_image,
+      s.logo,
       s.product_photos ? JSON.stringify(s.product_photos) : null
     ]);
   }
@@ -336,7 +341,7 @@ app.get('/api/shops', async (req, res) => {
   if (pool) {
     try {
       const result = await pool.query(
-        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", product_photos AS "productPhotos" FROM shops ORDER BY id'
+        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos" FROM shops ORDER BY id'
       );
       return res.json(result.rows);
     } catch (err) {
