@@ -1,6 +1,8 @@
 const path = require('path');
+const fs = require('fs');
 const crypto = require('crypto');
 const express = require('express');
+const { parse } = require('csv-parse/sync');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
@@ -80,6 +82,115 @@ const CREATE_FAVORITES = `
     PRIMARY KEY (user_id, shop_id)
   );
 `;
+
+const SHOP_UPSERT = `
+  INSERT INTO shops (id, name, address, city, category, description, link, shop_image, product_photos)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    address = EXCLUDED.address,
+    city = EXCLUDED.city,
+    category = EXCLUDED.category,
+    description = EXCLUDED.description,
+    link = EXCLUDED.link,
+    shop_image = EXCLUDED.shop_image,
+    product_photos = EXCLUDED.product_photos;
+`;
+
+const SEED_PLACEHOLDER_IMAGE = 'https://placehold.co/200x200/1d761e/fefff5?text=Product';
+
+function parseCityFromAddress(addressStr) {
+  if (!addressStr || typeof addressStr !== 'string') return null;
+  const parts = addressStr.split(',').map((p) => p.trim()).filter(Boolean);
+  if (parts.length >= 2) return parts[1];
+  return null;
+}
+
+function productPhotosFromRow(row) {
+  const urls = [];
+  for (let i = 1; i <= 6; i++) {
+    const val = row['Product Images ' + i];
+    if (val && typeof val === 'string' && val.trim().toLowerCase().startsWith('http')) {
+      urls.push(val.trim());
+    } else {
+      urls.push(SEED_PLACEHOLDER_IMAGE);
+    }
+  }
+  return urls;
+}
+
+function loadShopsFromCsv(csvPath) {
+  const raw = fs.readFileSync(csvPath, 'utf8');
+  const rows = parse(raw, { columns: true, skip_empty_lines: true });
+  return rows.map((row) => ({
+    id: (row.ID || '').trim() || null,
+    name: (row['Boutique Name'] || '').trim() || null,
+    address: (row.Address || '').trim() || null,
+    city: parseCityFromAddress(row.Address),
+    category: null,
+    description: (row['50-Word Description'] || '').trim() || null,
+    link: (row.Website || '').trim() || null,
+    shop_image: (row['Hero Image'] || '').trim() || null,
+    product_photos: productPhotosFromRow(row)
+  })).filter((s) => s.id);
+}
+
+function loadShopsFromJson(jsonPath) {
+  const raw = fs.readFileSync(jsonPath, 'utf8');
+  const data = JSON.parse(raw);
+  return data.map((s) => ({
+    id: s.id,
+    name: s.name ?? null,
+    address: s.address ?? null,
+    city: s.city ?? null,
+    category: s.category ?? null,
+    description: s.description ?? null,
+    link: s.link ?? null,
+    shop_image: s.shopImage ?? null,
+    product_photos: s.productPhotos || null
+  }));
+}
+
+async function runSeedShops() {
+  const csvPath = path.join(__dirname, 'data', 'boutique-data.csv');
+  const jsonPath = path.join(__dirname, 'data', 'shops.json');
+  let shops;
+  if (fs.existsSync(csvPath)) {
+    shops = loadShopsFromCsv(csvPath);
+  } else if (fs.existsSync(jsonPath)) {
+    shops = loadShopsFromJson(jsonPath);
+  } else {
+    return { error: 'No data file found (data/boutique-data.csv or data/shops.json)' };
+  }
+  for (const s of shops) {
+    await pool.query(SHOP_UPSERT, [
+      s.id,
+      s.name,
+      s.address,
+      s.city,
+      s.category,
+      s.description,
+      s.link,
+      s.shop_image,
+      s.product_photos ? JSON.stringify(s.product_photos) : null
+    ]);
+  }
+  return { count: shops.length };
+}
+
+// Admin required: must be signed in and is_admin in DB
+async function adminRequired(req, res, next) {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  try {
+    const result = await pool.query('SELECT is_admin FROM users WHERE id = $1', [req.user.id]);
+    const row = result.rows[0];
+    if (!row || !row.is_admin) return res.status(403).json({ error: 'Admin only' });
+    next();
+  } catch (err) {
+    console.error('Admin check error:', err.message);
+    res.status(500).json({ error: 'Failed to verify admin' });
+  }
+}
 
 async function ensureTables() {
   if (!pool) return;
@@ -323,6 +434,19 @@ app.post('/api/favorites', authRequired, async (req, res) => {
   } catch (err) {
     console.error('Favorites toggle error:', err.message);
     return res.status(500).json({ error: 'Failed to update favorite' });
+  }
+});
+
+// POST /api/admin/seed – sync shop data from CSV/JSON (admin only)
+app.post('/api/admin/seed', authRequired, adminRequired, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  try {
+    const result = await runSeedShops();
+    if (result.error) return res.status(400).json({ error: result.error });
+    return res.json({ ok: true, count: result.count });
+  } catch (err) {
+    console.error('Admin seed error:', err.message);
+    return res.status(500).json({ error: 'Seed failed' });
   }
 });
 
