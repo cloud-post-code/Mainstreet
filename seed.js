@@ -79,7 +79,7 @@ function loadShopsFromCsv(csvPath) {
     name: (row['Boutique Name'] || '').trim() || null,
     address: (row.Address || '').trim() || null,
     city: parseCityFromAddress(row.Address),
-    category: null,
+    category: (row.Category || '').trim() || null,
     description: (row['50-Word Description'] || '').trim() || null,
     link: (row.Website || '').trim() || null,
     shop_image: (row['Hero Image'] || '').trim() || null,

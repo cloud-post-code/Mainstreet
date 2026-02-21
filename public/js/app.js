@@ -222,10 +222,12 @@
     card.className = 'shop-card';
     card.dataset.shopId = shop.id;
 
-    const basePhotos = (shop.productPhotos && shop.productPhotos.length >= 4)
-      ? shop.productPhotos.slice(0, 4)
-      : Array(4).fill('https://placehold.co/200x200/1d761e/fefff5?text=Photo');
-    const productPhotos = basePhotos.length >= 6 ? basePhotos.slice(0, 6) : basePhotos.concat(basePhotos.slice(0, 2));
+    const PLACEHOLDER_PHOTO = 'https://placehold.co/200x200/1d761e/fefff5?text=Photo';
+    const rawPhotos = (shop.productPhotos && shop.productPhotos.length) ? shop.productPhotos.slice(0, 6) : [];
+    const productPhotos = [];
+    for (let i = 0; i < 6; i++) {
+      productPhotos.push(rawPhotos[i] || PLACEHOLDER_PHOTO);
+    }
     const baseLabels = (shop.productLabels && shop.productLabels.length >= 6)
       ? shop.productLabels.slice(0, 6)
       : (productLabelSets[(parseInt(shop.id, 10) - 1) % productLabelSets.length] || ['Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 5', 'Product 6']);
