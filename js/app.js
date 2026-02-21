@@ -265,8 +265,7 @@
       '<section class="shop-card-left">' +
       '<div class="shop-hero-wrap">' +
       '<img src="' + shopImg + '" alt="">' +
-      '<div class="shop-hero-overlay">' +
-      '<span class="shop-hero-label">View Interior</span></div></div>' +
+      '</div>' +
       '<div class="shop-card-prose">' +
       '<p>' + desc + '</p></div></section>' +
       '<section class="shop-card-right">' +
