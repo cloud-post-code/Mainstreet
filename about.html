@@ -73,8 +73,9 @@
   <main class="about-content">
     <h1 class="about-page-title">About Main St.</h1>
 
-    <!-- Optional hero image: replace div with <img src="assets/about/hero.jpg" alt="Main street or local shop" class="about-hero-image"> -->
-    <div class="about-image-placeholder about-hero-image" role="img" aria-label="Hero: main street or local shop"></div>
+    <figure class="about-hero-figure">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80" alt="Local shop storefront on main street" class="about-hero-image" width="1200" height="675" loading="eager">
+    </figure>
 
     <!-- Our Mission -->
     <section class="about-section about-mission">
@@ -107,8 +108,9 @@
         <span class="about-title-icon material-icons">help_outline</span>
         How It Works
       </h2>
-      <!-- Optional image: replace with <img src="assets/about/how-it-works.jpg" alt="Directory or storefront" class="about-how-image"> -->
-      <div class="about-image-placeholder about-how-image" role="img" aria-label="How it works: directory or community"></div>
+      <figure class="about-figure about-how-figure">
+        <img src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=1200&q=80" alt="Local market and community" class="about-how-image" width="1200" height="675" loading="lazy">
+      </figure>
       <p class="about-text">Main St. is built to protect that. To amplify it. To give it a home online that feels as real as the street it came from.</p>
       <p class="about-text">What we build rests on three pillars:</p>
       <div class="about-pillars">
@@ -133,8 +135,9 @@
         <span class="about-title-icon material-icons">history</span>
         Our History
       </h2>
-      <!-- Optional image: replace with <img src="assets/about/history.jpg" alt="4GoodVibes or early Main St." class="about-history-image"> -->
-      <div class="about-image-placeholder about-history-image" role="img" aria-label="History: early Main St. or 4GoodVibes"></div>
+      <figure class="about-figure about-history-figure">
+        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&q=80" alt="Handmade and local craft" class="about-history-image" width="1200" height="675" loading="lazy">
+      </figure>
       <p class="about-text">Main St. started with a simple and stubborn belief: local shops should not have to fight this hard just to exist online.</p>
       <p class="about-text">We watched incredible businesses — shops with loyal followings, incredible products, and deep community roots — struggle to be found by anyone beyond their immediate neighborhood. The tools that existed were built for solo merchants or global brands. Nothing was built for the shop owner who also manages three artisans, runs a weekend market, and answers customer emails at midnight.</p>
       <p class="about-text">So we built it ourselves.</p>
@@ -184,16 +187,28 @@
       </div>
     </section>
 
-    <!-- Company Profile (embedded PDF) -->
+    <!-- Company Profile – PDF as image slider -->
     <section class="about-section about-pdf-section">
       <h2 class="about-section-title">
         <span class="about-title-icon material-icons">description</span>
         Company Profile
       </h2>
       <div class="about-pdf-wrapper">
-        <object data="assets/profile.pdf" type="application/pdf" width="100%" height="600" class="about-pdf-embed" title="Main St. company profile (PDF)">
-          <p class="about-pdf-fallback">Your browser may not support embedded PDFs. <a href="assets/profile.pdf" download>Download profile.pdf</a>.</p>
-        </object>
+        <p class="about-profile-slider-fallback" hidden>Loading… <a href="assets/profile.pdf" download>Download profile.pdf</a>.</p>
+        <div class="about-profile-slider" aria-label="Company profile slides">
+          <div class="about-profile-slider-track" hidden>
+            <div class="about-profile-slider-inner"></div>
+          </div>
+          <div class="about-profile-slider-controls">
+            <button type="button" class="about-profile-slider-btn about-profile-slider-prev" aria-label="Previous slide">
+              <span class="material-icons">chevron_left</span>
+            </button>
+            <span class="about-profile-slider-counter" aria-live="polite">1 / 1</span>
+            <button type="button" class="about-profile-slider-btn about-profile-slider-next" aria-label="Next slide">
+              <span class="material-icons">chevron_right</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -211,6 +226,8 @@
       <p class="about-join-tagline">No contracts. No monthly fees. No risk. Just your shop, online, in your community.</p>
     </section>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/about-slider.js"></script>
   <script src="js/auth.js"></script>
 </body>
 </html>
