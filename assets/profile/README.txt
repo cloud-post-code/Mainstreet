@@ -1,5 +1,5 @@
-Add extracted PDF slides here as images:
-  slide-1.png, slide-2.png, slide-3.png, slide-4.png, slide-5.png
+Main St. at a glance slideshow: exactly 10 images only.
+  slide-1.png, slide-2.png, slide-3.png, slide-4.png, slide-5.png,
+  slide-6.png, slide-7.png, slide-8.png, slide-9.png, slide-10.png
 
-Export each page of profile.pdf to PNG (or JPG) and name them as above.
-You can add or remove slide divs in about.html to match your page count.
+Do not add slide-11 or higher; the about page is built for these 10 only.
