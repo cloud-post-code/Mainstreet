@@ -48,10 +48,133 @@
   font-size: 1.15rem;
   line-height: 1.7;
   color: var(--text-muted);
-  margin: 0;
+  margin: 0 0 1rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.about-mission-statement:last-child {
+  margin-bottom: 0;
+}
+
+/* Vision */
+.about-vision .about-text {
+  margin-bottom: 1rem;
+}
+
+/* Pillars (How It Works) */
+.about-pillars {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.about-pillar {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: rgba(29, 118, 30, 0.06);
+  border-radius: 12px;
+  border-left: 4px solid var(--brand-green);
+}
+
+.about-pillar:last-child {
+  margin-bottom: 0;
+}
+
+.about-pillar strong {
+  color: var(--text-dark);
+}
+
+/* Note From Blake */
+.about-note-quote {
+  margin: 0;
+  padding: 1.5rem;
+  background: rgba(29, 118, 30, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(29, 118, 30, 0.15);
+  border-left: 4px solid var(--brand-gold);
+}
+
+.about-note-quote p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin: 0 0 1rem;
+}
+
+.about-note-quote p:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.about-note-attribution {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Founders grid (2 columns) */
+.about-founders-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 640px) {
+  .about-founders-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PDF embed */
+.about-pdf-wrap {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(29, 118, 30, 0.2);
+  background: #fafafa;
+}
+
+.about-pdf-embed {
+  width: 100%;
+  min-height: 600px;
+  height: 80vh;
+  display: block;
+}
+
+.about-pdf-wrap object p {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.about-pdf-wrap object a {
+  color: var(--brand-green);
+}
+
+/* Join Us */
+.about-join {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.about-join-contact {
+  font-size: 1.15rem;
+  margin: 1rem 0;
+}
+
+.about-join-contact a {
+  color: var(--brand-green);
+  font-weight: 600;
+}
+
+.about-join-tagline {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
 }
 
 /* Section titles with icon */
