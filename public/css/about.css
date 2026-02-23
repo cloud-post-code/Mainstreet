@@ -1,4 +1,4 @@
-/* About Us page – mission, how it works, testimonial, history */
+/* About Us page – mission, vision, how it works, history, note, founders, PDF, join */
 
 .about-content {
   max-width: 800px;
@@ -14,7 +14,17 @@
   margin-bottom: 0;
 }
 
-/* Mission (top slogan) */
+/* Page title */
+.about-page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0 0 2rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+/* Mission */
 .about-mission {
   text-align: center;
   padding: 2rem 0;
@@ -48,10 +58,19 @@
   font-size: 1.15rem;
   line-height: 1.7;
   color: var(--text-muted);
-  margin: 0;
+  margin: 0 0 1rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.about-mission-statement:last-child {
+  margin-bottom: 0;
+}
+
+/* Vision */
+.about-vision .about-text {
+  margin-bottom: 1rem;
 }
 
 /* Section titles with icon */
@@ -71,7 +90,7 @@
   color: var(--brand-green);
 }
 
-/* Image placeholders */
+/* Image placeholders and real images */
 .about-image-placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -87,44 +106,71 @@
   font-size: 0.9rem;
 }
 
-/* Testimonials 2×2 grid */
-.about-testimonial-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+.about-hero-image {
+  margin-bottom: 2rem;
 }
 
-.about-testimonial-card {
+.about-section img.about-hero-image,
+.about-section img.about-how-image,
+.about-section img.about-history-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+/* How It Works – three pillars */
+.about-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.about-pillar {
   padding: 1.25rem;
   background: rgba(29, 118, 30, 0.06);
   border-radius: 12px;
   border: 1px solid rgba(29, 118, 30, 0.15);
 }
 
-.about-testimonial-card .about-quote {
-  margin-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  font-size: 0.95rem;
+.about-pillar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  color: var(--text-dark);
 }
 
-.about-testimonial-card .about-quote-attribution {
-  font-size: 0.85rem;
+.about-pillar .about-text {
+  margin-bottom: 0;
 }
 
-.about-testimonial-image {
-  aspect-ratio: 1;
-  width: 80px;
-  height: 80px;
-  max-width: none;
-  max-height: none;
-  margin-bottom: 0.75rem;
-  border-radius: 50%;
+/* A Note From Blake */
+.about-note-blockquote {
+  margin: 0;
+  padding: 1.5rem 1.5rem 1rem;
+  background: rgba(29, 118, 30, 0.06);
+  border-radius: 12px;
+  border-left: 4px solid var(--brand-gold);
+  font-style: italic;
 }
 
-@media (max-width: 560px) {
-  .about-testimonial-grid {
-    grid-template-columns: 1fr;
-  }
+.about-note-blockquote .about-text {
+  margin-bottom: 1rem;
+}
+
+.about-note-blockquote .about-text:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.about-note-attribution {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-style: normal;
+  margin: 0;
 }
 
 /* Body text */
@@ -156,11 +202,15 @@
   margin: 0;
 }
 
-/* Team (3 people) */
+/* Founders / Team grid – 2 columns for founders */
 .about-team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+
+.about-founders-grid {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .about-team-card {
@@ -179,6 +229,12 @@
   background: rgba(29, 118, 30, 0.1);
   border: 2px dashed rgba(29, 118, 30, 0.3);
   border-radius: 50%;
+  display: block;
+}
+
+.about-team-card img.about-team-image {
+  object-fit: cover;
+  border: none;
 }
 
 .about-team-name {
@@ -206,9 +262,67 @@
 }
 
 @media (max-width: 640px) {
-  .about-team-grid {
+  .about-team-grid,
+  .about-founders-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Company Profile – embedded PDF */
+.about-pdf-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(29, 118, 30, 0.06);
+  border: 1px solid rgba(29, 118, 30, 0.15);
+}
+
+.about-pdf-embed {
+  display: block;
+  min-height: 500px;
+  height: 60vh;
+}
+
+.about-pdf-fallback {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.about-pdf-fallback a {
+  color: var(--brand-green);
+  font-weight: 600;
+}
+
+/* Join Us CTA */
+.about-join {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.about-join-links {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+.about-join-link {
+  color: var(--brand-green);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.about-join-link:hover {
+  border-bottom-color: var(--brand-green);
+}
+
+.about-join-tagline {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 1rem 0 0;
+  font-style: italic;
 }
 
 /* About Us button yellow only on about page – independent from Favorites */
