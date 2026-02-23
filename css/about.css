@@ -14,14 +14,29 @@
   margin-bottom: 0;
 }
 
-/* Page title */
+/* Page header: title + lead */
+.about-header {
+  margin-bottom: 1.5rem;
+}
+
 .about-page-title {
   font-family: 'Playfair Display', serif;
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 0 0 2rem;
+  margin: 0 0 0.5rem;
   color: var(--text-dark);
   text-align: center;
+}
+
+.about-page-lead {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Mission */
@@ -54,18 +69,48 @@
   color: var(--text-dark);
 }
 
-.about-mission-statement {
+/* Section lead – first line or key idea */
+.about-section-lead {
   font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  margin: 0 0 1rem;
+  line-height: 1.65;
+  color: var(--text-dark);
+  margin: 0 0 1.25rem;
+  font-weight: 500;
+}
+
+.about-mission .about-section-lead,
+.about-mission .about-text {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  color: var(--text-muted);
 }
 
-.about-mission-statement:last-child {
-  margin-bottom: 0;
+.about-mission .about-section-lead {
+  color: var(--text-dark);
+  font-size: 1.2rem;
+}
+
+/* Emphasis and closing lines */
+.about-text-emphasis {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.about-text-closing {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* Subsection title (e.g. before pillars list) */
+.about-subsection-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--brand-green);
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
 }
 
 /* Vision */
@@ -182,6 +227,11 @@
   background: rgba(29, 118, 30, 0.06);
   border-radius: 12px;
   border-left: 4px solid var(--brand-gold);
+  font-style: italic;
+}
+
+.about-note-blockquote .about-section-lead {
+  margin-bottom: 1rem;
   font-style: italic;
 }
 
@@ -417,8 +467,17 @@
   padding: 2rem 0;
 }
 
+.about-join-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 1.5rem 0 0.5rem;
+}
+
 .about-join-links {
-  margin: 1rem 0;
+  margin: 0.5rem 0 1rem;
   font-size: 1.1rem;
 }
 
