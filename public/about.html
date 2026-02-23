@@ -109,7 +109,7 @@
         How It Works
       </h2>
       <figure class="about-figure about-how-figure">
-        <img src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=1200&q=80" alt="Local market and community" class="about-how-image" width="1200" height="675" loading="lazy">
+        <img src="assets/about/how-it-works.png" alt="The Main St. Pillars: Index, Web Tools for Local Shops, Building Local Relationships" class="about-how-image" loading="lazy">
       </figure>
       <p class="about-text">Main St. is built to protect that. To amplify it. To give it a home online that feels as real as the street it came from.</p>
       <p class="about-text">What we build rests on three pillars:</p>
@@ -136,7 +136,7 @@
         Our History
       </h2>
       <figure class="about-figure about-history-figure">
-        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&q=80" alt="Handmade and local craft" class="about-history-image" width="1200" height="675" loading="lazy">
+        <img src="assets/about/history.png" alt="Local market and support local" class="about-history-image" loading="lazy">
       </figure>
       <p class="about-text">Main St. started with a simple and stubborn belief: local shops should not have to fight this hard just to exist online.</p>
       <p class="about-text">We watched incredible businesses — shops with loyal followings, incredible products, and deep community roots — struggle to be found by anyone beyond their immediate neighborhood. The tools that existed were built for solo merchants or global brands. Nothing was built for the shop owner who also manages three artisans, runs a weekend market, and answers customer emails at midnight.</p>
@@ -171,13 +171,13 @@
       </h2>
       <div class="about-team-grid about-founders-grid">
         <div class="about-team-card">
-          <div class="about-team-image" role="img" aria-label="Blake Mauri"></div>
+          <img src="assets/about/blake.png" alt="Blake Mauri" class="about-team-image">
           <h3 class="about-team-name">Blake Mauri</h3>
           <p class="about-team-role">Co-Founder &amp; CEO</p>
           <p class="about-team-bio">Blake has spent his career at the intersection of community, technology, and local commerce. He is the driving force behind Main St.'s mission and platform, leading product development, community partnerships, and the vision for how local businesses can use technology without losing what makes them human. Before Main St., Blake built and operated 4GoodVibes, a handmade marketplace in the Boston area that became the proving ground for everything Main St. is today — growing from zero to over 146 active shops, 8,419 products, and $37,252 in sales without spending a dollar on advertising. Blake is a builder, a community organizer, and the son of a woman who believed that giving local voices a platform was always worth the effort.</p>
         </div>
         <div class="about-team-card">
-          <div class="about-team-image" role="img" aria-label="Arjun Singh"></div>
+          <img src="assets/about/arjun.png" alt="Arjun Singh" class="about-team-image">
           <h3 class="about-team-name">Arjun Singh</h3>
           <p class="about-team-role">Co-Founder</p>
           <p class="about-team-bio">Arjun brings the technical depth and operational rigor that turns a great idea into a platform that actually works. He and Blake share a belief that the tools being built for big business can and should be rebuilt for the businesses that need them most — the ones on the corner, the ones at the market, the ones that close if the community stops showing up. Arjun's work ensures that Main St. is not just a beautiful vision but a reliable, scalable, and genuinely useful product for every shop that trusts us with their business.</p>
@@ -185,28 +185,42 @@
       </div>
     </section>
 
-    <!-- Company Profile – PDF as image slider -->
-    <section class="about-section about-pdf-section">
+    <!-- Company Profile – extracted slide images in dedicated slideshow -->
+    <section class="about-section about-profile-section">
       <h2 class="about-section-title">
         <span class="about-title-icon material-icons">description</span>
         Company Profile
       </h2>
-      <div class="about-pdf-wrapper">
-        <p class="about-profile-slider-fallback" hidden>Loading… <a href="assets/profile.pdf" download>Download profile.pdf</a>.</p>
-        <div class="about-profile-slider" aria-label="Company profile slides">
-          <div class="about-profile-slider-track" hidden>
-            <div class="about-profile-slider-inner"></div>
-          </div>
-          <div class="about-profile-slider-controls">
-            <button type="button" class="about-profile-slider-btn about-profile-slider-prev" aria-label="Previous slide">
-              <span class="material-icons">chevron_left</span>
-            </button>
-            <span class="about-profile-slider-counter" aria-live="polite">1 / 1</span>
-            <button type="button" class="about-profile-slider-btn about-profile-slider-next" aria-label="Next slide">
-              <span class="material-icons">chevron_right</span>
-            </button>
+      <div class="about-profile-slideshow" aria-label="Company profile slideshow">
+        <div class="about-profile-slideshow-viewport">
+          <div class="about-profile-slideshow-track">
+            <div class="about-profile-slide" data-slide="1">
+              <img src="assets/profile/slide-1.png" alt="Company profile page 1" class="about-profile-slide-img" loading="lazy">
+            </div>
+            <div class="about-profile-slide" data-slide="2">
+              <img src="assets/profile/slide-2.png" alt="Company profile page 2" class="about-profile-slide-img" loading="lazy">
+            </div>
+            <div class="about-profile-slide" data-slide="3">
+              <img src="assets/profile/slide-3.png" alt="Company profile page 3" class="about-profile-slide-img" loading="lazy">
+            </div>
+            <div class="about-profile-slide" data-slide="4">
+              <img src="assets/profile/slide-4.png" alt="Company profile page 4" class="about-profile-slide-img" loading="lazy">
+            </div>
+            <div class="about-profile-slide" data-slide="5">
+              <img src="assets/profile/slide-5.png" alt="Company profile page 5" class="about-profile-slide-img" loading="lazy">
+            </div>
           </div>
         </div>
+        <div class="about-profile-slideshow-controls">
+          <button type="button" class="about-profile-slideshow-btn about-profile-slideshow-prev" aria-label="Previous slide">
+            <span class="material-icons">chevron_left</span>
+          </button>
+          <span class="about-profile-slideshow-counter" aria-live="polite">1 / 5</span>
+          <button type="button" class="about-profile-slideshow-btn about-profile-slideshow-next" aria-label="Next slide">
+            <span class="material-icons">chevron_right</span>
+          </button>
+        </div>
+        <p class="about-profile-download">Also available as <a href="assets/profile.pdf" download>profile.pdf</a>.</p>
       </div>
     </section>
 
@@ -224,7 +238,6 @@
       <p class="about-join-tagline">No contracts. No monthly fees. No risk. Just your shop, online, in your community.</p>
     </section>
   </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="js/about-slider.js"></script>
   <script src="js/auth.js"></script>
 </body>
