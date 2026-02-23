@@ -237,7 +237,7 @@
     const address = escapeHtml([shop.address, shop.city].filter(Boolean).join(', ') || 'Address');
     const desc = escapeHtml(shop.description || '');
     const link = (shop.link || '#').replace(/"/g, '&quot;');
-    const shopImg = (shop.shopImage || 'https://placehold.co/800x500/1d761e/fefff5?text=Shop').replace(/"/g, '&quot;');
+    const shopImg = (shop.shopImage || shop.logo || 'https://placehold.co/800x500/1d761e/fefff5?text=Shop').replace(/"/g, '&quot;');
     const logoUrl = (shop.logo && String(shop.logo).trim()) ? String(shop.logo).trim().replace(/"/g, '&quot;') : 'https://placehold.co/48x48/1d761e/fefff5?text=Logo';
 
     const favorited = isFavorited(shop.id);

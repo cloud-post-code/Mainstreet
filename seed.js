@@ -83,19 +83,24 @@ function getIdFromRow(row) {
 function loadShopsFromCsv(csvPath) {
   const raw = fs.readFileSync(csvPath, 'utf8');
   const rows = parse(raw, { columns: true, skip_empty_lines: true });
-  return rows.map((row) => ({
-    id: getIdFromRow(row) || null,
-    name: (row['Boutique Name'] || '').trim() || null,
-    address: (row.Address || '').trim() || null,
-    city: parseCityFromAddress(row.Address),
-    category: (row['Shop Type'] || row.Category || '').trim() || null,
-    description: (row['50-Word Description'] || '').trim() || null,
-    link: (row.Website || '').trim() || null,
-    shop_image: (row['Hero Image'] || '').trim() || null,
-    logo: (row.Logo || '').trim() || null,
-    product_photos: productPhotosFromRow(row),
-    product_count: (row['Estimated Item Count'] || '').trim() || null
-  })).filter((s) => s.id);
+  return rows.map((row) => {
+    const shopImage = (row['Hero Image'] || '').trim() || null;
+    const logo = (row.Logo || '').trim() || null;
+    const heroOrLogo = shopImage || (logo && logo.toLowerCase().startsWith('http') ? logo : null);
+    return {
+      id: getIdFromRow(row) || null,
+      name: (row['Boutique Name'] || '').trim() || null,
+      address: (row.Address || '').trim() || null,
+      city: parseCityFromAddress(row.Address),
+      category: (row['Shop Type'] || row.Category || '').trim() || null,
+      description: (row['50-Word Description'] || '').trim() || null,
+      link: (row.Website || '').trim() || null,
+      shop_image: heroOrLogo,
+      logo: logo,
+      product_photos: productPhotosFromRow(row),
+      product_count: (row['Estimated Item Count'] || '').trim() || null
+    };
+  }).filter((s) => s.id);
 }
 
 function loadShopsFromJson(jsonPath) {
