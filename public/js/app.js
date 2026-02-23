@@ -277,7 +277,7 @@
       '<a href="' + link + '" class="view-more-btn" target="_blank" rel="noopener noreferrer">VIEW MORE<span class="material-icons">arrow_forward</span></a>' +
       '<div class="shop-card-stat-single">' +
       '<span class="shop-card-category">' + escapeHtml(shop.category || '') + '</span>' +
-      '<span class="shop-card-item-count">' + (shop.productPhotos ? shop.productPhotos.length : 6) + ' items</span>' +
+      '<span class="shop-card-item-count">' + (shop.productCount || (shop.productPhotos ? shop.productPhotos.length : 6)) + ' items</span>' +
       '</div></section></div>';
 
     const btn = card.querySelector('.favorite-btn');

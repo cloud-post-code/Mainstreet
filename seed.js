@@ -32,13 +32,14 @@ const CREATE_TABLE = `
     link TEXT,
     shop_image TEXT,
     logo TEXT,
-    product_photos JSONB
+    product_photos JSONB,
+    product_count TEXT
   );
 `;
 
 const UPSERT = `
-  INSERT INTO shops (id, name, address, city, category, description, link, shop_image, logo, product_photos)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  INSERT INTO shops (id, name, address, city, category, description, link, shop_image, logo, product_photos, product_count)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
   ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     address = EXCLUDED.address,
@@ -48,7 +49,8 @@ const UPSERT = `
     link = EXCLUDED.link,
     shop_image = EXCLUDED.shop_image,
     logo = EXCLUDED.logo,
-    product_photos = EXCLUDED.product_photos;
+    product_photos = EXCLUDED.product_photos,
+    product_count = EXCLUDED.product_count;
 `;
 
 const PLACEHOLDER_IMAGE = 'https://placehold.co/200x200/1d761e/fefff5?text=Product';
@@ -73,20 +75,26 @@ function productPhotosFromRow(row) {
   return urls;
 }
 
+function getIdFromRow(row) {
+  const firstKey = Object.keys(row)[0];
+  return (row.ID || (firstKey !== undefined ? row[firstKey] : '') || row[''] || '').trim() || null;
+}
+
 function loadShopsFromCsv(csvPath) {
   const raw = fs.readFileSync(csvPath, 'utf8');
   const rows = parse(raw, { columns: true, skip_empty_lines: true });
   return rows.map((row) => ({
-    id: (row.ID || '').trim() || null,
+    id: getIdFromRow(row) || null,
     name: (row['Boutique Name'] || '').trim() || null,
     address: (row.Address || '').trim() || null,
     city: parseCityFromAddress(row.Address),
-    category: (row.Category || '').trim() || null,
+    category: (row['Shop Type'] || row.Category || '').trim() || null,
     description: (row['50-Word Description'] || '').trim() || null,
     link: (row.Website || '').trim() || null,
     shop_image: (row['Hero Image'] || '').trim() || null,
     logo: (row.Logo || '').trim() || null,
-    product_photos: productPhotosFromRow(row)
+    product_photos: productPhotosFromRow(row),
+    product_count: (row['Estimated Item Count'] || '').trim() || null
   })).filter((s) => s.id);
 }
 
@@ -103,7 +111,8 @@ function loadShopsFromJson(jsonPath) {
     link: s.link ?? null,
     shop_image: s.shopImage ?? null,
     logo: s.logo ?? null,
-    product_photos: s.productPhotos || null
+    product_photos: s.productPhotos || null,
+    product_count: s.productCount ?? s.product_count ?? null
   }));
 }
 
@@ -125,6 +134,7 @@ async function seed() {
 
   await pool.query(CREATE_TABLE);
   await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS logo TEXT');
+  await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS product_count TEXT');
 
   for (const s of shops) {
     await pool.query(UPSERT, [
@@ -137,7 +147,8 @@ async function seed() {
       s.link,
       s.shop_image,
       s.logo,
-      s.product_photos ? JSON.stringify(s.product_photos) : null
+      s.product_photos ? JSON.stringify(s.product_photos) : null,
+      s.product_count || null
     ]);
   }
 
