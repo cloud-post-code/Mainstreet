@@ -26,16 +26,16 @@
   bgEl.style.backgroundImage = 'none';
 
   function getRequiredTileCount() {
-    var scrollH = Math.max(
-      document.documentElement.scrollHeight,
-      document.body ? document.body.scrollHeight : 0,
-      wrapper.offsetHeight,
-      wrapper.scrollHeight,
-      window.innerHeight * 4
-    );
-    var fromHeight = Math.ceil(scrollH / tileHeightPx) + 5;
-    var minimum = 30;
-    return Math.max(minimum, fromHeight);
+    var contentHeight = wrapper.offsetHeight;
+    if (contentHeight <= 0) {
+      contentHeight = Math.max(
+        document.documentElement.scrollHeight || 0,
+        document.body ? document.body.scrollHeight : 0,
+        window.innerHeight
+      );
+    }
+    var fromHeight = Math.ceil(contentHeight / tileHeightPx) + 1;
+    return Math.max(1, fromHeight);
   }
 
   function buildTilesToEnd() {

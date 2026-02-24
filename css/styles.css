@@ -281,7 +281,6 @@ body {
 /* Map journey: wrapper, tiled background, characters (crayon + kids) */
 .map-journey-wrapper {
   position: relative;
-  min-height: 100vh;
 }
 
 /* Background layer: tiles are built by map-journey.js and rotate through map-journey-1..4.png */
