@@ -6,11 +6,10 @@
   var rafScheduled = false;
   var lastProgress = -1;
 
-  // Scroll path: start (top of page) and end (bottom of page) – Boston area, pan south
+  // Scroll path: start (top of page) and end (bottom) – map pans south at same rate as scroll, zoom fixed
   var startCenter = { lat: 42.365, lng: -71.065 };
   var endCenter = { lat: 42.28, lng: -71.065 };
-  var startZoom = 11;
-  var endZoom = 10;
+  var mapZoom = 11;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -32,10 +31,8 @@
 
     var lat = lerp(startCenter.lat, endCenter.lat, progress);
     var lng = lerp(startCenter.lng, endCenter.lng, progress);
-    var zoom = lerp(startZoom, endZoom, progress);
 
     map.panTo({ lat: lat, lng: lng });
-    map.setZoom(Math.round(zoom));
   }
 
   function onScroll() {
@@ -78,7 +75,7 @@
 
       map = new google.maps.Map(container, {
         center: { lat: centerLat, lng: centerLng },
-        zoom: startZoom,
+        zoom: mapZoom,
         disableDefaultUI: true,
         mapTypeControl: false,
         streetViewControl: false,
