@@ -51,14 +51,21 @@
       return;
     }
     var globalName = '__mainstreetMapBgInit';
-    window[globalName] = function () {
-      window[globalName] = null;
+    var done = false;
+    function runInit() {
+      if (done) return;
+      done = true;
+      if (window[globalName]) window[globalName] = null;
       callback();
-    };
+    }
+    window[globalName] = runInit;
     var script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(apiKey) + '&v=weekly&loading=async&callback=' + globalName;
     script.async = true;
     script.defer = true;
+    script.onload = function () {
+      if (typeof google !== 'undefined' && google.maps) runInit();
+    };
     script.onerror = function () {
       console.warn('[map-bg] Google Maps script failed to load – check API key and that Maps JavaScript API is enabled.');
       container.style.display = 'none';
@@ -91,6 +98,10 @@
         { stylers: [{ saturation: 0.4 }, { lightness: 0.2 }] }
       ]
     });
+
+    setTimeout(function () {
+      if (map) google.maps.event.trigger(map, 'resize');
+    }, 100);
 
     updateMapPosition();
     window.addEventListener('scroll', onScroll, { passive: true });

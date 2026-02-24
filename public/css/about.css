@@ -1,5 +1,14 @@
 /* About Us page – mission, vision, how it works, history, note, founders, PDF, join */
 
+.page-about {
+  background-color: #d2b48c;
+}
+
+.page-about .site-bg-rotate,
+.page-about .site-bg-rotate-layer {
+  background: #d2b48c;
+}
+
 .about-content {
   max-width: 800px;
   margin: 0 auto;
