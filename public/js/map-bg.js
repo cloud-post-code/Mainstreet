@@ -112,6 +112,26 @@
         if (map) google.maps.event.trigger(map, 'resize');
       }, 100);
 
+      // Preload tiles along the scroll path: quick pan sweep then back to start
+      (function preloadTiles() {
+        if (!map) return;
+        var steps = 12;
+        var step = 0;
+        function run() {
+          if (step <= steps) {
+            var t = step / steps;
+            var lat = lerp(startCenter.lat, endCenter.lat, t);
+            var lng = lerp(startCenter.lng, endCenter.lng, t);
+            map.panTo({ lat: lat, lng: lng });
+            step++;
+            setTimeout(run, 40);
+          } else {
+            map.panTo({ lat: startCenter.lat, lng: startCenter.lng });
+          }
+        }
+        setTimeout(run, 150);
+      })();
+
       updateMapPosition();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () {
