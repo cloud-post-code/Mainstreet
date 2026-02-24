@@ -288,7 +288,7 @@
       '<p>' + desc + '</p></div></section>' +
       '<section class="shop-card-right">' +
       '<div class="product-grid">' + productBlocks + '</div>' +
-      '<a href="' + link + '" class="view-more-btn" target="_blank" rel="noopener noreferrer">VIEW MORE<span class="material-icons">arrow_forward</span></a>' +
+      '<a href="' + link + '" class="view-more-btn" target="_blank" rel="noopener noreferrer">Enter Store<span class="material-icons">arrow_forward</span></a>' +
       '<div class="shop-card-stat-single">' +
       '<span class="shop-card-category">' + escapeHtml(getCategoryDisplayName(shop.category)) + '</span>' +
       '<span class="shop-card-item-count">' + (shop.productCount || (shop.productPhotos ? shop.productPhotos.length : 6)) + ' items</span>' +
@@ -314,6 +314,36 @@
     var div = document.createElement('div');
     div.textContent = s;
     return div.innerHTML;
+  }
+
+  function getCategoriesWithShops() {
+    var set = {};
+    allShops.forEach(function (shop) {
+      if (shop.category && shop.category.trim()) set[shop.category.trim()] = true;
+    });
+    return set;
+  }
+
+  function hideEmptyStreets() {
+    var categoriesWithShops = getCategoriesWithShops();
+    filterBtns.forEach(function (btn) {
+      var filter = btn.dataset.filter || 'all';
+      if (filter === 'all') {
+        btn.classList.remove('street-empty');
+      } else {
+        if (categoriesWithShops[filter]) {
+          btn.classList.remove('street-empty');
+        } else {
+          btn.classList.add('street-empty');
+        }
+      }
+    });
+    if (currentCategory !== 'all' && !categoriesWithShops[currentCategory]) {
+      currentCategory = 'all';
+      filterBtns.forEach(function (b) {
+        b.classList.toggle('active', (b.dataset.filter || 'all') === 'all');
+      });
+    }
   }
 
   function applyFilters() {
@@ -499,6 +529,7 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         allShops = Array.isArray(data) ? data : [];
+        hideEmptyStreets();
         if (window.getCurrentUser && window.getCurrentUser()) {
           fetchServerFavorites();
         } else {

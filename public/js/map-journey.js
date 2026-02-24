@@ -30,9 +30,12 @@
       document.documentElement.scrollHeight,
       document.body ? document.body.scrollHeight : 0,
       wrapper.offsetHeight,
+      wrapper.scrollHeight,
       window.innerHeight * 4
     );
-    return Math.ceil(scrollH / tileHeightPx) + 3;
+    var fromHeight = Math.ceil(scrollH / tileHeightPx) + 5;
+    var minimum = 30;
+    return Math.max(minimum, fromHeight);
   }
 
   function buildTilesToEnd() {
@@ -50,6 +53,15 @@
   }
 
   buildTilesToEnd();
+
+  // When page content grows (e.g. shop grid loads), add more tiles so background repeats to the end
+  if (typeof ResizeObserver !== 'undefined') {
+    var ro = new ResizeObserver(function () {
+      buildTilesToEnd();
+      ScrollTrigger.refresh();
+    });
+    ro.observe(wrapper);
+  }
 
   // Path in wrapper-relative coordinates: diagonal from upper-right toward lower-left
   // Progress 0 = top of scroll, 1 = bottom of scroll

@@ -509,6 +509,10 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
+.filter-btn.street-sign.street-empty {
+  display: none;
+}
+
 .filter-btn.street-sign.active .street-sign-text {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
