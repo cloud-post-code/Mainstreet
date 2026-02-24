@@ -12,6 +12,8 @@
     const signedIn = getEl('auth-signed-in');
     const triggerLabel = getEl('auth-trigger-label');
     const trigger = getEl('auth-trigger');
+    const adminLink = document.getElementById('admin-link');
+    const adminActions = getEl('auth-admin-actions');
     if (user) {
       if (signedOut) signedOut.hidden = true;
       if (signedIn) {
@@ -20,14 +22,18 @@
         var em = getEl('auth-display-email');
         if (un) un.textContent = user.username || '';
         if (em) em.textContent = user.email || '';
+        if (adminActions) adminActions.hidden = !user.is_admin;
       }
       if (triggerLabel) triggerLabel.textContent = user.username || 'Account';
       if (trigger) trigger.setAttribute('aria-label', 'Account');
+      if (adminLink) adminLink.style.display = user.is_admin ? '' : 'none';
     } else {
       if (signedOut) signedOut.hidden = false;
       if (signedIn) signedIn.hidden = true;
       if (triggerLabel) triggerLabel.textContent = 'Sign In';
       if (trigger) trigger.setAttribute('aria-label', 'Sign in');
+      if (adminLink) adminLink.style.display = 'none';
+      if (adminActions) adminActions.hidden = true;
     }
   }
 

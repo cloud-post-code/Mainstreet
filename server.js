@@ -466,6 +466,60 @@ app.post('/api/favorites', authRequired, async (req, res) => {
   }
 });
 
+// PATCH /api/admin/shops/:id – update one shop (admin only)
+app.patch('/api/admin/shops/:id', authRequired, adminRequired, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  const { id } = req.params;
+  const body = req.body || {};
+  const allowed = ['name', 'address', 'city', 'category', 'description', 'link', 'shop_image', 'logo', 'product_photos', 'product_count'];
+  const updates = [];
+  const values = [];
+  let paramIndex = 1;
+  for (const key of allowed) {
+    const camel = key === 'shop_image' ? 'shopImage' : key === 'product_photos' ? 'productPhotos' : key === 'product_count' ? 'productCount' : key;
+    const val = body[camel] !== undefined ? body[camel] : body[key];
+    if (val === undefined) continue;
+    if (key === 'product_photos') {
+      const arr = Array.isArray(val) ? val : (typeof val === 'string' ? (val.trim() ? JSON.parse(val) : []) : []);
+      updates.push(key + ' = $' + paramIndex);
+      values.push(JSON.stringify(arr));
+    } else {
+      updates.push(key + ' = $' + paramIndex);
+      values.push(typeof val === 'string' ? val : (val == null ? null : String(val)));
+    }
+    paramIndex++;
+  }
+  if (updates.length === 0) return res.status(400).json({ error: 'No fields to update' });
+  values.push(id);
+  const setClause = updates.join(', ');
+  try {
+    const result = await pool.query(
+      'UPDATE shops SET ' + setClause + ' WHERE id = $' + paramIndex + ' RETURNING id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount"',
+      values
+    );
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Shop not found' });
+    return res.json(result.rows[0]);
+  } catch (err) {
+    if (err.message && err.message.includes('JSON')) return res.status(400).json({ error: 'Invalid product_photos JSON' });
+    console.error('Admin PATCH shop error:', err.message);
+    return res.status(500).json({ error: 'Update failed' });
+  }
+});
+
+// DELETE /api/admin/shops/:id – delete one shop (admin only)
+app.delete('/api/admin/shops/:id', authRequired, adminRequired, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  const { id } = req.params;
+  try {
+    const result = await pool.query('DELETE FROM shops WHERE id = $1 RETURNING id', [id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Shop not found' });
+    return res.status(204).send();
+  } catch (err) {
+    console.error('Admin DELETE shop error:', err.message);
+    return res.status(500).json({ error: 'Delete failed' });
+  }
+});
+
 // POST /api/admin/seed – sync shop data from CSV/JSON (admin only)
 app.post('/api/admin/seed', authRequired, adminRequired, async (req, res) => {
   if (!pool) return res.status(503).json({ error: 'Database unavailable' });

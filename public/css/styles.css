@@ -1046,3 +1046,108 @@ body {
 .comment-submit:hover {
   opacity: 0.9;
 }
+
+/* Admin page */
+.admin-main {
+  max-width: 100%;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.admin-forbidden {
+  font-size: 1.125rem;
+  color: var(--text, #333);
+}
+
+.admin-title {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-loading {
+  color: var(--text, #333);
+}
+
+.admin-table-wrap {
+  margin-top: 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ccc;
+  padding: 0.35rem 0.5rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #f0f0f0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.admin-table .admin-input {
+  width: 100%;
+  min-width: 80px;
+  max-width: 280px;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.admin-table .admin-input-id {
+  max-width: 100px;
+  background: #f8f8f8;
+}
+
+.admin-table .admin-input-description,
+.admin-table .admin-input-json {
+  min-height: 2.5em;
+  resize: vertical;
+}
+
+.admin-actions-cell {
+  white-space: nowrap;
+}
+
+.admin-btn {
+  padding: 0.35rem 0.6rem;
+  margin-right: 0.25rem;
+  font-size: 0.8125rem;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.admin-btn:hover {
+  background: #f0f0f0;
+}
+
+.admin-save-btn {
+  border-color: var(--brand-green, #1d761e);
+  color: var(--brand-green, #1d761e);
+}
+
+.admin-delete-btn {
+  border-color: #a00;
+  color: #a00;
+}
+
+.admin-message {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+}
+
+.admin-message-error {
+  color: #a00;
+}

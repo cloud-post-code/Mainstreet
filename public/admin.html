@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Main St.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <a href="index.html" class="logo-link" aria-label="Main St. Home">
+        <span class="header-title">MAIN ST.</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a href="about.html" class="header-btn about-link">
+        <span class="material-icons">info</span>
+        <span class="header-btn-label">About Us</span>
+      </a>
+      <a href="index.html" class="header-btn favorites-link">
+        <span class="material-icons">favorite</span>
+        <span class="header-btn-label">Favorites</span>
+      </a>
+      <a href="admin.html" class="header-btn admin-link" id="admin-link" style="display:none">
+        <span class="material-icons">admin_panel_settings</span>
+        <span class="header-btn-label">Admin</span>
+      </a>
+      <div class="auth-wrap">
+        <button type="button" class="header-btn auth-trigger" id="auth-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Sign in">
+          <span class="material-icons">person</span>
+          <span class="header-btn-label" id="auth-trigger-label">Sign In</span>
+        </button>
+        <div class="auth-panel" id="auth-panel" role="dialog" aria-label="Sign in or create account" aria-hidden="true">
+          <div class="auth-signed-out" id="auth-signed-out">
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab active" data-tab="login">Sign in</button>
+              <button type="button" class="auth-tab" data-tab="register">Create account</button>
+            </div>
+            <form class="auth-form auth-login-form" id="auth-login-form">
+              <label for="auth-login-input">Email or username</label>
+              <input type="text" id="auth-login-input" name="email_or_username" autocomplete="username" required>
+              <label for="auth-login-password">Password</label>
+              <input type="password" id="auth-login-password" name="password" autocomplete="current-password" required>
+              <button type="submit" class="auth-submit">Sign in</button>
+            </form>
+            <form class="auth-form auth-register-form" id="auth-register-form" hidden>
+              <label for="auth-register-email">Email</label>
+              <input type="email" id="auth-register-email" name="email" autocomplete="email" required>
+              <label for="auth-register-username">Username</label>
+              <input type="text" id="auth-register-username" name="username" autocomplete="username" required>
+              <label for="auth-register-password">Password</label>
+              <input type="password" id="auth-register-password" name="password" autocomplete="new-password" required>
+              <label class="auth-checkbox-label">
+                <input type="checkbox" id="auth-subscribe-emails" name="subscribe_emails" value="1">
+                Subscribe to great emails
+              </label>
+              <button type="submit" class="auth-submit">Create account</button>
+            </form>
+            <p class="auth-error" id="auth-error" role="alert" hidden></p>
+          </div>
+          <div class="auth-signed-in" id="auth-signed-in" hidden>
+            <p class="auth-user-line"><strong>Username:</strong> <span id="auth-display-username"></span></p>
+            <p class="auth-user-line"><strong>Email:</strong> <span id="auth-display-email"></span></p>
+            <div class="auth-admin-actions" id="auth-admin-actions" hidden>
+              <button type="button" class="auth-seed-btn" id="auth-seed-btn">Sync shop data</button>
+              <span class="auth-seed-status" id="auth-seed-status"></span>
+            </div>
+            <button type="button" class="auth-signout" id="auth-signout">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <p id="admin-forbidden" class="admin-forbidden" hidden>Admin access required.</p>
+    <div id="admin-content" hidden>
+      <h1 class="admin-title">Edit shops</h1>
+      <p id="admin-loading" class="admin-loading">Loading shops…</p>
+      <div id="admin-table-wrap" class="admin-table-wrap" hidden></div>
+      <p id="admin-message" class="admin-message" role="alert" hidden></p>
+    </div>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
