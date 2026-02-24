@@ -1,5 +1,4 @@
 (function () {
-  var BG_INTERVAL_MS = 5500;
   var IMAGES = [
     '/assets/backgrounds/Screenshot_2026-02-24_at_11.39.51_AM-6c46718c-7cfc-4148-8fa4-21370b3935c0.png',
     '/assets/backgrounds/Screenshot_2026-02-24_at_11.39.57_AM-d11e21d0-bca0-4c2b-87d8-081bab731bf4.png',
@@ -21,13 +20,30 @@
   function run() {
     var el = document.getElementById('site-bg-rotate');
     if (!el || IMAGES.length === 0) return;
-    var index = 0;
-    function setNext() {
-      el.style.backgroundImage = 'url("' + IMAGES[index] + cacheBust + '")';
-      index = (index + 1) % IMAGES.length;
+
+    var lastIndex = -1;
+
+    function setBackgroundFromScroll() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) {
+        if (lastIndex !== 0) {
+          lastIndex = 0;
+          el.style.backgroundImage = 'url("' + IMAGES[0] + cacheBust + '")';
+        }
+        return;
+      }
+      var progress = Math.min(1, Math.max(0, scrollTop / docHeight));
+      var index = Math.min(IMAGES.length - 1, Math.floor(progress * IMAGES.length));
+      if (index !== lastIndex) {
+        lastIndex = index;
+        el.style.backgroundImage = 'url("' + IMAGES[index] + cacheBust + '")';
+      }
     }
-    setNext();
-    setInterval(setNext, BG_INTERVAL_MS);
+
+    setBackgroundFromScroll();
+    window.addEventListener('scroll', setBackgroundFromScroll, { passive: true });
+    window.addEventListener('resize', setBackgroundFromScroll);
   }
 
   if (document.readyState === 'loading') {
