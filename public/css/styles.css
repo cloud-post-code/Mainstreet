@@ -1151,3 +1151,18 @@ body {
 .admin-message-error {
   color: #a00;
 }
+
+.admin-retry-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  border: 1px solid var(--brand-green, #1d761e);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--brand-green, #1d761e);
+  cursor: pointer;
+}
+
+.admin-retry-btn:hover {
+  background: #f0f8f0;
+}

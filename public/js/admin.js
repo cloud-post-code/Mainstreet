@@ -200,14 +200,64 @@
     wrap.appendChild(table);
   }
 
+  function fetchWithTimeout(url, opts, ms) {
+    ms = ms || 15000;
+    var ctrl = new AbortController();
+    var t = setTimeout(function () { ctrl.abort(); }, ms);
+    opts = opts || {};
+    opts.credentials = opts.credentials || 'include';
+    opts.signal = ctrl.signal;
+    return fetch(url, opts).then(function (r) {
+      clearTimeout(t);
+      return r;
+    }, function (err) {
+      clearTimeout(t);
+      throw err;
+    });
+  }
+
+  function loadShops() {
+    var loading = getEl('admin-loading');
+    if (loading) {
+      loading.hidden = false;
+      loading.textContent = 'Loading shops…';
+    }
+    showMessage('');
+    fetchWithTimeout('/api/shops', creds, 15000)
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status === 503 ? 'Database unavailable' : 'Failed to load shops');
+        return r.json();
+      })
+      .then(function (data) {
+        var list = Array.isArray(data) ? data : [];
+        renderTable(list);
+        if (loading) loading.hidden = true;
+        hideRetry();
+      })
+      .catch(function (err) {
+        if (loading) {
+          loading.hidden = true;
+        }
+        var msg = (err && err.name === 'AbortError') ? 'Request timed out. Check the server and try again.' : (err && err.message) || 'Could not load shops.';
+        showMessage(msg, true);
+        var retry = getEl('admin-retry');
+        if (retry) retry.hidden = false;
+      });
+  }
+
+  function hideRetry() {
+    var retry = getEl('admin-retry');
+    if (retry) retry.hidden = true;
+  }
+
   function init() {
     function ensureUserThenRun(cb) {
       var user = window.getCurrentUser && window.getCurrentUser();
-      if (user !== undefined) {
+      if (user && typeof user === 'object') {
         cb(user);
         return;
       }
-      fetch('/api/auth/me', creds)
+      fetchWithTimeout('/api/auth/me', creds, 10000)
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (u) {
           if (u && window.setCurrentUser) window.setCurrentUser(u);
@@ -218,17 +268,7 @@
 
     ensureUserThenRun(function (user) {
       if (!handleAuthResponse(user)) return;
-      getEl('admin-loading').hidden = false;
-      fetch('/api/shops', creds)
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          renderTable(data);
-        })
-        .catch(function () {
-          showMessage('Could not load shops.', true);
-          var loading = getEl('admin-loading');
-          if (loading) loading.textContent = 'Failed to load shops.';
-        });
+      loadShops();
     });
 
     window.addEventListener('auth-change', function () {
@@ -241,4 +281,7 @@
   } else {
     init();
   }
+
+  var retryBtn = document.getElementById('admin-retry');
+  if (retryBtn) retryBtn.addEventListener('click', loadShops);
 })();

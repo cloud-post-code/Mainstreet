@@ -360,21 +360,32 @@ app.get('/api/auth/me', authOptional, async (req, res) => {
   }
 });
 
+// Query with timeout so slow DB does not hang the request
+function queryWithTimeout(p, text, values, ms) {
+  ms = ms || 10000;
+  return Promise.race([
+    p.query(text, values),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Query timeout')), ms))
+  ]);
+}
+
 // GET /api/shops
 app.get('/api/shops', async (req, res) => {
   if (pool) {
     try {
-      const result = await pool.query(
-        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount" FROM shops ORDER BY id'
+      const result = await queryWithTimeout(
+        pool,
+        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount" FROM shops ORDER BY id',
+        [],
+        10000
       );
       return res.json(result.rows);
     } catch (err) {
       console.error('DB error:', err.message);
-      return res.status(500).json({ error: 'Database error' });
+      return res.status(500).json({ error: err.message === 'Query timeout' ? 'Database timeout' : 'Database error' });
     }
   }
   try {
-    const fs = require('fs');
     const jsonPath = path.join(__dirname, 'data', 'shops.json');
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     return res.json(data);
