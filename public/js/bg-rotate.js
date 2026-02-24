@@ -15,35 +15,62 @@
     '/assets/backgrounds/Screenshot_2026-02-24_at_11.40.45_AM-b09b5aef-59f6-4102-a04e-3f0d93e07afd.png'
   ];
 
+  // For sharpness on retina: use 2x resolution sources (e.g. 3840px wide for 1920 viewport).
   var cacheBust = '?v=' + Date.now();
 
+  function preloadImages() {
+    IMAGES.forEach(function (url) {
+      var img = new Image();
+      img.src = url + cacheBust;
+    });
+  }
+
   function run() {
-    var el = document.getElementById('site-bg-rotate');
-    if (!el || IMAGES.length === 0) return;
+    var wrapper = document.getElementById('site-bg-rotate');
+    var layerA = document.getElementById('site-bg-rotate-a');
+    var layerB = document.getElementById('site-bg-rotate-b');
+    if (!wrapper || !layerA || !layerB || IMAGES.length === 0) return;
+
+    preloadImages();
 
     var lastIndex = -1;
+    var rafScheduled = false;
 
-    function setBackgroundFromScroll() {
+    function updateBackground() {
+      rafScheduled = false;
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       var docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight <= 0) {
-        if (lastIndex !== 0) {
-          lastIndex = 0;
-          el.style.backgroundImage = 'url("' + IMAGES[0] + cacheBust + '")';
-        }
+        layerA.style.backgroundImage = 'url("' + IMAGES[0] + cacheBust + '")';
+        layerA.style.opacity = '1';
+        layerB.style.opacity = '0';
         return;
       }
       var progress = Math.min(1, Math.max(0, scrollTop / docHeight));
       var index = Math.min(IMAGES.length - 1, Math.floor(progress * IMAGES.length));
+      var nextIndex = Math.min(index + 1, IMAGES.length - 1);
+      var subProgress = progress * IMAGES.length - index;
+      subProgress = Math.max(0, Math.min(1, subProgress));
+
       if (index !== lastIndex) {
+        layerA.style.backgroundImage = 'url("' + IMAGES[index] + cacheBust + '")';
+        layerB.style.backgroundImage = 'url("' + IMAGES[nextIndex] + cacheBust + '")';
         lastIndex = index;
-        el.style.backgroundImage = 'url("' + IMAGES[index] + cacheBust + '")';
+      }
+      layerA.style.opacity = String(1 - subProgress);
+      layerB.style.opacity = String(subProgress);
+    }
+
+    function onScroll() {
+      if (!rafScheduled) {
+        rafScheduled = true;
+        requestAnimationFrame(updateBackground);
       }
     }
 
-    setBackgroundFromScroll();
-    window.addEventListener('scroll', setBackgroundFromScroll, { passive: true });
-    window.addEventListener('resize', setBackgroundFromScroll);
+    updateBackground();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
 
   if (document.readyState === 'loading') {
