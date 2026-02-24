@@ -1,5 +1,6 @@
 (function () {
   var container = document.getElementById('site-map-bg');
+  var backdrop = document.getElementById('site-map-backdrop');
   if (!container) return;
 
   var map = null;
@@ -36,6 +37,16 @@
     }
     rafId = requestAnimationFrame(loop);
   }
+
+  function showMap() {
+    if (backdrop) backdrop.style.opacity = '1';
+  }
+
+  function hideMap() {
+    if (backdrop) backdrop.style.opacity = '0';
+  }
+
+  if (backdrop) backdrop.style.opacity = '0';
 
   function loadMapsScript(apiKey, callback) {
     if (typeof google !== 'undefined' && google.maps) {
@@ -90,28 +101,24 @@
 
       setTimeout(function () {
         if (map) google.maps.event.trigger(map, 'resize');
+        // Preload after resize so fitBounds uses correct dimensions
+        (function preloadFullPath() {
+          if (!map) return;
+          var bounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(Math.min(startCenter.lat, endCenter.lat), Math.min(startCenter.lng, endCenter.lng)),
+            new google.maps.LatLng(Math.max(startCenter.lat, endCenter.lat), Math.max(startCenter.lng, endCenter.lng))
+          );
+          map.fitBounds(bounds);
+          google.maps.event.addListenerOnce(map, 'idle', function () {
+            map.setZoom(mapZoom);
+            map.setCenter({ lat: startCenter.lat, lng: startCenter.lng });
+            google.maps.event.addListenerOnce(map, 'idle', function () {
+              showMap();
+              startScrollSyncLoop();
+            });
+          });
+        })();
       }, 100);
-
-      // Preload tiles along the scroll path: quick pan sweep then back to start; then start 1:1 scroll sync
-      (function preloadTiles() {
-        if (!map) return;
-        var steps = 12;
-        var step = 0;
-        function run() {
-          if (step <= steps) {
-            var t = step / steps;
-            var lat = lerp(startCenter.lat, endCenter.lat, t);
-            var lng = lerp(startCenter.lng, endCenter.lng, t);
-            map.panTo({ lat: lat, lng: lng });
-            step++;
-            setTimeout(run, 40);
-          } else {
-            map.panTo({ lat: startCenter.lat, lng: startCenter.lng });
-            startScrollSyncLoop();
-          }
-        }
-        setTimeout(run, 150);
-      })();
 
       window.addEventListener('resize', function () {
         if (map) {
