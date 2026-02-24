@@ -50,12 +50,17 @@
       callback();
       return;
     }
+    var globalName = '__mainstreetMapBgInit';
+    window[globalName] = function () {
+      window[globalName] = null;
+      callback();
+    };
     var script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(apiKey) + '&v=weekly';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(apiKey) + '&v=weekly&loading=async&callback=' + globalName;
     script.async = true;
     script.defer = true;
-    script.onload = callback;
     script.onerror = function () {
+      console.warn('[map-bg] Google Maps script failed to load – check API key and that Maps JavaScript API is enabled.');
       container.style.display = 'none';
     };
     document.head.appendChild(script);
@@ -99,10 +104,17 @@
 
   function run() {
     fetch('/api/config')
-      .then(function (res) { return res.json(); })
+      .then(function (res) {
+        if (!res.ok) {
+          console.warn('[map-bg] /api/config returned', res.status, res.statusText);
+          throw new Error('config ' + res.status);
+        }
+        return res.json();
+      })
       .then(function (config) {
         var apiKey = (config && config.googleMapsApiKey) ? config.googleMapsApiKey.trim() : '';
         if (!apiKey) {
+          console.warn('[map-bg] No GOOGLE_MAPS_API_KEY in config – set GOOGLE_MAPS_API_KEY in Railway (or .env) to show the map.');
           container.style.display = 'none';
           return;
         }
@@ -110,7 +122,8 @@
           initMap();
         });
       })
-      .catch(function () {
+      .catch(function (err) {
+        console.warn('[map-bg] Failed to load config or map:', err && err.message ? err.message : err);
         container.style.display = 'none';
       });
   }

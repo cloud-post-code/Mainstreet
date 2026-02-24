@@ -30,8 +30,12 @@ app.get('/api/health', (req, res) => {
 
 // Client config (e.g. Google Maps API key) – only expose non-secret keys needed by frontend
 app.get('/api/config', (req, res) => {
+  const key = process.env.GOOGLE_MAPS_API_KEY || '';
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[api/config] Requested; key present:', !!key);
+  }
   res.json({
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || ''
+    googleMapsApiKey: key
   });
 });
 
@@ -549,6 +553,12 @@ app.post('/api/admin/seed', authRequired, adminRequired, async (req, res) => {
     console.error('Admin seed error:', err.message);
     return res.status(500).json({ error: 'Seed failed' });
   }
+});
+
+// 404 – log so you can see what path is "not found" (e.g. in Railway logs)
+app.use((req, res) => {
+  console.warn('404:', req.method, req.path);
+  res.status(404).json({ error: 'Not found', path: req.path });
 });
 
 app.listen(PORT, async () => {
