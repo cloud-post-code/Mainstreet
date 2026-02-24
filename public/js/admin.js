@@ -39,25 +39,31 @@
     return div.innerHTML;
   }
 
-  function productPhotosToString(arr) {
-    if (!Array.isArray(arr)) return '';
-    try {
-      return JSON.stringify(arr);
-    } catch (e) {
-      return '';
+  function getProductPhotosArray(shop) {
+    var raw = shop.productPhotos || shop.product_photos;
+    if (Array.isArray(raw)) return raw;
+    if (raw && typeof raw === 'string') {
+      var trimmed = raw.trim();
+      if (!trimmed) return [];
+      try {
+        var parsed = JSON.parse(trimmed);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
     }
+    return [];
   }
 
-  function parseProductPhotos(str) {
-    if (!str || typeof str !== 'string') return [];
-    var trimmed = str.trim();
-    if (!trimmed) return [];
-    try {
-      var parsed = JSON.parse(trimmed);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) {
-      return [];
+  function collectProductPhotosFromRow(tr) {
+    var arr = [];
+    for (var i = 0; i < 6; i++) {
+      var input = tr.querySelector('.admin-input-product-photo[data-photo-index="' + i + '"]');
+      if (input && input.value && input.value.trim()) {
+        arr.push(input.value.trim());
+      }
     }
+    return arr;
   }
 
   function buildRow(shop) {
@@ -73,7 +79,13 @@
     var shopImage = shop.shopImage || shop.shop_image || '';
     var logo = shop.logo || '';
     var productCount = shop.productCount || shop.product_count || '';
-    var productPhotos = productPhotosToString(shop.productPhotos || shop.product_photos);
+    var productPhotosArr = getProductPhotosArray(shop);
+    var productPhotosCell = '';
+    for (var i = 0; i < 6; i++) {
+      var url = (productPhotosArr[i] != null && productPhotosArr[i] !== undefined) ? String(productPhotosArr[i]) : '';
+      productPhotosCell += '<input type="url" class="admin-input admin-input-product-photo" data-photo-index="' + i + '" value="' + escapeHtml(url) + '" placeholder="Image ' + (i + 1) + '" aria-label="Product image ' + (i + 1) + '">';
+    }
+    productPhotosCell = '<td class="admin-product-photos-cell"><div class="admin-product-photos-wrap">' + productPhotosCell + '</div></td>';
 
     tr.innerHTML =
       '<td><input type="text" class="admin-input admin-input-id" value="' + escapeHtml(id) + '" readonly aria-label="ID"></td>' +
@@ -86,7 +98,7 @@
       '<td><input type="text" class="admin-input" data-field="shop_image" value="' + escapeHtml(shopImage) + '" aria-label="Shop image URL"></td>' +
       '<td><input type="text" class="admin-input" data-field="logo" value="' + escapeHtml(logo) + '" aria-label="Logo URL"></td>' +
       '<td><input type="text" class="admin-input" data-field="product_count" value="' + escapeHtml(productCount) + '" aria-label="Product count"></td>' +
-      '<td><textarea class="admin-input admin-input-json" data-field="product_photos" rows="2" aria-label="Product photos JSON">' + escapeHtml(productPhotos) + '</textarea></td>' +
+      productPhotosCell +
       '<td class="admin-actions-cell">' +
         '<button type="button" class="admin-btn admin-save-btn">Save</button> ' +
         '<button type="button" class="admin-btn admin-delete-btn">Delete</button>' +
@@ -107,7 +119,7 @@
         shop_image: tr.querySelector('[data-field="shop_image"]').value,
         logo: tr.querySelector('[data-field="logo"]').value,
         product_count: tr.querySelector('[data-field="product_count"]').value,
-        product_photos: parseProductPhotos(tr.querySelector('[data-field="product_photos"]').value)
+        product_photos: collectProductPhotosFromRow(tr)
       };
       saveBtn.disabled = true;
       fetch('/api/admin/shops/' + encodeURIComponent(rowId), {
@@ -188,7 +200,7 @@
       '<tr>' +
       '<th>id</th><th>name</th><th>address</th><th>city</th><th>category</th>' +
       '<th>description</th><th>link</th><th>shop_image</th><th>logo</th><th>product_count</th>' +
-      '<th>product_photos</th><th></th>' +
+      '<th>Product images (1–6)</th><th></th>' +
       '</tr>';
     table.appendChild(thead);
     var tbody = document.createElement('tbody');

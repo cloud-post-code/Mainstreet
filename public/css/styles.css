@@ -1165,6 +1165,25 @@ body {
   line-height: 1.3;
 }
 
+.admin-product-photos-cell {
+  vertical-align: top;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.admin-product-photos-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-product-photos-wrap .admin-input-product-photo {
+  width: 100%;
+  min-width: 0;
+  font-size: 11px;
+  padding: 0.25rem 0.35rem;
+}
+
 .admin-table th:nth-child(1) { width: 90px; min-width: 90px; }
 .admin-table th:nth-child(2) { width: 120px; min-width: 120px; }
 .admin-table th:nth-child(3) { width: 140px; min-width: 140px; }
