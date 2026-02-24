@@ -5,3 +5,6 @@ builder = "nixpacks"
 startCommand = "npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
+
+# Optional env (set in Railway dashboard or CLI):
+#   GOOGLE_MAPS_API_KEY – Google Maps JavaScript API key for the scroll-driven map background on the home page. If unset, the map is hidden and the page uses a solid background.

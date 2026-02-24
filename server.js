@@ -28,6 +28,13 @@ app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
 
+// Client config (e.g. Google Maps API key) – only expose non-secret keys needed by frontend
+app.get('/api/config', (req, res) => {
+  res.json({
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || ''
+  });
+});
+
 // Database
 let pool = null;
 if (process.env.DATABASE_URL) {

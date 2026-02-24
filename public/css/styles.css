@@ -22,7 +22,7 @@ body {
   position: relative;
 }
 
-/* Full-page rotating map backgrounds (13 separate images) */
+/* Full-page rotating map backgrounds (13 separate images) – legacy; replaced by site-map-bg */
 .site-bg-rotate {
   position: fixed;
   inset: 0;
@@ -34,6 +34,24 @@ body {
   will-change: transform;
   contain: paint;
   transform: translateZ(0);
+}
+
+/* Google Map full-viewport background; scroll drives pan/zoom */
+#site-map-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#site-map-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(254, 255, 245, 0.55) 0%, rgba(254, 255, 245, 0.35) 50%, rgba(254, 255, 245, 0.65) 100%);
+  pointer-events: none;
 }
 
 /* Two layers for crossfade; background image and overlay live on children */
