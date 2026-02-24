@@ -195,7 +195,7 @@
       "https://center-goods.com/cdn/shop/products/CompostableSilkDentalFlossRefillsCenterGoods.jpg?v=1651767902",
       "https://center-goods.com/cdn/shop/products/GrapefruitLemonDeoderantCenterGoods.jpg?v=1617738933",
       "https://center-goods.com/cdn/shop/files/RaspberryRoseLipBalmCenterGoods.jpg?v=1757719012",
-      "https://center-goods.com/products/unpaper-towels-rainbow"
+      "https://center-goods.com/cdn/shop/products/LittleRedChickensDishClothCenterGoods.heic?v=1656093345&width=720"
     ],
     "productCount": "100-500"
   },
@@ -560,26 +560,6 @@
     "productCount": "100-500"
   },
   {
-    "id": "MST_0029",
-    "name": "KM Hudson",
-    "address": "125 Charles Street, Boston, MA, 02114",
-    "city": "Boston",
-    "category": "Clothing Boutique",
-    "description": "KMHudson Ltd is a specialty lingerie retailer branding itself as “The Bra Store.” The site’s categories (bras by style, panties, shapewear, sleepwear) suggest a fit-and-service-driven shop selling curated intimates. It reads like a boutique where expertise matters—helping customers find the right fit and quality—rather than a generic department-store lingerie page.",
-    "link": "https://kmhudsonltd.com",
-    "shopImage": "https://cdn.shopify.com/s/files/1/1137/3866/files/IMG_1914_480x480.jpg?v=1732994151",
-    "logo": "https://kmhudsonltd.com/cdn/shop/files/SEARCH_DISPLAY_IMAGE_2021_07_16_16_53_59_UTC.jpg?crop=center&height=32&v=1716991400&width=32",
-    "productPhotos": [
-      "https://kmhudsonltd.com/cdn/shop/files/012-0826CAL.jpg?v=1698432045&width=1946",
-      "https://kmhudsonltd.com/cdn/shop/files/NEVER07ZL_FONTA_ZM_BK_L_2_2500x_948c2f8c-a73f-482c-a43b-54a8dd602ce0.webp?v=1748361767&width=533",
-      "https://kmhudsonltd.com/cdn/shop/files/NEVER1310_PASIF_LB_CA_L_2500x_6f2550e7-8f1a-4482-9f9b-ae2d0cd31c74.webp?v=1748361858&width=533",
-      "https://kmhudsonltd.com/cdn/shop/files/IMG_6921.jpg?v=1735670277&width=533",
-      "https://kmhudsonltd.com/cdn/shop/files/NEVER0343_PASIF_FL_GH_L_2500x_6d7de542-f33c-4006-bf48-78b05f4309c1.webp?v=1748360950&width=533",
-      "https://kmhudsonltd.com/cdn/shop/files/MAGNO2221_IBISC_LB_CA_L_2500x_81d64593-d435-49b0-9794-4a75a232819c.webp?v=1760545654&width=533"
-    ],
-    "productCount": "100-500"
-  },
-  {
     "id": "MST_0030",
     "name": "KODOMO — South End",
     "address": "579 Tremont St, Boston, MA, 02118",
@@ -720,26 +700,6 @@
     "productCount": "1000+"
   },
   {
-    "id": "MST_0037",
-    "name": "Maxima Gift & Book Center",
-    "address": "212 Massachusetts Ave, Arlington, MA, 02474",
-    "city": "Arlington",
-    "category": "Gifts",
-    "description": "Duplicate of the link above (Maxima Center). If you want the table to list each link only once, I can de-duplicate; otherwise, the description is the same: a retail storefront whose “About” details weren’t readable in my view, so I can’t confirm specifics without copied text from the site.",
-    "link": "https://www.maximacenter.com",
-    "shopImage": "https://s3-media0.fl.yelpcdn.com/bphoto/AcUZzb7wzhuombmzyado5g/348s.jpg",
-    "logo": "https://cdn.shoplightspeed.com/shops/657021/themes/13296/v/1137126/assets/favicon.png?20260115145714",
-    "productPhotos": [
-      "https://cdn.shoplightspeed.com/shops/657021/files/71142711/150x150x2/project-hail-mary.jpg",
-      "https://cdn.shoplightspeed.com/shops/657021/files/42657456/150x150x2/hamnet.jpg",
-      "https://cdn.shoplightspeed.com/shops/657021/files/74397181/150x150x2/wuthering-heights.jpg",
-      "https://cdn.shoplightspeed.com/shops/657021/files/74393683/150x150x2/the-elsewhere-express-a-novel.jpg",
-      "https://cdn.shoplightspeed.com/shops/657021/files/73946472/150x150x2/heated-rivalry-game-changers-2.jpg",
-      "https://cdn.shoplightspeed.com/shops/657021/files/73355079/150x150x2/crowntide-the-lightlark-saga-book-4-signed-copy.jpg"
-    ],
-    "productCount": "500-1000"
-  },
-  {
     "id": "MST_0038",
     "name": "Mint Julep",
     "address": "1302 Beacon St, Brookline, MA, 02446",
@@ -750,12 +710,12 @@
     "shopImage": "https://media.timeout.com/images/101657025/750/422/image.jpg",
     "logo": "https://www.shopmintjulep.com/cdn/shop/files/checkout_logo_4_32x32.png?v=1613149065",
     "productPhotos": [
-      "https://www.shopmintjulep.com/cdn/shop/files/Screenshot2026-02-23at5.18.06PM_{width}x.png?v=1771885161",
-      "https://www.shopmintjulep.com/cdn/shop/files/Screenshot2026-02-23at5.18.06PM_1024x.png?v=1771885161",
-      "https://www.shopmintjulep.com/cdn/shop/files/Steve_Madden_Ciara_Dress_XQ108797_{width}x.png?v=1771886905",
-      "https://www.shopmintjulep.com/cdn/shop/files/Steve_Madden_Ciara_Dress_XQ108797_1024x.png?v=1771886905",
-      "https://www.shopmintjulep.com/cdn/shop/files/STEVEMADDEN_APPAREL_XQ108744_PINK-MULTI_01_{width}x.jpg?v=1771889801",
-      "https://www.shopmintjulep.com/cdn/shop/files/STEVEMADDEN_APPAREL_XQ108744_PINK-MULTI_01_1024x.jpg?v=1771889801"
+      "https://www.shopmintjulep.com/cdn/shop/files/15701_590x.jpg?v=1770428613",
+      "https://www.shopmintjulep.com/cdn/shop/files/15701_590x.jpg?v=1770428613",
+      "https://www.shopmintjulep.com/cdn/shop/files/e946e670795b4_590x.jpg?v=1763591695",
+      "https://www.shopmintjulep.com/cdn/shop/files/MG2977_ALL_1800x1800_e0a51937-708c-4a1e-b5ab-9ec0ae5b147a_590x.jpg?v=1762409344",
+      "https://www.shopmintjulep.com/cdn/shop/files/IMG_5478_590x.jpg?v=1769366701",
+      "https://www.shopmintjulep.com/cdn/shop/files/16294_590x.jpg?v=1770437214"
     ],
     "productCount": "100-500"
   },
@@ -770,12 +730,12 @@
     "shopImage": "https://mottoharvardsq.com/cdn/shop/files/image_123650291_8a6dbed3-9b49-4c52-9043-41d424e7d5d5_1800x.jpg?v=1755887799",
     "logo": "https://mottoharvardsq.com/cdn/shop/files/favicon2022_96x.png?v=1666575683",
     "productPhotos": [
-      "https://mottoharvardsq.com/cdn/shop/files/image_123650291_8da6fb33-a7ed-45b5-b561-840468147e7b_1x1.jpg?v=1755961285",
-      "https://mottoharvardsq.com/cdn/shop/files/image_123650291_8da6fb33-a7ed-45b5-b561-840468147e7b_x800.jpg?v=1755961285",
-      "https://mottoharvardsq.com/cdn/shop/files/image_123650291_8a6dbed3-9b49-4c52-9043-41d424e7d5d5_{width}x.jpg?v=1755887799",
-      "https://mottoharvardsq.com/cdn/shop/files/image_123650291_8a6dbed3-9b49-4c52-9043-41d424e7d5d5_1000x.jpg?v=1755887799",
-      "https://mottoharvardsq.com/cdn/shop/files/Mobile-necklaces6.3.24_7f874e25-ee4b-44a1-ab08-bed50f031bdb_1x1.jpg?v=1717464947",
-      "https://mottoharvardsq.com/cdn/shop/files/Mobile-necklaces6.3.24_7f874e25-ee4b-44a1-ab08-bed50f031bdb_x800.jpg?v=1717464947"
+      "https://mottoharvardsq.com/cdn/shop/files/IMG_5347_600x.jpg?v=1722531050",
+      "https://mottoharvardsq.com/cdn/shop/files/IMG_9301_600x.jpg?v=1768650663",
+      "https://mottoharvardsq.com/cdn/shop/files/IMG_4048_600x.jpg?v=1762903557",
+      "https://mottoharvardsq.com/cdn/shop/files/MUZC8FLDK_600x.jpg?v=1748027459",
+      "https://mottoharvardsq.com/cdn/shop/files/ANDLAZM_600x.jpg?v=1735217474",
+      "https://mottoharvardsq.com/cdn/shop/files/HGBCT22_600x.jpg?v=1716140079"
     ],
     "productCount": "100-500"
   },
@@ -790,12 +750,12 @@
     "shopImage": "https://patchnyc.com/cdn/shop/files/Monoprix_highlight_1728x.jpg?v=1614297181",
     "logo": "https://patchnyc.com/cdn/shop/files/Profile_Favicon_Test1_32x32.jpg?v=1695058180",
     "productPhotos": [
-      "https://patchnyc.com/cdn/shop/files/Life-on-the-Asteroid1_{width}x.jpg?v=1767904731",
-      "https://patchnyc.com/cdn/shop/files/Life-on-the-Asteroid1_720x.jpg?v=1767904731",
-      "https://patchnyc.com/cdn/shop/files/Mortal-_-Pestle1_{width}x.jpg?v=1767905213",
-      "https://patchnyc.com/cdn/shop/files/Mortal-_-Pestle1_720x.jpg?v=1767905213",
-      "https://patchnyc.com/cdn/shop/files/Taking-the-Air1_{width}x.jpg?v=1767904882",
-      "https://patchnyc.com/cdn/shop/files/Taking-the-Air1_720x.jpg?v=1767904882"
+      "https://cdn.shopify.com/s/files/1/0070/5042/files/ADV-Wall.jpg?v=1769727169",
+      "https://patchnyc.com/cdn/shop/products/Giraffe-Lg-Rec-Tray_720x.jpg?v=1511302650",
+      "https://patchnyc.com/cdn/shop/files/Tiger-Bullet-Bowl-Aqua-Dots2_720x.jpg?v=1699484971",
+      "https://patchnyc.com/cdn/shop/files/Five-Hearts1a_720x.jpg?v=1770412419",
+      "https://patchnyc.com/cdn/shop/files/Flannel-A1a_720x.jpg?v=1727318119",
+      "https://patchnyc.com/cdn/shop/files/Eye-in-Heart-Right_720x.jpg?v=1755291543"
     ],
     "productCount": "500-1000"
   },
@@ -1070,11 +1030,11 @@
     "shopImage": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoj5HH-mY9WZpxWA4xZPHyszujlB4qbq-824GHTw4eh2AbcO9FigMsdADOCztjGhAzF5TJtciqPVQzSAWp8hvyadIk6tshmOhLZReJPwTDeKwCnCl24WnI1BcAIJUMQ-xV3Nebf=s1360-w1360-h1020-rw",
     "logo": "https://www.thefairyshop.com.au/cdn/shop/files/iconforwebsite_32x32.png?v=1645150163",
     "productPhotos": [
-      "https://www.thefairyshop.com.au/products/fairy-garden-mushroom-kit-gift-set",
-      "https://www.thefairyshop.com.au/products/glow-in-the-dark-fairy-door-and-mushroom-set",
-      "https://www.thefairyshop.com.au/cdn/shop/files/a-visit-to-fairyland-hardback-book-by-shirley-barber_533x.png?v=1748253591",
-      "https://www.thefairyshop.com.au/products/purple-fairy-tutu-and-wing-set-1",
-      "https://www.thefairyshop.com.au/products/glow-in-the-dark-fairy-door-and-mushroom-set",
+      "https://www.thefairyshop.com.au/cdn/shop/files/purple-velvet-fairy-dancer-dress_720x.jpg?v=1771625465",
+      "https://www.thefairyshop.com.au/cdn/shop/files/glow-in-the-dark-fairy-welcome-door-windows-and-lantern-1_720x.png?v=1740187948",
+      "https://www.thefairyshop.com.au/cdn/shop/products/fairy-garden-pink-blossom-fairy-house_1100x.png?v=1680223840",
+      "https://www.thefairyshop.com.au/cdn/shop/files/fairy-party-favour-candy-bags-5_720x.png?v=1753698594",
+      "https://www.thefairyshop.com.au/cdn/shop/files/claris-the-mouse-compartment-lunch-box-5_720x.png?v=1769037244",
       "https://www.thefairyshop.com.au/cdn/shop/files/rainbow-fairy-dress-with-wings-6_533x.png?v=1765346693"
     ],
     "productCount": "1000+"
