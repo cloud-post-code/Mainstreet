@@ -7,9 +7,9 @@
   var lastProgress = -1;
 
   // Scroll path: start (top of page) and end (bottom) – map pans south at same rate as scroll, zoom fixed
-  var startCenter = { lat: 42.365, lng: -71.065 };
-  var endCenter = { lat: 42.28, lng: -71.065 };
-  var mapZoom = 11;
+  var startCenter = { lat: 42.38, lng: -71.065 };
+  var endCenter = { lat: 42.24, lng: -71.065 };
+  var mapZoom = 14;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
