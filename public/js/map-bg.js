@@ -9,11 +9,6 @@
   var startCenter = { lat: 42.48, lng: -71.065 };
   var endCenter = { lat: 42.12, lng: -71.065 };
   var mapZoom = 17;
-  var smoothFactor = 0.14;
-
-  // Target center from scroll; smooth-follow updates map toward this
-  var targetLat = startCenter.lat;
-  var targetLng = startCenter.lng;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -26,35 +21,20 @@
     return a + (b - a) * t;
   }
 
-  function updateMapPosition() {
+  function syncMapToScroll() {
     if (!map) return;
     var progress = getScrollProgress();
-    targetLat = lerp(startCenter.lat, endCenter.lat, progress);
-    targetLng = lerp(startCenter.lng, endCenter.lng, progress);
+    var lat = lerp(startCenter.lat, endCenter.lat, progress);
+    var lng = lerp(startCenter.lng, endCenter.lng, progress);
+    map.panTo({ lat: lat, lng: lng });
   }
 
-  function tick() {
-    if (!map) return;
-    var center = map.getCenter();
-    if (!center) return;
-    var lat = center.lat();
-    var lng = center.lng();
-    var newLat = lat + (targetLat - lat) * smoothFactor;
-    var newLng = lng + (targetLng - lng) * smoothFactor;
-    map.panTo({ lat: newLat, lng: newLng });
-    var dist = Math.abs(newLat - targetLat) + Math.abs(newLng - targetLng);
-    if (dist > 1e-5) {
-      rafId = requestAnimationFrame(tick);
-    } else {
-      rafId = null;
+  function startScrollSyncLoop() {
+    function loop() {
+      syncMapToScroll();
+      rafId = requestAnimationFrame(loop);
     }
-  }
-
-  function onScroll() {
-    updateMapPosition();
-    if (!rafId) {
-      rafId = requestAnimationFrame(tick);
-    }
+    rafId = requestAnimationFrame(loop);
   }
 
   function loadMapsScript(apiKey, callback) {
@@ -112,7 +92,7 @@
         if (map) google.maps.event.trigger(map, 'resize');
       }, 100);
 
-      // Preload tiles along the scroll path: quick pan sweep then back to start
+      // Preload tiles along the scroll path: quick pan sweep then back to start; then start 1:1 scroll sync
       (function preloadTiles() {
         if (!map) return;
         var steps = 12;
@@ -127,17 +107,16 @@
             setTimeout(run, 40);
           } else {
             map.panTo({ lat: startCenter.lat, lng: startCenter.lng });
+            startScrollSyncLoop();
           }
         }
         setTimeout(run, 150);
       })();
 
-      updateMapPosition();
-      window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () {
         if (map) {
           google.maps.event.trigger(map, 'resize');
-          updateMapPosition();
+          syncMapToScroll();
         }
       });
     } catch (e) {
