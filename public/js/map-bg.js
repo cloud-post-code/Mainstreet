@@ -3,13 +3,17 @@
   if (!container) return;
 
   var map = null;
-  var rafScheduled = false;
-  var lastProgress = -1;
+  var rafId = null;
 
-  // Scroll path: start (top of page) and end (bottom) – map pans south at same rate as scroll, zoom fixed
-  var startCenter = { lat: 42.38, lng: -71.065 };
-  var endCenter = { lat: 42.24, lng: -71.065 };
-  var mapZoom = 14;
+  // Scroll path: start (top) to end (bottom) – long journey, very zoomed in
+  var startCenter = { lat: 42.48, lng: -71.065 };
+  var endCenter = { lat: 42.12, lng: -71.065 };
+  var mapZoom = 17;
+  var smoothFactor = 0.14;
+
+  // Target center from scroll; smooth-follow updates map toward this
+  var targetLat = startCenter.lat;
+  var targetLng = startCenter.lng;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -23,22 +27,33 @@
   }
 
   function updateMapPosition() {
-    rafScheduled = false;
     if (!map) return;
     var progress = getScrollProgress();
-    if (progress === lastProgress) return;
-    lastProgress = progress;
+    targetLat = lerp(startCenter.lat, endCenter.lat, progress);
+    targetLng = lerp(startCenter.lng, endCenter.lng, progress);
+  }
 
-    var lat = lerp(startCenter.lat, endCenter.lat, progress);
-    var lng = lerp(startCenter.lng, endCenter.lng, progress);
-
-    map.panTo({ lat: lat, lng: lng });
+  function tick() {
+    if (!map) return;
+    var center = map.getCenter();
+    if (!center) return;
+    var lat = center.lat();
+    var lng = center.lng();
+    var newLat = lat + (targetLat - lat) * smoothFactor;
+    var newLng = lng + (targetLng - lng) * smoothFactor;
+    map.panTo({ lat: newLat, lng: newLng });
+    var dist = Math.abs(newLat - targetLat) + Math.abs(newLng - targetLng);
+    if (dist > 1e-5) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+    }
   }
 
   function onScroll() {
-    if (!rafScheduled) {
-      rafScheduled = true;
-      requestAnimationFrame(updateMapPosition);
+    updateMapPosition();
+    if (!rafId) {
+      rafId = requestAnimationFrame(tick);
     }
   }
 
