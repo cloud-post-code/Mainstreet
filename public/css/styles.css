@@ -37,6 +37,10 @@ body {
 }
 
 /* Google Map full-viewport background; scroll drives pan/zoom */
+.page-home {
+  background-color: transparent;
+}
+
 #site-map-bg {
   position: fixed;
   inset: 0;
