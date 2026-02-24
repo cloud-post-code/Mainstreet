@@ -278,6 +278,74 @@ body {
   color: var(--brand-cream);
 }
 
+/* Map hero: scroll-driven journey background */
+.map-hero {
+  position: relative;
+  height: 120vh;
+  min-height: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.map-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/map-journey.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.map-hero-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drawn-path-stroke {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.map-hero-characters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-crayon {
+  position: absolute;
+  width: 3.5rem;
+  height: 10rem;
+  left: 12%;
+  top: 78%;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  z-index: 3;
+}
+
+.map-crayon .crayon-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+}
+
+.map-kid {
+  position: absolute;
+  width: 2.5rem;
+  height: 3.2rem;
+  left: 18%;
+  top: 72%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.map-kid .kid-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+}
+
 /* Main content */
 .main-content {
   max-width: 1200px;
