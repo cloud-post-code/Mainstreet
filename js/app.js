@@ -21,6 +21,20 @@
   let showFavoritesOnly = false;
   var serverFavoritesIds = null;
 
+  var categoryDisplayNames = {
+    'all': 'Main Street',
+    'Clothing Boutique': 'Apparel Avenue',
+    'Gifts': 'Present Parkway',
+    'Vintage / Thrift': 'Secondhand Street',
+    'Stationary': 'Letter Lane',
+    'Home Good': 'Decor Detour'
+  };
+
+  function getCategoryDisplayName(category) {
+    if (!category) return '';
+    return categoryDisplayNames[category] || category;
+  }
+
   function getFavorites() {
     if (window.getCurrentUser && window.getCurrentUser() && Array.isArray(serverFavoritesIds)) return serverFavoritesIds;
     try {
@@ -276,7 +290,7 @@
       '<div class="product-grid">' + productBlocks + '</div>' +
       '<a href="' + link + '" class="view-more-btn" target="_blank" rel="noopener noreferrer">VIEW MORE<span class="material-icons">arrow_forward</span></a>' +
       '<div class="shop-card-stat-single">' +
-      '<span class="shop-card-category">' + escapeHtml(shop.category || '') + '</span>' +
+      '<span class="shop-card-category">' + escapeHtml(getCategoryDisplayName(shop.category)) + '</span>' +
       '<span class="shop-card-item-count">' + (shop.productCount || (shop.productPhotos ? shop.productPhotos.length : 6)) + ' items</span>' +
       '</div></section></div>';
 
