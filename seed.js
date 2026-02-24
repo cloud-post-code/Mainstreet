@@ -100,7 +100,20 @@ function loadShopsFromCsv(csvPath) {
       product_photos: productPhotosFromRow(row),
       product_count: (row['Estimated Item Count'] || '').trim() || null
     };
-  }).filter((s) => s.id);
+  })
+    .filter((s) => s.id)
+    .filter(dedupeByShopName());
+}
+
+function dedupeByShopName() {
+  const seen = new Set();
+  return (shop) => {
+    const key = (shop.name || '').trim().toLowerCase();
+    if (!key) return true;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  };
 }
 
 function loadShopsFromJson(jsonPath) {
