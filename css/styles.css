@@ -335,7 +335,7 @@ body {
   width: 40px;
   height: 51px;
   z-index: 2;
-  animation: map-kid-walk 0.5s ease-in-out infinite;
+  animation: map-kid-walk 0.6s ease-in-out infinite;
 }
 
 .map-kid .map-kid-img {
@@ -346,8 +346,10 @@ body {
 }
 
 @keyframes map-kid-walk {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -4px); }
+  50% { transform: translate(0, -2px); }
+  75% { transform: translate(-2px, -4px); }
 }
 
 /* Main content */

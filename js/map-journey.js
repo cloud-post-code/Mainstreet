@@ -19,26 +19,37 @@
     'assets/map-journey-4.png'
   ];
 
-  // Build tiled map background with alternating horizontal flip; each tile uses next background in rotation
   var tileHeightVh = 80;
   var vh = window.innerHeight * 0.01;
   var tileHeightPx = tileHeightVh * vh;
-  var docHeight = Math.max(
-    document.documentElement.scrollHeight,
-    document.documentElement.offsetHeight,
-    wrapper.offsetHeight,
-    window.innerHeight * 3
-  );
-  var numTiles = Math.max(15, Math.ceil(docHeight / tileHeightPx) + 2);
+  var tilesBuilt = 0;
   bgEl.style.backgroundImage = 'none';
-  for (var t = 0; t < numTiles; t++) {
-    var tile = document.createElement('div');
-    tile.className = 'map-tile' + (t % 2 === 1 ? ' map-tile--flipped' : '');
-    tile.style.height = tileHeightPx + 'px';
-    var bgIndex = t % backgroundImages.length;
-    tile.style.backgroundImage = "url('" + backgroundImages[bgIndex] + "')";
-    bgEl.appendChild(tile);
+
+  function getRequiredTileCount() {
+    var scrollH = Math.max(
+      document.documentElement.scrollHeight,
+      document.body ? document.body.scrollHeight : 0,
+      wrapper.offsetHeight,
+      window.innerHeight * 4
+    );
+    return Math.ceil(scrollH / tileHeightPx) + 3;
   }
+
+  function buildTilesToEnd() {
+    var required = getRequiredTileCount();
+    if (required <= tilesBuilt) return;
+    for (var t = tilesBuilt; t < required; t++) {
+      var tile = document.createElement('div');
+      tile.className = 'map-tile' + (t % 2 === 1 ? ' map-tile--flipped' : '');
+      tile.style.height = tileHeightPx + 'px';
+      var bgIndex = t % backgroundImages.length;
+      tile.style.backgroundImage = "url('" + backgroundImages[bgIndex] + "')";
+      bgEl.appendChild(tile);
+    }
+    tilesBuilt = required;
+  }
+
+  buildTilesToEnd();
 
   // Path in wrapper-relative coordinates: diagonal from upper-right toward lower-left
   // Progress 0 = top of scroll, 1 = bottom of scroll
@@ -80,15 +91,17 @@
       rotation: rotation
     });
 
-    var kidOffsets = [0, 0.12, 0.24, 0.36, 0.5];
+    // Kids spread along full path so you see one from time to time as you scroll
+    var kidOffsets = [0.02, 0.14, 0.26, 0.38, 0.5, 0.62, 0.74, 0.86, 0.96];
     kidEls.forEach(function (el, i) {
-      var p = progress * 1.15 - kidOffsets[i];
-      if (p < 0 || p > 1) {
+      var offset = kidOffsets[i % kidOffsets.length];
+      var p = progress - offset;
+      if (p < -0.05 || p > 1.05) {
         el.style.visibility = 'hidden';
         return;
       }
       el.style.visibility = 'visible';
-      var pt = getPathPoint(p, w, h);
+      var pt = getPathPoint(Math.max(0, Math.min(1, p)), w, h);
       gsap.set(el, {
         left: pt.x,
         top: pt.y,
@@ -101,11 +114,15 @@
   gsap.ticker.add(updatePositions);
   ScrollTrigger.addEventListener('refresh', updatePositions);
   window.addEventListener('resize', function () {
+    buildTilesToEnd();
     ScrollTrigger.refresh();
   });
   updatePositions();
 
-  // Refresh when dynamic content (shop grid) has loaded
+  function onRefresh() {
+    buildTilesToEnd();
+  }
+  ScrollTrigger.addEventListener('refresh', onRefresh);
   setTimeout(function () { ScrollTrigger.refresh(); }, 1500);
   setTimeout(function () { ScrollTrigger.refresh(); }, 4000);
 })();
