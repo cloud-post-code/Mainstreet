@@ -463,6 +463,22 @@
     });
   }
 
+  var scrollToTopBtn = document.getElementById('scroll-to-top');
+  var siteHeader = document.querySelector('.site-header');
+  function updateScrollToTopVisibility() {
+    if (!scrollToTopBtn || !siteHeader) return;
+    var headerGone = siteHeader.getBoundingClientRect().bottom < 0;
+    scrollToTopBtn.classList.toggle('scroll-to-top--visible', headerGone);
+    scrollToTopBtn.setAttribute('aria-hidden', headerGone ? 'false' : 'true');
+  }
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', updateScrollToTopVisibility, { passive: true });
+    updateScrollToTopVisibility();
+  }
+
   var shareOverlay = document.getElementById('share-modal-overlay');
   var shareClose = document.getElementById('share-modal-close');
   var shareCopyBtn = document.getElementById('share-copy-btn');

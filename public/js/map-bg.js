@@ -27,7 +27,7 @@
     var progress = getScrollProgress();
     var lat = lerp(startCenter.lat, endCenter.lat, progress);
     var lng = lerp(startCenter.lng, endCenter.lng, progress);
-    map.panTo({ lat: lat, lng: lng });
+    map.setCenter({ lat: lat, lng: lng });
   }
 
   function startScrollSyncLoop() {
