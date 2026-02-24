@@ -16,12 +16,14 @@
     'assets/backgrounds/Screenshot_2026-02-24_at_11.40.45_AM-d104ca5f-aa3e-4dbb-9d89-24862ddd7561.png'
   ];
 
+  var cacheBust = '?v=' + Date.now();
+
   function run() {
     var el = document.getElementById('site-bg-rotate');
     if (!el || IMAGES.length === 0) return;
     var index = 0;
     function setNext() {
-      el.style.backgroundImage = 'url(' + IMAGES[index] + ')';
+      el.style.backgroundImage = 'url("' + IMAGES[index] + cacheBust + '")';
       index = (index + 1) % IMAGES.length;
     }
     setNext();
