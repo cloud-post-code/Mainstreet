@@ -16,6 +16,7 @@
 
   var currentLat = startCenter.lat;
   var currentLng = startCenter.lng;
+  var lastScrollTop = -1;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -30,6 +31,10 @@
 
   function syncMapToScroll() {
     if (!map) return;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var isScrolling = scrollTop !== lastScrollTop;
+    lastScrollTop = scrollTop;
+    if (!isScrolling) return;
     var progress = getScrollProgress();
     var ahead = Math.min(1, progress + lookAhead);
     var targetLat = lerp(startCenter.lat, endCenter.lat, ahead);
