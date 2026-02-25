@@ -9,6 +9,10 @@
   background: #d2b48c;
 }
 
+.page-about .site-bg-rotate::after {
+  display: none;
+}
+
 .about-content {
   max-width: 800px;
   margin: 0 auto;

@@ -30,6 +30,8 @@
     var layerA = document.getElementById('site-bg-rotate-a');
     var layerB = document.getElementById('site-bg-rotate-b');
     if (!wrapper || !layerA || !layerB || IMAGES.length === 0) return;
+    /* About page uses solid tan background; do not apply map images */
+    if (document.body && document.body.classList.contains('page-about')) return;
 
     preloadImages();
 
