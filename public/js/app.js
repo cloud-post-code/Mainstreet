@@ -317,6 +317,20 @@
     var commentBtnEl = card.querySelector('.card-comment-btn');
     if (commentBtnEl) commentBtnEl.addEventListener('click', function () { openCommentSidebar(shop); });
 
+    var enterStoreBtn = card.querySelector('.view-more-btn');
+    if (enterStoreBtn) {
+      enterStoreBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var user = window.getCurrentUser && window.getCurrentUser();
+        if (user && user.is_admin) {
+          window.open(shop.link || '#', '_blank');
+          return;
+        }
+        fetch('/api/shops/' + encodeURIComponent(shop.id) + '/enter', { credentials: 'include', method: 'POST' });
+        window.open(shop.link || '#', '_blank');
+      });
+    }
+
     return card;
   }
 

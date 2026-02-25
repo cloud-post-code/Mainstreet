@@ -68,7 +68,8 @@
 
   function buildRow(shop) {
     var tr = document.createElement('tr');
-    tr.setAttribute('data-shop-id', escapeHtml(shop.id));
+    var rowId = shop.id != null && shop.id !== '' ? String(shop.id) : '';
+    tr.setAttribute('data-shop-id', rowId || 'new');
     var id = shop.id || '';
     var name = shop.name || '';
     var address = shop.address || '';
@@ -79,6 +80,7 @@
     var shopImage = shop.shopImage || shop.shop_image || '';
     var logo = shop.logo || '';
     var productCount = shop.productCount || shop.product_count || '';
+    var enterStoreClicks = shop.enterStoreClicks ?? shop.enter_store_clicks ?? 0;
     var productPhotosArr = getProductPhotosArray(shop);
     var productPhotosCell = '';
     for (var i = 0; i < 6; i++) {
@@ -89,6 +91,7 @@
 
     tr.innerHTML =
       '<td><input type="text" class="admin-input admin-input-id" value="' + escapeHtml(id) + '" readonly aria-label="ID"></td>' +
+      '<td class="admin-enter-clicks-cell">' + escapeHtml(String(enterStoreClicks)) + '</td>' +
       '<td><input type="text" class="admin-input" data-field="name" value="' + escapeHtml(name) + '" aria-label="Name"></td>' +
       '<td><input type="text" class="admin-input" data-field="address" value="' + escapeHtml(address) + '" aria-label="Address"></td>' +
       '<td><input type="text" class="admin-input" data-field="city" value="' + escapeHtml(city) + '" aria-label="City"></td>' +
@@ -109,6 +112,7 @@
 
     saveBtn.addEventListener('click', function () {
       var rowId = tr.getAttribute('data-shop-id');
+      var isNew = !rowId || rowId === 'new';
       var body = {
         name: tr.querySelector('[data-field="name"]').value,
         address: tr.querySelector('[data-field="address"]').value,
@@ -122,8 +126,10 @@
         product_photos: collectProductPhotosFromRow(tr)
       };
       saveBtn.disabled = true;
-      fetch('/api/admin/shops/' + encodeURIComponent(rowId), {
-        method: 'PATCH',
+      var url = isNew ? '/api/admin/shops' : '/api/admin/shops/' + encodeURIComponent(rowId);
+      var method = isNew ? 'POST' : 'PATCH';
+      fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(body)
@@ -138,20 +144,33 @@
         .then(function (data) {
           saveBtn.disabled = false;
           if (data && data.id) {
-            showMessage('Saved.');
+            if (isNew) {
+              tr.setAttribute('data-shop-id', data.id);
+              var idInput = tr.querySelector('.admin-input-id');
+              if (idInput) idInput.value = data.id;
+              showMessage('Shop created.');
+            } else {
+              showMessage('Saved.');
+            }
           } else if (data && data.error) {
             showMessage(data.error, true);
           }
         })
         .catch(function () {
           saveBtn.disabled = false;
-          showMessage('Update failed.', true);
+          showMessage(isNew ? 'Create failed.' : 'Update failed.', true);
         });
     });
 
     deleteBtn.addEventListener('click', function () {
-      if (!confirm('Delete this shop? This cannot be undone.')) return;
       var rowId = tr.getAttribute('data-shop-id');
+      var isNew = !rowId || rowId === 'new';
+      if (isNew) {
+        tr.remove();
+        showMessage('New shop row removed.');
+        return;
+      }
+      if (!confirm('Delete this shop? This cannot be undone.')) return;
       deleteBtn.disabled = true;
       fetch('/api/admin/shops/' + encodeURIComponent(rowId), {
         method: 'DELETE',
@@ -198,7 +217,7 @@
     var thead = document.createElement('thead');
     thead.innerHTML =
       '<tr>' +
-      '<th>id</th><th>name</th><th>address</th><th>city</th><th>category</th>' +
+      '<th>id</th><th>Enter store clicks</th><th>name</th><th>address</th><th>city</th><th>category</th>' +
       '<th>description</th><th>link</th><th>shop_image</th><th>logo</th><th>product_count</th>' +
       '<th>Product images (1–6)</th><th></th>' +
       '</tr>';
@@ -210,6 +229,19 @@
     table.appendChild(tbody);
     wrap.innerHTML = '';
     wrap.appendChild(table);
+
+    var addBtn = getEl('admin-add-shop');
+    if (addBtn) {
+      addBtn.hidden = false;
+      addBtn.onclick = function () {
+        var tbody = wrap.querySelector('tbody');
+        if (tbody) {
+          var newRow = buildRow({ id: '' });
+          tbody.insertBefore(newRow, tbody.firstChild);
+          showMessage('Fill in the new row and click Save to add the shop.');
+        }
+      };
+    }
   }
 
   function fetchWithTimeout(url, opts, ms) {

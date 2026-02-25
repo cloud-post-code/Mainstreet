@@ -10,12 +10,16 @@
   var startCenter = { lat: 42.48, lng: -71.065 };
   var endCenter = { lat: 42.12, lng: -71.065 };
   var mapZoom = 17;
+  var lookAhead = 0.04; // center map slightly ahead of scroll so tiles below load sooner
+  // Higher = map moves slower per scroll (still completes journey by end of page)
+  var scrollSpeedFactor = 1.8;
 
   function getScrollProgress() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight <= 0) return 0;
-    return Math.max(0, Math.min(1, scrollTop / docHeight));
+    var raw = Math.max(0, Math.min(1, scrollTop / docHeight));
+    return Math.pow(raw, scrollSpeedFactor);
   }
 
   function lerp(a, b, t) {
@@ -25,8 +29,9 @@
   function syncMapToScroll() {
     if (!map) return;
     var progress = getScrollProgress();
-    var lat = lerp(startCenter.lat, endCenter.lat, progress);
-    var lng = lerp(startCenter.lng, endCenter.lng, progress);
+    var ahead = Math.min(1, progress + lookAhead);
+    var lat = lerp(startCenter.lat, endCenter.lat, ahead);
+    var lng = lerp(startCenter.lng, endCenter.lng, ahead);
     map.setCenter({ lat: lat, lng: lng });
   }
 

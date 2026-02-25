@@ -236,6 +236,7 @@ async function ensureTables() {
   try {
     await pool.query(CREATE_SHOPS);
     await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS product_count TEXT');
+    await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS enter_store_clicks INTEGER DEFAULT 0');
     await pool.query(CREATE_USERS);
     await pool.query(CREATE_COMMENTS);
     await pool.query(CREATE_COMMENTS_INDEX);
@@ -386,7 +387,7 @@ app.get('/api/shops', async (req, res) => {
     try {
       const result = await queryWithTimeout(
         pool,
-        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount" FROM shops ORDER BY id',
+        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount", enter_store_clicks AS "enterStoreClicks" FROM shops ORDER BY id',
         [],
         10000
       );
@@ -403,6 +404,29 @@ app.get('/api/shops', async (req, res) => {
   } catch (err) {
     console.error('Fallback read error:', err.message);
     return res.status(500).json({ error: 'No shops data' });
+  }
+});
+
+// POST /api/shops/:id/enter – record "Enter store" click (non-admin only)
+app.post('/api/shops/:id/enter', authOptional, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  const shopId = req.params.id;
+  if (!shopId) return res.status(400).json({ error: 'Shop id required' });
+  try {
+    if (req.user) {
+      const result = await pool.query('SELECT is_admin FROM users WHERE id = $1', [req.user.id]);
+      const row = result.rows[0];
+      if (row && row.is_admin) return res.status(204).end();
+    }
+    const update = await pool.query(
+      'UPDATE shops SET enter_store_clicks = COALESCE(enter_store_clicks, 0) + 1 WHERE id = $1',
+      [shopId]
+    );
+    if (update.rowCount === 0) return res.status(404).json({ error: 'Shop not found' });
+    return res.status(204).end();
+  } catch (err) {
+    console.error('Enter store click error:', err.message);
+    return res.status(500).json({ error: 'Failed to record click' });
   }
 });
 
@@ -485,6 +509,57 @@ app.post('/api/favorites', authRequired, async (req, res) => {
   } catch (err) {
     console.error('Favorites toggle error:', err.message);
     return res.status(500).json({ error: 'Failed to update favorite' });
+  }
+});
+
+// POST /api/admin/shops – create one shop (admin only)
+app.post('/api/admin/shops', authRequired, adminRequired, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database unavailable' });
+  const body = req.body || {};
+  const name = (body.name != null && body.name !== undefined) ? String(body.name).trim() : '';
+  const address = (body.address != null && body.address !== undefined) ? String(body.address) : '';
+  const city = (body.city != null && body.city !== undefined) ? String(body.city) : '';
+  const category = (body.category != null && body.category !== undefined) ? String(body.category) : '';
+  const description = (body.description != null && body.description !== undefined) ? String(body.description) : '';
+  const link = (body.link != null && body.link !== undefined) ? String(body.link) : '';
+  const shop_image = (body.shop_image != null && body.shop_image !== undefined) ? String(body.shop_image) : '';
+  const logo = (body.logo != null && body.logo !== undefined) ? String(body.logo) : '';
+  const product_count = (body.product_count != null && body.product_count !== undefined) ? String(body.product_count) : '';
+  let product_photos = body.product_photos;
+  if (!Array.isArray(product_photos)) {
+    if (typeof product_photos === 'string' && product_photos.trim()) {
+      try {
+        product_photos = JSON.parse(product_photos);
+      } catch (e) {
+        product_photos = [];
+      }
+    } else {
+      product_photos = [];
+    }
+  }
+  const slug = name
+    ? name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '') || null
+    : null;
+  let id = slug || 'shop-' + crypto.randomBytes(6).toString('hex');
+  try {
+    const existing = await pool.query('SELECT id FROM shops WHERE id = $1', [id]);
+    if (existing.rows.length > 0) {
+      id = (slug || 'shop') + '-' + crypto.randomBytes(4).toString('hex');
+    }
+    await pool.query(SHOP_UPSERT, [
+      id, name, address, city, category, description, link, shop_image, logo,
+      JSON.stringify(product_photos), product_count
+    ]);
+    const result = await pool.query(
+      'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount" FROM shops WHERE id = $1',
+      [id]
+    );
+    if (result.rows.length === 0) return res.status(500).json({ error: 'Create failed' });
+    return res.status(201).json(result.rows[0]);
+  } catch (err) {
+    if (err.message && err.message.includes('JSON')) return res.status(400).json({ error: 'Invalid product_photos' });
+    console.error('Admin POST shop error:', err.message);
+    return res.status(500).json({ error: 'Create failed' });
   }
 });
 
