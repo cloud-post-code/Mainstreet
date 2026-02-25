@@ -6,17 +6,24 @@
   var map = null;
   var rafId = null;
 
-  // Scroll path: start (top) to end (bottom) – long journey, very zoomed in
+  // Scroll path: start (top) to end (bottom) – map pans so scroll pixels match map progress
   var startCenter = { lat: 42.48, lng: -71.065 };
   var endCenter = { lat: 42.12, lng: -71.065 };
   var mapZoom = 17;
   var lookAhead = 0.04; // center map slightly ahead of scroll so tiles below load sooner
 
-  function getScrollProgress() {
+  function getScrollMetrics() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight <= 0) return 0;
-    return Math.max(0, Math.min(1, scrollTop / docHeight));
+    var scrollHeight = document.documentElement.scrollHeight;
+    var clientHeight = window.innerHeight;
+    var maxScrollPx = Math.max(0, scrollHeight - clientHeight);
+    return { scrollTop: scrollTop, maxScrollPx: maxScrollPx };
+  }
+
+  function getScrollProgress() {
+    var m = getScrollMetrics();
+    if (m.maxScrollPx <= 0) return 0;
+    return Math.max(0, Math.min(1, m.scrollTop / m.maxScrollPx));
   }
 
   function lerp(a, b, t) {
@@ -25,7 +32,13 @@
 
   function syncMapToScroll() {
     if (!map) return;
-    var progress = getScrollProgress();
+    var m = getScrollMetrics();
+    if (m.maxScrollPx <= 0) {
+      map.setCenter({ lat: startCenter.lat, lng: startCenter.lng });
+      return;
+    }
+    // Progress = pixels scrolled / total scrollable pixels (1:1 lock with front content)
+    var progress = Math.max(0, Math.min(1, m.scrollTop / m.maxScrollPx));
     var ahead = Math.min(1, progress + lookAhead);
     var lat = lerp(startCenter.lat, endCenter.lat, ahead);
     var lng = lerp(startCenter.lng, endCenter.lng, ahead);
