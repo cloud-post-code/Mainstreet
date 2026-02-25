@@ -12,7 +12,7 @@
   var mapZoom = 17;
   var lookAhead = 0.04; // center map slightly ahead of scroll so tiles below load sooner
   // Lower = map moves slower (eases toward scroll target). 0.02–0.08 typical.
-  var mapFollowSpeed = 0.01;
+  var mapFollowSpeed = 0.004;
 
   var currentLat = startCenter.lat;
   var currentLng = startCenter.lng;
@@ -34,13 +34,8 @@
     var ahead = Math.min(1, progress + lookAhead);
     var targetLat = lerp(startCenter.lat, endCenter.lat, ahead);
     var targetLng = lerp(startCenter.lng, endCenter.lng, ahead);
-    if (progress <= 0.02 || progress >= 0.98) {
-      currentLat = targetLat;
-      currentLng = targetLng;
-    } else {
-      currentLat = lerp(currentLat, targetLat, mapFollowSpeed);
-      currentLng = lerp(currentLng, targetLng, mapFollowSpeed);
-    }
+    currentLat = lerp(currentLat, targetLat, mapFollowSpeed);
+    currentLng = lerp(currentLng, targetLng, mapFollowSpeed);
     map.setCenter({ lat: currentLat, lng: currentLng });
   }
 
