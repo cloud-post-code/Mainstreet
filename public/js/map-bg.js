@@ -12,7 +12,7 @@
   var mapZoom = 17;
   var lookAhead = 0.04; // center map slightly ahead of scroll so tiles below load sooner
   // Lower = map moves slower (eases toward scroll target). 0.02–0.08 typical.
-  var mapFollowSpeed = 0.035;
+  var mapFollowSpeed = 0.01;
 
   var currentLat = startCenter.lat;
   var currentLng = startCenter.lng;
