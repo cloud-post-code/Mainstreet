@@ -211,7 +211,7 @@ body {
     right: 0;
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 0.5rem;
     background: var(--brand-green);
     padding: 0.5rem 1rem 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -229,12 +229,11 @@ body {
     padding: 0.75rem 1rem;
     border-radius: 8px;
     text-align: left;
+    flex-shrink: 0;
   }
   .header-actions .auth-wrap {
     width: 100%;
-  }
-  .header-actions .auth-trigger {
-    width: 100%;
+    flex-shrink: 0;
   }
   .header-actions .auth-panel {
     position: static;
