@@ -34,8 +34,13 @@
     var ahead = Math.min(1, progress + lookAhead);
     var targetLat = lerp(startCenter.lat, endCenter.lat, ahead);
     var targetLng = lerp(startCenter.lng, endCenter.lng, ahead);
-    currentLat = lerp(currentLat, targetLat, mapFollowSpeed);
-    currentLng = lerp(currentLng, targetLng, mapFollowSpeed);
+    if (progress <= 0.02 || progress >= 0.98) {
+      currentLat = targetLat;
+      currentLng = targetLng;
+    } else {
+      currentLat = lerp(currentLat, targetLat, mapFollowSpeed);
+      currentLng = lerp(currentLng, targetLng, mapFollowSpeed);
+    }
     map.setCenter({ lat: currentLat, lng: currentLng });
   }
 
