@@ -6,7 +6,7 @@ const { parse } = require('csv-parse/sync');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
@@ -93,6 +93,37 @@ const CREATE_FAVORITES = `
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     shop_id TEXT NOT NULL,
     PRIMARY KEY (user_id, shop_id)
+  );
+`;
+
+const CREATE_PRODUCTS = `
+  CREATE TABLE IF NOT EXISTS products (
+    id SERIAL PRIMARY KEY,
+    shop_id TEXT NOT NULL REFERENCES shops(id) ON DELETE CASCADE,
+    name TEXT,
+    image_link TEXT,
+    price TEXT,
+    item_link TEXT NOT NULL,
+    short_description TEXT,
+    in_stock BOOLEAN DEFAULT true,
+    category TEXT,
+    source_url TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+  );
+`;
+const CREATE_PRODUCTS_SHOP_IDX = `CREATE INDEX IF NOT EXISTS products_shop_id_idx ON products(shop_id);`;
+const CREATE_PRODUCTS_CATEGORY_IDX = `CREATE INDEX IF NOT EXISTS products_category_idx ON products(category);`;
+
+const CREATE_CRAWL_LOG = `
+  CREATE TABLE IF NOT EXISTS crawl_log (
+    id SERIAL PRIMARY KEY,
+    shop_id TEXT REFERENCES shops(id) ON DELETE CASCADE,
+    status TEXT,
+    items_found INTEGER DEFAULT 0,
+    error TEXT,
+    started_at TIMESTAMPTZ DEFAULT NOW(),
+    completed_at TIMESTAMPTZ
   );
 `;
 
@@ -242,6 +273,10 @@ async function ensureTables() {
     await pool.query(CREATE_COMMENTS);
     await pool.query(CREATE_COMMENTS_INDEX);
     await pool.query(CREATE_FAVORITES);
+    await pool.query(CREATE_PRODUCTS);
+    await pool.query(CREATE_PRODUCTS_SHOP_IDX);
+    await pool.query(CREATE_PRODUCTS_CATEGORY_IDX);
+    await pool.query(CREATE_CRAWL_LOG);
   } catch (err) {
     console.error('Failed to create tables:', err.message);
   }
