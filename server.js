@@ -237,6 +237,7 @@ async function ensureTables() {
     await pool.query(CREATE_SHOPS);
     await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS product_count TEXT');
     await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS enter_store_clicks INTEGER DEFAULT 0');
+    await pool.query('ALTER TABLE shops ADD COLUMN IF NOT EXISTS featured BOOLEAN DEFAULT false');
     await pool.query(CREATE_USERS);
     await pool.query(CREATE_COMMENTS);
     await pool.query(CREATE_COMMENTS_INDEX);
@@ -387,7 +388,7 @@ app.get('/api/shops', async (req, res) => {
     try {
       const result = await queryWithTimeout(
         pool,
-        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount", enter_store_clicks AS "enterStoreClicks" FROM shops ORDER BY id',
+        'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount", enter_store_clicks AS "enterStoreClicks", featured FROM shops ORDER BY featured DESC, id',
         [],
         10000
       );
@@ -400,7 +401,16 @@ app.get('/api/shops', async (req, res) => {
   try {
     const jsonPath = path.join(__dirname, 'data', 'shops.json');
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-    return res.json(data);
+    const shops = (Array.isArray(data) ? data : []).map((s) => ({
+      ...s,
+      featured: s.featured ?? false
+    }));
+    shops.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return (a.id || '').localeCompare(b.id || '');
+    });
+    return res.json(shops);
   } catch (err) {
     console.error('Fallback read error:', err.message);
     return res.status(500).json({ error: 'No shops data' });
@@ -550,8 +560,12 @@ app.post('/api/admin/shops', authRequired, adminRequired, async (req, res) => {
       id, name, address, city, category, description, link, shop_image, logo,
       JSON.stringify(product_photos), product_count
     ]);
+    const featured = Boolean(body.featured);
+    if (featured) {
+      await pool.query('UPDATE shops SET featured = true WHERE id = $1', [id]);
+    }
     const result = await pool.query(
-      'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount" FROM shops WHERE id = $1',
+      'SELECT id, name, address, city, category, description, link, shop_image AS "shopImage", logo, product_photos AS "productPhotos", product_count AS "productCount", featured FROM shops WHERE id = $1',
       [id]
     );
     if (result.rows.length === 0) return res.status(500).json({ error: 'Create failed' });
@@ -568,7 +582,7 @@ app.patch('/api/admin/shops/:id', authRequired, adminRequired, async (req, res) 
   if (!pool) return res.status(503).json({ error: 'Database unavailable' });
   const { id } = req.params;
   const body = req.body || {};
-  const allowed = ['name', 'address', 'city', 'category', 'description', 'link', 'shop_image', 'logo', 'product_photos', 'product_count'];
+  const allowed = ['name', 'address', 'city', 'category', 'description', 'link', 'shop_image', 'logo', 'product_photos', 'product_count', 'featured'];
   const updates = [];
   const values = [];
   let paramIndex = 1;
@@ -580,6 +594,9 @@ app.patch('/api/admin/shops/:id', authRequired, adminRequired, async (req, res) 
       const arr = Array.isArray(val) ? val : (typeof val === 'string' ? (val.trim() ? JSON.parse(val) : []) : []);
       updates.push(key + ' = $' + paramIndex);
       values.push(JSON.stringify(arr));
+    } else if (key === 'featured') {
+      updates.push(key + ' = $' + paramIndex);
+      values.push(Boolean(val));
     } else {
       updates.push(key + ' = $' + paramIndex);
       values.push(typeof val === 'string' ? val : (val == null ? null : String(val)));
@@ -627,6 +644,93 @@ app.post('/api/admin/seed', authRequired, adminRequired, async (req, res) => {
   } catch (err) {
     console.error('Admin seed error:', err.message);
     return res.status(500).json({ error: 'Seed failed' });
+  }
+});
+
+function escapeCsvField(val) {
+  if (val == null || val === undefined) return '';
+  const str = String(val);
+  if (str.includes(',') || str.includes('"') || str.includes('\n') || str.includes('\r')) {
+    return '"' + str.replace(/"/g, '""') + '"';
+  }
+  return str;
+}
+
+function shopsToCsv(rows) {
+  const headers = [
+    'ID', 'Boutique Name', 'Address', 'City', 'Shop Type', '50-Word Description', 'Website',
+    'Hero Image', 'Logo',
+    'Product Image 1', 'Product Image 2', 'Product Image 3', 'Product Image 4', 'Product Image 5', 'Product Image 6',
+    'Estimated Item Count', 'Enter Store Clicks', 'Featured'
+  ];
+  const lines = [headers.join(',')];
+  for (const row of rows) {
+    const photos = Array.isArray(row.product_photos) ? row.product_photos : (typeof row.product_photos === 'string' ? (() => { try { return JSON.parse(row.product_photos); } catch { return []; } })() : []);
+    const cells = [
+      row.id,
+      row.name,
+      row.address,
+      row.city,
+      row.category,
+      row.description,
+      row.link,
+      row.shop_image,
+      row.logo,
+      photos[0] ?? '',
+      photos[1] ?? '',
+      photos[2] ?? '',
+      photos[3] ?? '',
+      photos[4] ?? '',
+      photos[5] ?? '',
+      row.product_count,
+      row.enter_store_clicks ?? 0,
+      row.featured ? 'true' : 'false'
+    ];
+    lines.push(cells.map(escapeCsvField).join(','));
+  }
+  return lines.join('\n');
+}
+
+// GET /api/admin/shops/export – download all shop data as CSV (admin only)
+app.get('/api/admin/shops/export', authRequired, adminRequired, async (req, res) => {
+  try {
+    let rows;
+    if (pool) {
+      const result = await queryWithTimeout(
+        pool,
+        'SELECT id, name, address, city, category, description, link, shop_image, logo, product_photos, product_count, enter_store_clicks, featured FROM shops ORDER BY featured DESC, id',
+        [],
+        15000
+      );
+      rows = result.rows;
+    } else {
+      const jsonPath = path.join(__dirname, 'data', 'shops.json');
+      const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      const shops = Array.isArray(data) ? data : [];
+      rows = shops.map((s) => ({
+        id: s.id,
+        name: s.name,
+        address: s.address,
+        city: s.city,
+        category: s.category,
+        description: s.description,
+        link: s.link,
+        shop_image: s.shopImage ?? s.shop_image,
+        logo: s.logo,
+        product_photos: s.productPhotos ?? s.product_photos,
+        product_count: s.productCount ?? s.product_count,
+        enter_store_clicks: s.enterStoreClicks ?? s.enter_store_clicks ?? 0,
+        featured: s.featured ?? false
+      }));
+    }
+    const csv = shopsToCsv(rows);
+    const filename = 'mainstreet-shops-' + new Date().toISOString().slice(0, 10) + '.csv';
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="' + filename + '"');
+    return res.send(csv);
+  } catch (err) {
+    console.error('Export error:', err.message);
+    return res.status(500).json({ error: 'Export failed' });
   }
 });
 

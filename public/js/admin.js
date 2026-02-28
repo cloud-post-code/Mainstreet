@@ -81,6 +81,7 @@
     var logo = shop.logo || '';
     var productCount = shop.productCount || shop.product_count || '';
     var enterStoreClicks = shop.enterStoreClicks ?? shop.enter_store_clicks ?? 0;
+    var featured = !!(shop.featured);
     var productPhotosArr = getProductPhotosArray(shop);
     var productPhotosCell = '';
     for (var i = 0; i < 6; i++) {
@@ -92,6 +93,7 @@
     tr.innerHTML =
       '<td><input type="text" class="admin-input admin-input-id" value="' + escapeHtml(id) + '" readonly aria-label="ID"></td>' +
       '<td class="admin-enter-clicks-cell">' + escapeHtml(String(enterStoreClicks)) + '</td>' +
+      '<td class="admin-featured-cell"><input type="checkbox" class="admin-input-featured" data-field="featured" ' + (featured ? 'checked' : '') + ' aria-label="Featured"></td>' +
       '<td><input type="text" class="admin-input" data-field="name" value="' + escapeHtml(name) + '" aria-label="Name"></td>' +
       '<td><input type="text" class="admin-input" data-field="address" value="' + escapeHtml(address) + '" aria-label="Address"></td>' +
       '<td><input type="text" class="admin-input" data-field="city" value="' + escapeHtml(city) + '" aria-label="City"></td>' +
@@ -113,6 +115,7 @@
     saveBtn.addEventListener('click', function () {
       var rowId = tr.getAttribute('data-shop-id');
       var isNew = !rowId || rowId === 'new';
+      var featuredCheckbox = tr.querySelector('[data-field="featured"]');
       var body = {
         name: tr.querySelector('[data-field="name"]').value,
         address: tr.querySelector('[data-field="address"]').value,
@@ -123,7 +126,8 @@
         shop_image: tr.querySelector('[data-field="shop_image"]').value,
         logo: tr.querySelector('[data-field="logo"]').value,
         product_count: tr.querySelector('[data-field="product_count"]').value,
-        product_photos: collectProductPhotosFromRow(tr)
+        product_photos: collectProductPhotosFromRow(tr),
+        featured: featuredCheckbox ? featuredCheckbox.checked : false
       };
       saveBtn.disabled = true;
       var url = isNew ? '/api/admin/shops' : '/api/admin/shops/' + encodeURIComponent(rowId);
@@ -217,7 +221,7 @@
     var thead = document.createElement('thead');
     thead.innerHTML =
       '<tr>' +
-      '<th>id</th><th>Enter store clicks</th><th>name</th><th>address</th><th>city</th><th>category</th>' +
+      '<th>id</th><th>Enter store clicks</th><th>Featured</th><th>name</th><th>address</th><th>city</th><th>category</th>' +
       '<th>description</th><th>link</th><th>shop_image</th><th>logo</th><th>product_count</th>' +
       '<th>Product images (1–6)</th><th></th>' +
       '</tr>';
@@ -241,6 +245,37 @@
           showMessage('Fill in the new row and click Save to add the shop.');
         }
       };
+    }
+    var exportBtn = getEl('admin-export-csv');
+    if (exportBtn) {
+      exportBtn.hidden = false;
+      exportBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        fetch('/api/admin/shops/export', { credentials: 'include' })
+          .then(function (r) {
+            if (!r.ok) {
+              if (r.status === 401 || r.status === 403) {
+                showMessage('Sign in as admin to export.', true);
+              } else {
+                return r.json().then(function (d) { throw new Error(d.error || 'Export failed'); });
+              }
+              return null;
+            }
+            return r.blob();
+          })
+          .then(function (blob) {
+            if (!blob) return;
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'mainstreet-shops-' + new Date().toISOString().slice(0, 10) + '.csv';
+            a.click();
+            URL.revokeObjectURL(a.href);
+            showMessage('CSV exported.');
+          })
+          .catch(function (err) {
+            showMessage(err && err.message ? err.message : 'Export failed.', true);
+          });
+      });
     }
   }
 

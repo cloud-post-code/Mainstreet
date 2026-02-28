@@ -569,8 +569,10 @@
     fetch('/api/shops', { credentials: 'include' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        allShops = Array.isArray(data) ? data : [];
-        allShops = shuffleArray(allShops);
+        var raw = Array.isArray(data) ? data : [];
+        var featuredShops = raw.filter(function (s) { return s.featured; });
+        var otherShops = raw.filter(function (s) { return !s.featured; });
+        allShops = featuredShops.concat(shuffleArray(otherShops));
         hideEmptyStreets();
         if (window.getCurrentUser && window.getCurrentUser()) {
           fetchServerFavorites();
