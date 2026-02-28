@@ -106,7 +106,7 @@ body {
 /* Header – mobile-style top bar: left-aligned title + address, right actions */
 .site-header {
   position: relative;
-  z-index: 1;
+  z-index: 1000;
   background-color: var(--brand-green);
   padding: 0.85rem 1rem 0.9rem;
   display: flex;
@@ -314,7 +314,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   padding: 1rem;
-  z-index: 100;
+  z-index: 1001;
   display: none;
 }
 .auth-panel.is-open {
