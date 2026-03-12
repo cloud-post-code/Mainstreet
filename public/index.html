@@ -17,8 +17,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://maps.googleapis.com">
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
 </head>
-<body class="page-landing">
+<body class="page-home">
+  <div id="site-map-backdrop" class="site-map-backdrop" aria-hidden="true">
+    <div id="site-map-bg" class="site-map-bg" aria-hidden="true"></div>
+  </div>
   <header class="site-header">
     <div class="header-left">
       <a href="index.html" class="logo-link" aria-label="Main St. Home">
@@ -88,8 +93,9 @@
     </div>
   </header>
 
+  <div class="landing-middle">
   <section class="landing-hero">
-    <p class="landing-mission">We build the tools and community that help local shops get online, get discovered, and grow — on their own terms.</p>
+    <p class="landing-mission landing-street-sign"><span class="street-sign-text">We build the tools and community that help local shops get online, get discovered, and grow — on their own terms.</span></p>
     <div class="landing-cta-wrap">
       <a href="directory.html" class="landing-cta">Explore the Main Street Index</a>
     </div>
@@ -97,19 +103,19 @@
 
   <section class="landing-products">
     <div class="landing-product">
-      <h2>The Main St. Index</h2>
+      <h2 class="landing-street-sign"><span class="street-sign-text">The Main St. Index</span></h2>
       <p>A living, searchable directory of local shops across every community we serve. Not a generic business listing. A real record of who is out there, what they carry, and what makes them worth visiting. If you want to shop local but don't know where to start, the Index is where you begin. Every shop deserves to be findable. We are building the place that makes that possible.</p>
       <a href="directory.html" class="landing-cta">Browse the Index</a>
     </div>
     <div class="landing-product">
-      <h2>Web Tools for Local Shops</h2>
+      <h2 class="landing-street-sign"><span class="street-sign-text">Web Tools for Local Shops</span></h2>
       <p>Purpose-built software for the shop owner who has never had software built for them. A storefront that goes live in 48 hours. AI-assisted product listings. Connected artisan networks. Inventory management, fulfillment support, and a sales dashboard that actually makes sense. Everything a local business needs to sell online — and nothing they don't.</p>
       <a href="https://4goodvibes.shop/" class="landing-cta-external" target="_blank" rel="noopener noreferrer">See our pilot: 4GoodVibes</a>
     </div>
   </section>
 
   <section class="landing-contact">
-    <h2>Get in touch</h2>
+    <h2 class="landing-street-sign"><span class="street-sign-text">Get in touch</span></h2>
     <form id="landing-contact-form" class="landing-contact-form">
       <label for="contact-name">Name</label>
       <input type="text" id="contact-name" name="name" required autocomplete="name">
@@ -128,8 +134,10 @@
     </form>
     <p id="landing-contact-feedback" class="landing-contact-message" role="alert" hidden></p>
   </section>
+  </div>
 
   <script src="js/header.js"></script>
+  <script src="js/map-bg.js"></script>
   <script src="js/auth.js"></script>
   <script>
     (function () {
