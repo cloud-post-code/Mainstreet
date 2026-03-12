@@ -55,12 +55,16 @@ body {
   text-align: center;
 }
 
-/* Landing hero image */
+/* Landing hero image – inside first tan block */
 .landing-hero-figure {
-  margin: 0 0 1.5rem;
-  border-radius: 8px;
+  margin: -2rem -1.5rem 1.5rem -1.5rem;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+}
+
+.landing-hero .landing-hero-figure:first-child {
+  margin-top: -2rem;
 }
 
 .landing-hero-image {
@@ -88,7 +92,7 @@ body {
 
 .landing-mission {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.2rem, 3.25vw, 1.6rem);
   font-weight: 700;
   line-height: 1.35;
   color: var(--text-dark);
@@ -233,7 +237,7 @@ body {
 }
 
 .landing-contact textarea {
-  min-height: 100px;
+  min-height: 180px;
   resize: vertical;
 }
 
