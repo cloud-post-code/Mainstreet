@@ -86,8 +86,8 @@ body {
 
 .landing-hero {
   padding: 2rem 1.5rem;
-  max-width: 42rem;
-  margin: 0 auto 1.5rem;
+  width: 100%;
+  margin: 0 0 1.5rem;
 }
 
 .landing-mission {
@@ -180,7 +180,7 @@ body {
   text-align: left;
   display: inline-block;
   width: 100%;
-  max-width: 28rem;
+  max-width: 40rem;
 }
 
 .landing-contact-row {
@@ -203,7 +203,8 @@ body {
 
 .landing-contact-field input {
   width: 100%;
-  padding: 0.6rem 0.75rem;
+  padding: 0.75rem 1rem;
+  min-height: 2.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: inherit;
@@ -222,8 +223,9 @@ body {
 .landing-contact select,
 .landing-contact textarea {
   width: 100%;
-  padding: 0.6rem 0.75rem;
+  padding: 0.75rem 1rem;
   margin-bottom: 1rem;
+  min-height: 2.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: inherit;
@@ -241,25 +243,46 @@ body {
   resize: vertical;
 }
 
-.landing-contact button[type="submit"] {
-  padding: 0.85rem 1.75rem;
-  background-color: var(--brand-green);
-  color: var(--brand-cream);
-  font-weight: 600;
-  border: none;
-  border-radius: 4px;
+.landing-contact-submit-wrap {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* Send message button – street sign style (centered) */
+.landing-cta-street-sign-btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  border: 3px solid #fff;
+  background: linear-gradient(180deg, #0d5c0d 0%, #0a4a0a 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   cursor: pointer;
-  font-size: 1rem;
-  transition: opacity 0.2s;
+  box-shadow:
+    0 2px 0 0 rgba(0, 0, 0, 0.2),
+    0 3px 6px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
 }
 
-.landing-contact button[type="submit"]:hover {
-  opacity: 0.9;
+.landing-cta-street-sign-btn:hover {
+  background: linear-gradient(180deg, #0f6b0f 0%, #0d5c0d 100%);
+  box-shadow:
+    0 2px 0 0 rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  color: #fff;
 }
 
-.landing-contact button[type="submit"]:disabled {
+.landing-cta-street-sign-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
 .landing-contact-message {
