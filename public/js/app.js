@@ -466,14 +466,17 @@
   var logoLink = document.getElementById('logo-link');
   if (logoLink) {
     logoLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo(0, 0);
-      if (searchInput) searchInput.value = '';
-      currentCategory = 'all';
-      showFavoritesOnly = false;
-      filterBtns.forEach(function (b) { b.classList.remove('active'); if (b.dataset.filter === 'all') b.classList.add('active'); });
-      if (favoritesLink) favoritesLink.classList.remove('active');
-      renderVisibleCards();
+      var href = logoLink.getAttribute('href') || '';
+      if (href === '#' || href === '') {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        if (searchInput) searchInput.value = '';
+        currentCategory = 'all';
+        showFavoritesOnly = false;
+        filterBtns.forEach(function (b) { b.classList.remove('active'); if (b.dataset.filter === 'all') b.classList.add('active'); });
+        if (favoritesLink) favoritesLink.classList.remove('active');
+        renderVisibleCards();
+      }
     });
   }
 

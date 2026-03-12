@@ -28,7 +28,91 @@
     }
     if (forbidden) forbidden.hidden = true;
     if (content) content.hidden = false;
+    initAdminTabs();
     return true;
+  }
+
+  function showPanel(panelName) {
+    var panelShops = getEl('admin-panel-shops');
+    var panelContact = getEl('admin-panel-contact');
+    var tabShops = getEl('admin-tab-shops');
+    var tabContact = getEl('admin-tab-contact');
+    if (panelName === 'contact') {
+      if (panelShops) panelShops.hidden = true;
+      if (panelContact) panelContact.hidden = false;
+      if (tabShops) { tabShops.classList.remove('active'); tabShops.setAttribute('aria-selected', 'false'); }
+      if (tabContact) { tabContact.classList.add('active'); tabContact.setAttribute('aria-selected', 'true'); }
+      loadContactSubmissions();
+    } else {
+      if (panelShops) panelShops.hidden = false;
+      if (panelContact) panelContact.hidden = true;
+      if (tabShops) { tabShops.classList.add('active'); tabShops.setAttribute('aria-selected', 'true'); }
+      if (tabContact) { tabContact.classList.remove('active'); tabContact.setAttribute('aria-selected', 'false'); }
+    }
+  }
+
+  function initAdminTabs() {
+    var tabShops = getEl('admin-tab-shops');
+    var tabContact = getEl('admin-tab-contact');
+    if (tabShops) tabShops.addEventListener('click', function () { showPanel('shops'); });
+    if (tabContact) tabContact.addEventListener('click', function () { showPanel('contact'); });
+    if (window.location.hash === '#contact') showPanel('contact');
+  }
+
+  function loadContactSubmissions() {
+    var wrap = getEl('admin-contact-table-wrap');
+    var loading = getEl('admin-contact-loading');
+    var empty = getEl('admin-contact-empty');
+    var errEl = getEl('admin-contact-error');
+    if (loading) { loading.hidden = false; loading.textContent = 'Loading submissions…'; }
+    if (wrap) wrap.hidden = true;
+    if (empty) empty.hidden = true;
+    if (errEl) errEl.hidden = true;
+    fetchWithTimeout('/api/admin/contact', creds, 10000)
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load submissions');
+        return r.json();
+      })
+      .then(function (list) {
+        if (loading) loading.hidden = true;
+        var arr = Array.isArray(list) ? list : [];
+        if (arr.length === 0) {
+          if (empty) empty.hidden = false;
+          return;
+        }
+        if (empty) empty.hidden = true;
+        var table = document.createElement('table');
+        table.className = 'admin-table admin-contact-table';
+        table.setAttribute('role', 'grid');
+        var thead = document.createElement('thead');
+        thead.innerHTML = '<tr><th>Date</th><th>Name</th><th>Email</th><th>Service</th><th>Message</th></tr>';
+        table.appendChild(thead);
+        var tbody = document.createElement('tbody');
+        arr.forEach(function (row) {
+          var tr = document.createElement('tr');
+          var date = row.created_at ? new Date(row.created_at).toLocaleString() : '—';
+          tr.innerHTML =
+            '<td>' + escapeHtml(date) + '</td>' +
+            '<td>' + escapeHtml(row.name || '') + '</td>' +
+            '<td>' + escapeHtml(row.email || '') + '</td>' +
+            '<td>' + escapeHtml(row.service || '') + '</td>' +
+            '<td>' + escapeHtml(row.message || '') + '</td>';
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        if (wrap) {
+          wrap.innerHTML = '';
+          wrap.appendChild(table);
+          wrap.hidden = false;
+        }
+      })
+      .catch(function (err) {
+        if (loading) loading.hidden = true;
+        if (errEl) {
+          errEl.textContent = err && err.message ? err.message : 'Failed to load contact submissions.';
+          errEl.hidden = false;
+        }
+      });
   }
 
   function escapeHtml(s) {

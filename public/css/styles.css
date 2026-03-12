@@ -41,6 +41,167 @@ body {
   background-color: transparent;
 }
 
+/* Landing page – no map background */
+.page-landing {
+  background-color: var(--brand-cream);
+}
+
+.landing-hero {
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.landing-mission {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-dark);
+  margin: 0 0 2rem;
+}
+
+.landing-cta-wrap {
+  margin-bottom: 3rem;
+}
+
+.landing-cta {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--brand-green);
+  color: var(--brand-cream);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.landing-cta:hover {
+  opacity: 0.9;
+}
+
+.landing-products {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.landing-product {
+  margin-bottom: 2.5rem;
+}
+
+.landing-product h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 0.75rem;
+}
+
+.landing-product p {
+  margin: 0 0 1rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.landing-product .landing-cta {
+  margin-top: 0.5rem;
+}
+
+.landing-product .landing-cta-external {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--brand-green);
+  color: var(--brand-cream);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.landing-product .landing-cta-external:hover {
+  opacity: 0.9;
+}
+
+.landing-contact {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.landing-contact h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--text-dark);
+}
+
+.landing-contact label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: var(--text-dark);
+}
+
+.landing-contact input,
+.landing-contact select,
+.landing-contact textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.landing-contact textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.landing-contact button[type="submit"] {
+  padding: 0.85rem 1.75rem;
+  background-color: var(--brand-green);
+  color: var(--brand-cream);
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.landing-contact button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+.landing-contact button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.landing-contact-message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.landing-contact-message.success {
+  background: rgba(29, 118, 30, 0.15);
+  color: var(--brand-green);
+}
+
+.landing-contact-message.error {
+  background: rgba(180, 50, 50, 0.1);
+  color: #b43232;
+}
+
 /* Backdrop layer: contains the map, sits behind all page content */
 .site-map-backdrop {
   position: fixed;
@@ -1124,6 +1285,65 @@ body {
 }
 
 /* Admin page – Excel/CSV-style spreadsheet */
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.admin-tab-btn {
+  padding: 0.6rem 1.25rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.admin-tab-btn:hover {
+  color: var(--text-dark);
+}
+
+.admin-tab-btn.active {
+  color: var(--brand-green);
+  border-bottom-color: var(--brand-green);
+}
+
+.admin-panel {
+  padding-top: 0;
+}
+
+.admin-contact-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-contact-table th,
+.admin-contact-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.admin-contact-table th {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.admin-contact-table td {
+  vertical-align: top;
+}
+
+.admin-contact-empty {
+  color: var(--text-muted);
+  margin: 1rem 0;
+}
+
 .admin-main {
   max-width: 100%;
   padding: 1rem;

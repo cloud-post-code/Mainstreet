@@ -127,6 +127,17 @@ const CREATE_CRAWL_LOG = `
   );
 `;
 
+const CREATE_CONTACT_SUBMISSIONS = `
+  CREATE TABLE IF NOT EXISTS contact_submissions (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    service TEXT NOT NULL,
+    message TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+  );
+`;
+
 const SHOP_UPSERT = `
   INSERT INTO shops (id, name, address, city, category, description, link, shop_image, logo, product_photos, product_count)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
@@ -277,6 +288,7 @@ async function ensureTables() {
     await pool.query(CREATE_PRODUCTS_SHOP_IDX);
     await pool.query(CREATE_PRODUCTS_CATEGORY_IDX);
     await pool.query(CREATE_CRAWL_LOG);
+    await pool.query(CREATE_CONTACT_SUBMISSIONS);
   } catch (err) {
     console.error('Failed to create tables:', err.message);
   }
@@ -557,6 +569,57 @@ app.post('/api/favorites', authRequired, async (req, res) => {
   }
 });
 
+const VALID_CONTACT_SERVICES = ['Main St. Index', 'Web Tools for Local Shops', 'Other'];
+
+// POST /api/contact – public contact form submission
+app.post('/api/contact', async (req, res) => {
+  const body = req.body || {};
+  const name = (body.name != null && body.name !== undefined) ? String(body.name).trim() : '';
+  const email = (body.email != null && body.email !== undefined) ? String(body.email).trim().toLowerCase() : '';
+  const service = (body.service != null && body.service !== undefined) ? String(body.service).trim() : '';
+  const message = (body.message != null && body.message !== undefined) ? String(body.message).trim() : '';
+
+  if (!name) return res.status(400).json({ error: 'Name is required' });
+  if (!email) return res.status(400).json({ error: 'Email is required' });
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) return res.status(400).json({ error: 'Invalid email format' });
+  if (!service || !VALID_CONTACT_SERVICES.includes(service)) {
+    return res.status(400).json({ error: 'Please select a valid service (Main St. Index, Web Tools for Local Shops, or Other)' });
+  }
+
+  const submission = { name, email, service, message, created_at: new Date().toISOString() };
+
+  if (pool) {
+    try {
+      await pool.query(
+        'INSERT INTO contact_submissions (name, email, service, message) VALUES ($1, $2, $3, $4)',
+        [name, email, service, message || null]
+      );
+      return res.status(201).json({ ok: true });
+    } catch (err) {
+      console.error('Contact form insert error:', err.message);
+      return res.status(500).json({ error: 'Failed to submit' });
+    }
+  }
+
+  const contactPath = path.join(__dirname, 'data', 'contact-submissions.json');
+  try {
+    let list = [];
+    if (fs.existsSync(contactPath)) {
+      const raw = fs.readFileSync(contactPath, 'utf8');
+      list = JSON.parse(raw);
+      if (!Array.isArray(list)) list = [];
+    }
+    list.push({ id: list.length + 1, ...submission });
+    fs.mkdirSync(path.dirname(contactPath), { recursive: true });
+    fs.writeFileSync(contactPath, JSON.stringify(list, null, 2), 'utf8');
+    return res.status(201).json({ ok: true });
+  } catch (err) {
+    console.error('Contact form file write error:', err.message);
+    return res.status(500).json({ error: 'Failed to submit' });
+  }
+});
+
 // POST /api/admin/shops – create one shop (admin only)
 app.post('/api/admin/shops', authRequired, adminRequired, async (req, res) => {
   if (!pool) return res.status(503).json({ error: 'Database unavailable' });
@@ -766,6 +829,40 @@ app.get('/api/admin/shops/export', authRequired, adminRequired, async (req, res)
   } catch (err) {
     console.error('Export error:', err.message);
     return res.status(500).json({ error: 'Export failed' });
+  }
+});
+
+// GET /api/admin/contact – list contact form submissions (admin only)
+app.get('/api/admin/contact', authRequired, adminRequired, async (req, res) => {
+  if (pool) {
+    try {
+      const result = await pool.query(
+        'SELECT id, name, email, service, message, created_at FROM contact_submissions ORDER BY created_at DESC'
+      );
+      return res.json(result.rows.map((r) => ({
+        id: r.id,
+        name: r.name,
+        email: r.email,
+        service: r.service,
+        message: r.message,
+        created_at: r.created_at
+      })));
+    } catch (err) {
+      console.error('Admin contact list error:', err.message);
+      return res.status(500).json({ error: 'Failed to load submissions' });
+    }
+  }
+  const contactPath = path.join(__dirname, 'data', 'contact-submissions.json');
+  try {
+    if (!fs.existsSync(contactPath)) return res.json([]);
+    const raw = fs.readFileSync(contactPath, 'utf8');
+    const list = JSON.parse(raw);
+    const arr = Array.isArray(list) ? list : [];
+    arr.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+    return res.json(arr);
+  } catch (err) {
+    console.error('Admin contact file read error:', err.message);
+    return res.status(500).json({ error: 'Failed to load submissions' });
   }
 });
 

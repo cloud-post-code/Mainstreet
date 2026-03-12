@@ -32,7 +32,7 @@
         <span class="material-icons">info</span>
         <span class="header-btn-label">About Us</span>
       </a>
-      <a href="index.html" class="header-btn favorites-link">
+      <a href="directory.html" class="header-btn favorites-link">
         <span class="material-icons">favorite</span>
         <span class="header-btn-label">Favorites</span>
       </a>
@@ -90,15 +90,28 @@
   <main class="admin-main">
     <p id="admin-forbidden" class="admin-forbidden" hidden>Admin access required.</p>
     <div id="admin-content" hidden>
-      <h1 class="admin-title">Edit shops</h1>
-      <div class="admin-toolbar">
-        <button type="button" id="admin-add-shop" class="admin-btn admin-add-shop-btn" hidden>Add shop</button>
-        <a href="/api/admin/shops/export" id="admin-export-csv" class="admin-btn admin-export-btn" download hidden>Export CSV</a>
+      <div class="admin-tabs" role="tablist">
+        <button type="button" class="admin-tab-btn active" id="admin-tab-shops" role="tab" aria-selected="true" aria-controls="admin-panel-shops" data-tab="shops">Edit shops</button>
+        <button type="button" class="admin-tab-btn" id="admin-tab-contact" role="tab" aria-selected="false" aria-controls="admin-panel-contact" data-tab="contact">Contact form</button>
       </div>
-      <p id="admin-loading" class="admin-loading">Loading shops…</p>
-      <div id="admin-table-wrap" class="admin-table-wrap" hidden></div>
-      <p id="admin-message" class="admin-message" role="alert" hidden></p>
-      <button type="button" id="admin-retry" class="admin-retry-btn" hidden>Retry</button>
+      <div id="admin-panel-shops" class="admin-panel" role="tabpanel" aria-labelledby="admin-tab-shops">
+        <h1 class="admin-title">Edit shops</h1>
+        <div class="admin-toolbar">
+          <button type="button" id="admin-add-shop" class="admin-btn admin-add-shop-btn" hidden>Add shop</button>
+          <a href="/api/admin/shops/export" id="admin-export-csv" class="admin-btn admin-export-btn" download hidden>Export CSV</a>
+        </div>
+        <p id="admin-loading" class="admin-loading">Loading shops…</p>
+        <div id="admin-table-wrap" class="admin-table-wrap" hidden></div>
+        <p id="admin-message" class="admin-message" role="alert" hidden></p>
+        <button type="button" id="admin-retry" class="admin-retry-btn" hidden>Retry</button>
+      </div>
+      <div id="admin-panel-contact" class="admin-panel" role="tabpanel" aria-labelledby="admin-tab-contact" hidden>
+        <h1 class="admin-title">Contact form</h1>
+        <p id="admin-contact-loading" class="admin-loading">Loading submissions…</p>
+        <div id="admin-contact-table-wrap" class="admin-table-wrap" hidden></div>
+        <p id="admin-contact-empty" class="admin-contact-empty" hidden>No contact submissions yet.</p>
+        <p id="admin-contact-error" class="admin-message admin-message-error" role="alert" hidden></p>
+      </div>
     </div>
   </main>
 

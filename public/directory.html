@@ -10,18 +10,23 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main St. – Local Shops, Online</title>
+  <title>Main St. – Main Street Index</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231d761e'/><text x='16' y='22' font-family='sans-serif' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://maps.googleapis.com">
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
 </head>
-<body class="page-landing">
+<body class="page-home">
+  <div id="site-map-backdrop" class="site-map-backdrop" aria-hidden="true">
+    <div id="site-map-bg" class="site-map-bg" aria-hidden="true"></div>
+  </div>
   <header class="site-header">
     <div class="header-left">
-      <a href="index.html" class="logo-link" aria-label="Main St. Home">
+      <a href="index.html" class="logo-link" id="logo-link" aria-label="Main St. Home">
         <span class="header-title">MAIN ST.</span>
       </a>
     </div>
@@ -33,7 +38,7 @@
         <span class="material-icons">info</span>
         <span class="header-btn-label">About Us</span>
       </a>
-      <a href="directory.html" class="header-btn favorites-link">
+      <a href="#" class="header-btn favorites-link" id="favorites-link">
         <span class="material-icons">favorite</span>
         <span class="header-btn-label">Favorites</span>
       </a>
@@ -88,94 +93,68 @@
     </div>
   </header>
 
-  <section class="landing-hero">
-    <p class="landing-mission">We build the tools and community that help local shops get online, get discovered, and grow — on their own terms.</p>
-    <div class="landing-cta-wrap">
-      <a href="directory.html" class="landing-cta">Explore the Main Street Index</a>
-    </div>
-  </section>
+  <div class="main-wrapper">
+    <main class="main-content">
+    <section class="controls">
+      <div class="search-wrap">
+        <span class="search-icon material-icons" aria-hidden="true">search</span>
+        <label for="search-input" class="visually-hidden">Search by name</label>
+        <input type="search" id="search-input" class="search-input" placeholder="Search by name" autocomplete="off">
+      </div>
+      <div class="filters street-sign-filters" role="group" aria-label="Shop category filters">
+        <button type="button" class="filter-btn street-sign active" data-filter="all"><span class="street-sign-text">Main Street</span></button>
+        <button type="button" class="filter-btn street-sign" data-filter="Clothing Boutique"><span class="street-sign-text">Apparel Avenue</span></button>
+        <button type="button" class="filter-btn street-sign" data-filter="Gifts"><span class="street-sign-text">Present Parkway</span></button>
+        <button type="button" class="filter-btn street-sign" data-filter="Vintage / Thrift"><span class="street-sign-text">Secondhand Street</span></button>
+        <button type="button" class="filter-btn street-sign" data-filter="Stationary"><span class="street-sign-text">Letter Lane</span></button>
+        <button type="button" class="filter-btn street-sign" data-filter="Home Good"><span class="street-sign-text">Decor Detour</span></button>
+      </div>
+    </section>
 
-  <section class="landing-products">
-    <div class="landing-product">
-      <h2>The Main St. Index</h2>
-      <p>A living, searchable directory of local shops across every community we serve. Not a generic business listing. A real record of who is out there, what they carry, and what makes them worth visiting. If you want to shop local but don't know where to start, the Index is where you begin. Every shop deserves to be findable. We are building the place that makes that possible.</p>
-      <a href="directory.html" class="landing-cta">Browse the Index</a>
-    </div>
-    <div class="landing-product">
-      <h2>Web Tools for Local Shops</h2>
-      <p>Purpose-built software for the shop owner who has never had software built for them. A storefront that goes live in 48 hours. AI-assisted product listings. Connected artisan networks. Inventory management, fulfillment support, and a sales dashboard that actually makes sense. Everything a local business needs to sell online — and nothing they don't.</p>
-      <a href="https://4goodvibes.shop/" class="landing-cta-external" target="_blank" rel="noopener noreferrer">See our pilot: 4GoodVibes</a>
-    </div>
-  </section>
+    <div class="shop-grid" id="shop-grid"></div>
+    <div class="scroll-sentinel" id="scroll-sentinel" aria-hidden="true"></div>
+    <p class="loading-indicator" id="loading-indicator" hidden>Loading more shops…</p>
+    <p class="no-results" id="no-results" hidden>No shops match your search or filters.</p>
+  </main>
+  </div>
 
-  <section class="landing-contact">
-    <h2>Get in touch</h2>
-    <form id="landing-contact-form" class="landing-contact-form">
-      <label for="contact-name">Name</label>
-      <input type="text" id="contact-name" name="name" required autocomplete="name">
-      <label for="contact-email">Email</label>
-      <input type="email" id="contact-email" name="email" required autocomplete="email">
-      <label for="contact-service">I'm interested in</label>
-      <select id="contact-service" name="service" required>
-        <option value="">Select…</option>
-        <option value="Main St. Index">Main St. Index</option>
-        <option value="Web Tools for Local Shops">Web Tools for Local Shops</option>
-        <option value="Other">Other</option>
-      </select>
-      <label for="contact-message">More information</label>
-      <textarea id="contact-message" name="message" rows="4" placeholder="Tell us a bit about your shop or what you're looking for…"></textarea>
-      <button type="submit">Send message</button>
+  <!-- Share modal (per-card: Copy link = shop link, optional Share via) -->
+  <div class="share-modal-overlay" id="share-modal-overlay" aria-hidden="true">
+    <div class="share-modal" role="dialog" aria-label="Share options">
+      <button type="button" class="share-modal-close" id="share-modal-close" aria-label="Close">
+        <span class="material-icons">close</span>
+      </button>
+      <h3 class="share-modal-title">Share this shop</h3>
+      <div class="share-modal-actions">
+        <button type="button" class="share-copy-btn" id="share-copy-btn">Copy link</button>
+        <button type="button" class="share-via-btn" id="share-via-btn" style="display:none">Share via…</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment sidebar -->
+  <div class="comment-sidebar-overlay" id="comment-sidebar-overlay" aria-hidden="true"></div>
+  <aside class="comment-sidebar" id="comment-sidebar" aria-label="Comments">
+    <div class="comment-sidebar-header">
+      <h3 class="comment-sidebar-title" id="comment-sidebar-title">Comments</h3>
+      <button type="button" class="comment-sidebar-close" id="comment-sidebar-close" aria-label="Close">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="comment-list" id="comment-list"></div>
+    <form class="comment-form" id="comment-form">
+      <textarea id="comment-input" class="comment-input" placeholder="Write a comment…" rows="3" required></textarea>
+      <button type="submit" class="comment-submit">Submit</button>
     </form>
-    <p id="landing-contact-feedback" class="landing-contact-message" role="alert" hidden></p>
-  </section>
+  </aside>
+
+  <button type="button" class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top" aria-hidden="true">
+    <span class="material-icons" aria-hidden="true">arrow_upward</span>
+  </button>
 
   <script src="js/header.js"></script>
   <script src="js/auth.js"></script>
-  <script>
-    (function () {
-      var form = document.getElementById('landing-contact-form');
-      var feedback = document.getElementById('landing-contact-feedback');
-      if (!form || !feedback) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        feedback.hidden = true;
-        feedback.className = 'landing-contact-message';
-        feedback.textContent = '';
-        var submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        var payload = {
-          name: (form.querySelector('[name="name"]') && form.querySelector('[name="name"]').value) || '',
-          email: (form.querySelector('[name="email"]') && form.querySelector('[name="email"]').value) || '',
-          service: (form.querySelector('[name="service"]') && form.querySelector('[name="service"]').value) || '',
-          message: (form.querySelector('[name="message"]') && form.querySelector('[name="message"]').value) || ''
-        };
-        fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-          .then(function (r) {
-            return r.json().then(function (data) {
-              if (r.ok) {
-                feedback.textContent = 'Thanks for reaching out. We\'ll be in touch soon.';
-                feedback.classList.add('success');
-                form.reset();
-              } else {
-                feedback.textContent = (data && data.error) || 'Something went wrong. Please try again.';
-                feedback.classList.add('error');
-              }
-              feedback.hidden = false;
-              submitBtn.disabled = false;
-            });
-          })
-          .catch(function () {
-            feedback.textContent = 'Something went wrong. Please try again.';
-            feedback.classList.add('error');
-            feedback.hidden = false;
-            submitBtn.disabled = false;
-          });
-      });
-    })();
-  </script>
+  <script src="js/map-bg.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
