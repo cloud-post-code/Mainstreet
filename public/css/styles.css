@@ -128,7 +128,14 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  align-items: center;
+  align-items: stretch;
+}
+
+.landing-cta-row .landing-cta-street-sign {
+  flex: 1;
+  min-width: 10rem;
+  max-width: 12rem;
+  text-align: center;
 }
 
 .landing-product-block {
