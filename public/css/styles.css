@@ -55,22 +55,33 @@ body {
   text-align: center;
 }
 
-/* Landing hero image – inside first tan block */
-.landing-hero-figure {
-  margin: -2rem -1.5rem 1.5rem -1.5rem;
-  border-radius: 8px 8px 0 0;
+/* Then and Now – two images half and half */
+.landing-then-now-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.landing-then-now {
+  display: flex;
+  gap: 0;
+  margin: 0 0 1.5rem;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: none;
 }
 
-.landing-hero .landing-hero-figure:first-child {
-  margin-top: -2rem;
+.landing-then-now-figure {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
 }
 
-.landing-hero-image {
+.landing-then-now-image {
   width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: 320px;
   object-fit: cover;
   display: block;
   vertical-align: middle;
@@ -125,6 +136,13 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   font-size: 0.95rem;
+}
+
+.landing-product-subtitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 0.5rem;
 }
 
 /* Street-sign style CTAs (same look as index category filters) */

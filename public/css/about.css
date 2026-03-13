@@ -164,27 +164,48 @@
   font-size: 0.9rem;
 }
 
-/* Hero image */
-.about-hero-figure {
+/* Then and Now – two images half and half */
+.about-then-now {
   margin: 0 -1.5rem 2.5rem;
+}
+
+.about-then-now-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.about-then-now-images {
+  display: flex;
+  gap: 0;
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.about-hero-image {
+.about-then-now-figure {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+}
+
+.about-then-now-image {
   width: 100%;
   height: auto;
-  max-height: 420px;
+  max-height: 380px;
   object-fit: cover;
   display: block;
   vertical-align: middle;
 }
 
 @media (min-width: 640px) {
-  .about-hero-figure {
+  .about-then-now {
     margin-left: 0;
     margin-right: 0;
+  }
+  .about-then-now-images {
     border-radius: 16px;
   }
 }
@@ -226,6 +247,13 @@
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 0.75rem;
+  color: var(--text-dark);
+}
+
+.about-pillar-subtitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
   color: var(--text-dark);
 }
 
