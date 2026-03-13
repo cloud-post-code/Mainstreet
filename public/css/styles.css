@@ -103,7 +103,7 @@ body {
 
 .landing-mission {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.2rem, 3.25vw, 1.6rem);
+  font-size: clamp(0.9rem, 2.25vw, 1.15rem);
   font-weight: 700;
   line-height: 1.35;
   color: var(--text-dark);
