@@ -110,12 +110,25 @@ body {
   margin: 0;
 }
 
+.landing-mission-label {
+  display: block;
+  margin-bottom: 0.25em;
+}
+
 /* Two product blocks side by side */
 .landing-product-row {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+}
+
+.landing-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
 }
 
 .landing-product-block {

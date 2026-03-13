@@ -52,6 +52,13 @@
   margin-right: auto;
 }
 
+.about-page-lead-label {
+  display: block;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.25em;
+}
+
 /* Mission */
 .about-mission {
   text-align: center;
