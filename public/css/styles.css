@@ -128,20 +128,15 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  align-items: stretch;
-}
-
-.landing-cta-row .landing-cta-street-sign {
-  flex: 1;
-  min-width: 10rem;
-  max-width: 12rem;
-  text-align: center;
+  align-items: center;
 }
 
 .landing-product-block {
   flex: 1;
   min-width: 260px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .landing-product-block h2 {
@@ -156,6 +151,11 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   font-size: 0.95rem;
+}
+
+.landing-product-cta {
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
 .landing-product-subtitle {
