@@ -579,12 +579,6 @@ body {
   border-color: var(--brand-gold);
 }
 
-.site-header .header-actions a.terms-link.active {
-  background: var(--brand-green);
-  color: #fff;
-  border-color: var(--brand-green);
-}
-
 /* Auth: Sign In trigger + dropdown panel */
 .auth-wrap {
   position: relative;
