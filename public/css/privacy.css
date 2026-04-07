@@ -1,5 +1,6 @@
-/* Privacy policy page */
-.page-privacy {
+/* Legal pages (privacy, terms) */
+.page-privacy,
+.page-terms {
   background: #fafafa;
 }
 
