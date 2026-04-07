@@ -1,0 +1,106 @@
+/* Privacy policy page */
+.page-privacy {
+  background: #fafafa;
+}
+
+.privacy-main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.privacy-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.privacy-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #111;
+}
+
+.privacy-updated {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #666;
+}
+
+.privacy-legal {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #333;
+}
+
+.privacy-legal h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+  color: #111;
+}
+
+.privacy-legal h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+  color: #222;
+}
+
+.privacy-legal p,
+.privacy-legal li {
+  margin: 0 0 0.75rem;
+}
+
+.privacy-legal ul {
+  margin: 0 0 1rem;
+  padding-left: 1.35rem;
+}
+
+.privacy-legal a {
+  color: var(--brand-green, #1d761e);
+  word-break: break-word;
+}
+
+.privacy-legal a:hover {
+  text-decoration: underline;
+}
+
+.privacy-legal .privacy-toc {
+  list-style: none;
+  padding-left: 0;
+}
+
+.privacy-legal .privacy-toc li {
+  margin-bottom: 0.35rem;
+}
+
+.privacy-legal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.privacy-legal th,
+.privacy-legal td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.65rem;
+  vertical-align: top;
+}
+
+.privacy-legal th {
+  background: #f0f0f0;
+  text-align: left;
+}
+
+.privacy-legal .privacy-note {
+  font-size: 0.875rem;
+  color: #555;
+  font-style: italic;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+}
