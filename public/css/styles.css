@@ -2363,6 +2363,15 @@ body {
   color: var(--text-dark);
 }
 
+.home-case-study-intro {
+  margin: 0 auto 0.85rem;
+  max-width: 38rem;
+  text-align: center;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+}
+
 .home-case-study-note {
   margin: 0 auto;
   max-width: 32rem;
