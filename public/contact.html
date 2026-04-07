@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vs6z0vw6fn");
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Main Street—list your shop, partner as a maker, or ask about the platform.">
+  <title>Contact — Main Street</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://maps.googleapis.com">
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+</head>
+<body class="page-home">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="site-map-backdrop" class="site-map-backdrop" aria-hidden="true">
+    <div id="site-map-bg" class="site-map-bg" aria-hidden="true"></div>
+  </div>
+  <header class="site-header site-header--sticky">
+    <div class="header-left">
+      <a href="index.html" class="logo-link" aria-label="Main Street Home">
+        <span class="header-title">MAIN ST.</span>
+      </a>
+    </div>
+    <button type="button" class="header-menu-btn" id="header-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="header-actions">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <nav class="header-actions" id="header-actions" aria-label="Primary">
+      <a href="directory.html" class="header-btn header-btn--shop-local"><span class="material-icons" aria-hidden="true">storefront</span><span class="header-btn-label">Shop local</span></a>
+      <a href="index.html" class="header-btn home-nav-link">Home</a>
+      <a href="about.html" class="header-btn about-link">About</a>
+      <a href="index.html#pricing" class="header-btn">Pricing</a>
+      <a href="contact.html" class="header-btn contact-link active" aria-current="page">Contact</a>
+      <a href="admin.html" class="header-btn admin-link" id="admin-link" style="display:none">
+        <span class="material-icons">admin_panel_settings</span>
+        <span class="header-btn-label">Admin</span>
+      </a>
+      <div class="auth-wrap">
+        <button type="button" class="header-btn auth-trigger" id="auth-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Sign in">
+          <span class="material-icons">person</span>
+          <span class="header-btn-label" id="auth-trigger-label">Sign In</span>
+        </button>
+        <div class="auth-panel" id="auth-panel" role="dialog" aria-label="Sign in or create account" aria-hidden="true">
+          <div class="auth-signed-out" id="auth-signed-out">
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab active" data-tab="login">Sign in</button>
+              <button type="button" class="auth-tab" data-tab="register">Create account</button>
+            </div>
+            <form class="auth-form auth-login-form" id="auth-login-form">
+              <label for="auth-login-input">Email or username</label>
+              <input type="text" id="auth-login-input" name="email_or_username" autocomplete="username" required>
+              <label for="auth-login-password">Password</label>
+              <input type="password" id="auth-login-password" name="password" autocomplete="current-password" required>
+              <button type="submit" class="auth-submit">Sign in</button>
+            </form>
+            <form class="auth-form auth-register-form" id="auth-register-form" hidden>
+              <label for="auth-register-email">Email</label>
+              <input type="email" id="auth-register-email" name="email" autocomplete="email" required>
+              <label for="auth-register-username">Username</label>
+              <input type="text" id="auth-register-username" name="username" autocomplete="username" required>
+              <label for="auth-register-password">Password</label>
+              <input type="password" id="auth-register-password" name="password" autocomplete="new-password" required>
+              <label class="auth-checkbox-label">
+                <input type="checkbox" id="auth-subscribe-emails" name="subscribe_emails" value="1">
+                Subscribe to great emails
+              </label>
+              <button type="submit" class="auth-submit">Create account</button>
+            </form>
+            <p class="auth-error" id="auth-error" role="alert" hidden></p>
+          </div>
+          <div class="auth-signed-in" id="auth-signed-in" hidden>
+            <p class="auth-user-line"><strong>Username:</strong> <span id="auth-display-username"></span></p>
+            <p class="auth-user-line"><strong>Email:</strong> <span id="auth-display-email"></span></p>
+            <div class="auth-admin-actions" id="auth-admin-actions" hidden>
+              <button type="button" class="auth-seed-btn" id="auth-seed-btn">Sync shop data</button>
+              <span class="auth-seed-status" id="auth-seed-status"></span>
+            </div>
+            <button type="button" class="auth-signout" id="auth-signout">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="main-wrapper">
+    <main id="main-content" class="contact-page-main">
+      <section class="landing-contact landing-tan-block contact-page-panel" aria-labelledby="contact-heading">
+        <h1 id="contact-heading">Contact us</h1>
+        <p class="home-contact-lead">Run a shop or supply one? Tell us your name and location—we will follow up. <a href="directory.html">Shoppers: browse stores here</a>.</p>
+        <form id="landing-contact-form" class="landing-contact-form">
+          <div class="landing-contact-row">
+            <div class="landing-contact-field">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" required autocomplete="name">
+            </div>
+            <div class="landing-contact-field">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="email" required autocomplete="email">
+            </div>
+          </div>
+          <label for="contact-service">I am a</label>
+          <select id="contact-service" name="service" required class="landing-contact-select">
+            <option value="">Select…</option>
+            <option value="Local shop owner">Local shop owner</option>
+            <option value="Artisan / maker">Artisan / maker</option>
+            <option value="Customer / shop local">Customer — shop local</option>
+            <option value="Press / partnership">Press / partnership</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="6" placeholder="Shop name, location, or what you are hoping to solve…"></textarea>
+          <div class="landing-contact-submit-wrap">
+            <button type="submit" class="landing-cta-street-sign-btn">Send message</button>
+          </div>
+        </form>
+        <p id="landing-contact-feedback" class="landing-contact-message" role="alert" hidden></p>
+        <p class="contact-page-back"><a href="index.html">← Back to home</a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer site-footer--over-map site-footer--home" role="contentinfo">
+      <div class="site-footer-grid">
+        <div class="site-footer-brand">
+          <p class="site-footer-name">Main Street</p>
+          <p class="site-footer-tagline">Storefronts for local retailers—sell online with your makers.</p>
+        </div>
+        <div class="site-footer-col">
+          <p class="site-footer-heading">Explore</p>
+          <ul class="site-footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="directory.html">Shop directory</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+          </ul>
+        </div>
+        <div class="site-footer-col">
+          <p class="site-footer-heading">Legal</p>
+          <ul class="site-footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="site-footer-inner site-footer-copy">© Main Street. Boston area first; serving U.S. local indie retail.</p>
+    </footer>
+  </div>
+
+  <script src="js/header.js"></script>
+  <script src="js/map-bg.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('landing-contact-form');
+      var feedback = document.getElementById('landing-contact-feedback');
+      if (!form || !feedback) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        feedback.hidden = true;
+        feedback.className = 'landing-contact-message';
+        feedback.textContent = '';
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        var payload = {
+          name: (form.querySelector('[name="name"]') && form.querySelector('[name="name"]').value) || '',
+          email: (form.querySelector('[name="email"]') && form.querySelector('[name="email"]').value) || '',
+          service: (form.querySelector('[name="service"]') && form.querySelector('[name="service"]').value) || '',
+          message: (form.querySelector('[name="message"]') && form.querySelector('[name="message"]').value) || ''
+        };
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (r) {
+            return r.json().then(function (data) {
+              if (r.ok) {
+                feedback.textContent = 'Thanks for reaching out. We\'ll be in touch soon.';
+                feedback.classList.add('success');
+                form.reset();
+              } else {
+                feedback.textContent = (data && data.error) || 'Something went wrong. Please try again.';
+                feedback.classList.add('error');
+              }
+              feedback.hidden = false;
+              submitBtn.disabled = false;
+            });
+          })
+          .catch(function () {
+            feedback.textContent = 'Something went wrong. Please try again.';
+            feedback.classList.add('error');
+            feedback.hidden = false;
+            submitBtn.disabled = false;
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

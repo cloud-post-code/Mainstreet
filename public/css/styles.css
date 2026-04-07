@@ -43,7 +43,8 @@ body {
 
 /* Landing page – map background with tan middle band, scrolls like index */
 .main-wrapper:has(.landing-middle),
-.main-wrapper:has(.home-main) {
+.main-wrapper:has(.home-main),
+.main-wrapper:has(.contact-page-main) {
   min-height: 180vh;
 }
 
@@ -213,6 +214,60 @@ body {
   font-weight: 700;
   margin: 0 0 1.25rem;
   color: var(--text-dark);
+}
+
+.landing-contact h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: var(--text-dark);
+}
+
+.contact-page-main {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 2.5rem;
+}
+
+.contact-page-panel {
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.contact-page-back {
+  margin: 1.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+.contact-page-back a {
+  color: var(--brand-green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-page-back a:hover {
+  text-decoration: underline;
+}
+
+.home-contact-cta {
+  text-align: center;
+}
+
+.home-contact-cta-heading {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  margin: 0 0 0.35rem;
+  color: var(--text-dark);
+}
+
+.home-contact-cta-text {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .landing-contact form {
@@ -591,6 +646,12 @@ body {
 
 /* Favorites yellow only when toggled on home page – independent from About Us */
 .site-header .header-actions a.favorites-link.active {
+  background: var(--brand-gold);
+  color: var(--text-dark);
+  border-color: var(--brand-gold);
+}
+
+.site-header .header-actions a.contact-link.active {
   background: var(--brand-gold);
   color: var(--text-dark);
   border-color: var(--brand-gold);
@@ -2012,114 +2073,254 @@ body {
   text-align: center;
 }
 
-.home-sell-panel-title {
-  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+/* Homepage: product story panel — stacked inset regions (layout + padding via .home-panel.home-sell-panel) */
+
+.home-sell-inset {
+  background: rgba(254, 255, 245, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
+  padding: 1.15rem 1.25rem;
+}
+
+.home-sell-inset--head {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.home-sell-intro-title {
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
   font-weight: 800;
   text-align: center;
-  margin: 0 0 1.35rem;
+  margin: 0 0 0.5rem;
   line-height: 1.35;
   color: var(--text-dark);
 }
 
-.home-stats-row {
-  list-style: none;
-  margin: 0 0 1.5rem;
-  padding: 0.85rem 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem 1.25rem;
-  background: rgba(254, 255, 245, 0.75);
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 0.88rem;
-  line-height: 1.35;
-  color: var(--text-dark);
-  text-align: center;
-}
-
-.home-stats-num {
-  display: block;
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--brand-green);
-}
-
-@media (min-width: 640px) {
-  .home-stats-row li {
-    flex: 0 1 auto;
-    max-width: 11rem;
-  }
-  .home-stats-num {
-    display: inline;
-    margin-right: 0.2rem;
-  }
-}
-
-.home-sell-bullets {
-  margin: 0 auto 1.25rem;
-  padding-left: 1.35rem;
-  max-width: 42rem;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--text-dark);
-}
-
-.home-sell-bullets li {
-  margin-bottom: 0.65rem;
-}
-
-.home-sell-bullets li:last-child {
-  margin-bottom: 0;
-}
-
-.home-sell-usp {
-  margin: 0 auto 1.5rem;
-  padding: 1rem 1.15rem;
-  max-width: 42rem;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--text-dark);
-  background: rgba(254, 255, 245, 0.6);
-  border-radius: 10px;
-  border-left: 4px solid var(--brand-green);
-}
-
-.home-sell-footer {
-  display: grid;
-  gap: 1rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 0.95rem;
+.home-sell-intro-deck {
+  margin: 0 auto;
+  max-width: 36rem;
+  font-size: 0.93rem;
   line-height: 1.55;
   color: var(--text-muted);
 }
 
+.home-region-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--brand-green);
+  margin: 0 0 0.85rem;
+}
+
+.home-region-label--center {
+  text-align: center;
+}
+
+.home-region-label--commercial {
+  margin-bottom: 0.7rem;
+}
+
+.home-benefit-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.home-benefit-card {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  border-left: 3px solid var(--brand-green);
+}
+
+.home-benefit-card.home-value-prop {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-left-width: 4px;
+}
+
+.home-value-prop-index {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  background: var(--brand-gold);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  line-height: 1;
+}
+
+.home-value-prop-body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.home-benefit-card-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.home-benefit-card-title.home-value-prop-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.08rem, 2.5vw, 1.28rem);
+  font-weight: 700;
+  line-height: 1.28;
+  color: var(--text-dark);
+}
+
+.home-benefit-card-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.home-sell-inset--commercial {
+  background: rgba(232, 224, 213, 0.65);
+}
+
+.home-sell-footer-cards {
+  display: grid;
+  gap: 0.85rem;
+}
+
 @media (min-width: 640px) {
-  .home-sell-footer {
+  .home-sell-footer-cards {
     grid-template-columns: 1fr 1fr;
-    align-items: start;
+    align-items: stretch;
   }
+}
+
+.home-sell-info-card {
+  background: rgba(254, 255, 245, 0.92);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.home-sell-info-card-body {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .home-sell-price-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--brand-green);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
-.home-sell-footer a {
+.home-sell-info-card-body a {
   color: var(--brand-green);
   font-weight: 700;
   text-decoration: none;
 }
 
-.home-sell-footer a:hover {
+.home-sell-info-card-body a:hover {
   text-decoration: underline;
+}
+
+/* Case study — narrative vs. metrics clearly split */
+.home-case-study {
+  border: 1px dashed rgba(29, 118, 30, 0.38);
+  background: rgba(254, 255, 245, 0.45);
+}
+
+.home-case-study-top {
+  text-align: center;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(29, 118, 30, 0.22);
+}
+
+.home-case-study-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-green);
+}
+
+.home-case-study-title {
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  margin: 0 0 0.65rem;
+  line-height: 1.35;
+  color: var(--text-dark);
+}
+
+.home-case-study-note {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.home-case-study-stats-box {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 1.1rem 1rem 1.2rem;
+  border: 1px solid rgba(29, 118, 30, 0.16);
+}
+
+.home-stats-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+@media (min-width: 520px) {
+  .home-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.home-stats-cell {
+  background: rgba(254, 255, 245, 0.95);
+  border-radius: 8px;
+  padding: 0.8rem 0.75rem;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.home-stats-cell .home-stats-num {
+  display: block;
+  font-weight: 800;
+  font-size: 1.12rem;
+  color: var(--brand-green);
+  margin-bottom: 0.2rem;
+}
+
+.home-stats-desc {
+  display: block;
+  color: var(--text-dark);
 }
 
 .home-panel {
@@ -2128,6 +2329,20 @@ body {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
   padding: clamp(1.5rem, 4vw, 2.25rem);
   margin-bottom: 1.25rem;
+}
+
+.home-panel.home-sell-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.2rem, 3vw, 1.65rem);
+}
+
+.home-panel.home-case-study {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .home-hero-title {
@@ -2164,23 +2379,64 @@ body {
 
 @media (min-width: 768px) {
   .home-hero-grid {
-    grid-template-columns: 1fr minmax(240px, 42%);
+    grid-template-columns: 1fr minmax(200px, 36%);
     gap: 2rem;
   }
 }
 
-.home-hero-figure {
+.home-hero-icons {
   margin: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
 }
 
-.home-hero-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  vertical-align: middle;
+.home-hero-icon-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 1rem;
+  max-width: 17rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .home-hero-icon-grid {
+    margin-inline: 0;
+    max-width: none;
+  }
+}
+
+.home-hero-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.home-hero-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 14px;
+  background: linear-gradient(145deg, var(--brand-cream) 0%, rgba(254, 255, 245, 0.85) 100%);
+  border: 2px solid var(--brand-green);
+  color: var(--brand-green);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.home-hero-icon-circle .material-icons {
+  font-size: 1.75rem;
+}
+
+.home-hero-icon-caption {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-dark);
+  max-width: 7rem;
 }
 
 .home-hero-cta {
