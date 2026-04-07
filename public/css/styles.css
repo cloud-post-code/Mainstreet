@@ -1807,3 +1807,16 @@ body {
 .site-footer a:hover {
   text-decoration: underline;
 }
+
+/* Home: footer sits in main column above fixed map backdrop */
+.page-home .site-footer--over-map {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+  background-color: #e8e0d5;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
+}
