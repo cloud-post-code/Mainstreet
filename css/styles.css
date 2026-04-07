@@ -1046,3 +1046,29 @@ body {
 .comment-submit:hover {
   opacity: 0.9;
 }
+
+/* Site footer (Privacy, Terms) */
+.site-footer {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.site-footer-inner {
+  margin: 0;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.site-footer a {
+  color: var(--brand-green, #1d761e);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
