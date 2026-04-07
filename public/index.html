@@ -10,18 +10,18 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Main Street connects local shops, artisans, and customers on one platform. AI-assisted listings, local delivery or pickup, 5% commission. Starting in the Boston area.">
-  <title>Main Street — Local shops &amp; artisans online</title>
+  <meta name="description" content="Main Street helps local retailers sell online with their artisans on one storefront—AI listings, pickup &amp; delivery, 5% commission. Boston area first.">
+  <title>Main Street — Sell online from your local shop</title>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.undergraduation.com/">
-  <meta property="og:title" content="Main Street — Local shops &amp; artisans online">
-  <meta property="og:description" content="Bring your Main Street online: one platform for shops, makers, and neighbors. Save time, grow online sales, keep your community identity.">
+  <meta property="og:title" content="Main Street — Sell online from your local shop">
+  <meta property="og:description" content="Retail-focused storefronts for Main Street: list with AI help, sell with your makers, pickup &amp; delivery. Shoppers: browse local stores in one directory.">
   <meta property="og:image" content="https://www.shopmainstreet.co/assets/about/hero.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Main Street — Local shops &amp; artisans online">
-  <meta name="twitter:description" content="Bring your Main Street online: one platform for shops, makers, and neighbors. Save time, grow online sales, keep your community identity.">
+  <meta name="twitter:title" content="Main Street — Sell online from your local shop">
+  <meta name="twitter:description" content="Retail-focused storefronts for Main Street: list with AI help, sell with your makers, pickup &amp; delivery. Shoppers: browse local stores in one directory.">
   <meta name="twitter:image" content="https://www.shopmainstreet.co/assets/about/hero.png">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,15 @@
   <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
 </head>
 <body class="page-home">
+  <script>
+    (function () {
+      try {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+          document.documentElement.classList.add('home-animate-on');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div id="site-map-backdrop" class="site-map-backdrop" aria-hidden="true">
     <div id="site-map-bg" class="site-map-bg" aria-hidden="true"></div>
@@ -47,9 +56,9 @@
       <span class="material-icons" aria-hidden="true">menu</span>
     </button>
     <nav class="header-actions" id="header-actions" aria-label="Primary">
+      <a href="directory.html" class="header-btn header-btn--shop-local"><span class="material-icons" aria-hidden="true">storefront</span><span class="header-btn-label">Shop local</span></a>
       <a href="index.html" class="header-btn home-nav-link">Home</a>
       <a href="about.html" class="header-btn about-link">About</a>
-      <a href="directory.html" class="header-btn favorites-link">Shops</a>
       <a href="#pricing" class="header-btn">Pricing</a>
       <a href="#get-in-touch" class="header-btn">Contact</a>
       <a href="admin.html" class="header-btn admin-link" id="admin-link" style="display:none">
@@ -105,117 +114,71 @@
 
   <div class="main-wrapper">
     <main id="main-content" class="home-main">
-      <!-- 1. Above the fold: what / who / why + primary CTA -->
-      <section class="home-hero home-panel" aria-labelledby="home-hero-heading">
+      <p class="home-shopper-rail home-animate" style="--home-order: 0">
+        <span class="home-shopper-rail-text">Just here to browse and buy?</span>
+        <a href="directory.html" class="home-shopper-rail-cta">Shop local stores →</a>
+      </p>
+
+      <!-- Hero + street visuals in one panel (retail-focused) -->
+      <section class="home-hero home-panel home-hero--retail" aria-labelledby="home-hero-heading">
+        <p class="home-eyebrow home-animate" style="--home-order: 1">For Main Street retailers &amp; gift shops</p>
         <div class="home-hero-grid">
           <div class="home-hero-copy">
-            <h1 id="home-hero-heading" class="home-hero-title">The online platform for local shops and their artisans</h1>
-            <p class="home-hero-lead">For <strong>shop owners</strong> who need a real web presence without losing Main Street charm. For <strong>makers</strong> who want reach through trusted local stores. For <strong>neighbors</strong> who want to shop local in one place—with pickup or local delivery.</p>
-            <div class="home-hero-cta">
-              <a href="#get-in-touch" class="home-btn home-btn--primary">Get started</a>
-              <a href="directory.html" class="home-btn home-btn--secondary">Browse local shops</a>
+            <h1 id="home-hero-heading" class="home-hero-title home-animate" style="--home-order: 2">Sell online from your <em>local shop</em>—with your makers on the same storefront</h1>
+            <p class="home-hero-lead home-animate" style="--home-order: 3">Turn your floor into a live catalog: AI-assisted listings, inventory help, and checkout with <strong>pickup or local delivery</strong>. Built for indie retail starting in <strong>Boston</strong>, expanding across the U.S.</p>
+            <div class="home-hero-cta home-animate" style="--home-order: 4">
+              <a href="#get-in-touch" class="home-btn home-btn--primary">List your shop</a>
+              <a href="#pricing" class="home-btn home-btn--secondary">See pricing</a>
             </div>
-            <p class="home-hero-note">Starting in the <strong>Boston area</strong>, built for indie retail and handcrafted goods across the U.S.</p>
           </div>
-          <figure class="home-hero-figure">
-            <img src="assets/about/hero.png" alt="Main Street: local retail and community shopping" class="home-hero-image" width="600" height="400" fetchpriority="high" decoding="async">
+          <figure class="home-hero-figure home-animate home-animate--pop" style="--home-order: 5">
+            <img src="assets/about/hero.png" alt="Local storefronts and neighborhood retail on Main Street" class="home-hero-image" width="600" height="400" fetchpriority="high" decoding="async">
           </figure>
         </div>
-      </section>
-
-      <!-- Trust strip -->
-      <section class="home-trust home-panel" aria-label="Platform results">
-        <ul class="home-trust-list">
-          <li><span class="home-trust-stat">$33K+</span> GMV in under 6 months</li>
-          <li><span class="home-trust-stat">120</span> sellers onboarded in one month</li>
-          <li><span class="home-trust-stat">300+</span> hours saved per shop (automation)</li>
-          <li><span class="home-trust-stat">54%</span> of online sales across the ecosystem</li>
-        </ul>
-      </section>
-
-      <!-- Benefits: outcomes -->
-      <section class="home-section home-panel" aria-labelledby="benefits-heading">
-        <h2 id="benefits-heading" class="home-section-title">What you get—not buzzwords</h2>
-        <p class="home-section-intro">Practical outcomes for busy shop teams and makers.</p>
-        <ul class="home-benefit-grid">
-          <li class="home-benefit-card">
-            <h3 class="home-benefit-title">Launch faster</h3>
-            <p>AI-assisted brand profiles, storefronts, and product listings—so you are online without a full-time ecommerce hire.</p>
-          </li>
-          <li class="home-benefit-card">
-            <h3 class="home-benefit-title">Reclaim your week</h3>
-            <p>List and refresh inventory at scale with an autonomous assistant, barcodeless scanning, and less manual data entry.</p>
-          </li>
-          <li class="home-benefit-card">
-            <h3 class="home-benefit-title">Stay visible</h3>
-            <p>AI help with social posts so promotions keep running while you run the floor.</p>
-          </li>
-          <li class="home-benefit-card">
-            <h3 class="home-benefit-title">Keep fulfillment human</h3>
-            <p>Artisans can ship direct; customers get seamless checkout with <strong>local delivery</strong> or <strong>in-store pickup</strong>.</p>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Who it's for -->
-      <section class="home-section home-panel" aria-labelledby="audience-heading">
-        <h2 id="audience-heading" class="home-section-title">Built for three sides of Main Street</h2>
-        <div class="home-audience-grid">
-          <article class="home-audience-card">
-            <h3 class="home-audience-title">Local shop owners</h3>
-            <p>Gift shops, boutiques, specialty retail—bring 100+ SKUs online, grow beyond ~10% digital revenue, and champion your artisan community without drowning in tools.</p>
-          </article>
-          <article class="home-audience-card">
-            <h3 class="home-audience-title">Artisans &amp; makers</h3>
-            <p>Reach buyers through stores people already trust. Easier listings, fair economics, and more time making—not wrestling marketplaces.</p>
-          </article>
-          <article class="home-audience-card">
-            <h3 class="home-audience-title">Community-minded shoppers</h3>
-            <p>Discover handcrafted goods from multiple local shops in one browse-friendly place. Support your economy and pick what fits your day.</p>
-          </article>
+        <div class="home-street-strip">
+          <p class="home-street-strip-label home-animate" style="--home-order: 6">Main Street then &amp; now</p>
+          <div class="landing-then-now">
+            <figure class="landing-then-now-figure home-animate home-animate--tilt" style="--home-order: 7">
+              <img src="assets/about/then.png" alt="Historic Main Street with local shops: Miller's Hardware, Books and Crannies, The Daily Grind Cafe" class="landing-then-now-image" width="400" height="320" loading="lazy" decoding="async">
+            </figure>
+            <figure class="landing-then-now-figure home-animate home-animate--tilt" style="--home-order: 8">
+              <img src="assets/about/now.png" alt="Today's Main Street mix of local and national storefronts" class="landing-then-now-image" width="400" height="320" loading="lazy" decoding="async">
+            </figure>
+          </div>
         </div>
       </section>
 
-      <!-- USP -->
-      <section class="home-section home-panel home-usp" aria-labelledby="usp-heading">
-        <h2 id="usp-heading" class="home-section-title">Community in one platform—not isolation or noise</h2>
-        <p class="home-usp-text">Unlike solo merchant tools, you are not on an island. Unlike giant marketplaces, your shop and makers keep identity and connection. <strong>Main Street</strong> is built so local stores and their artisans grow <em>together</em> online.</p>
-      </section>
-
-      <!-- Social proof -->
-      <section class="home-section home-panel" aria-labelledby="proof-heading">
-        <h2 id="proof-heading" class="home-section-title">See it on a real Main Street</h2>
-        <p class="home-proof-lead"><strong>4 Good Vibes</strong> is our pilot partner—a local shop using the platform so customers can browse and buy from their community of makers online.</p>
-        <p class="home-pilot-cta"><a href="https://4goodvibes.shop/" class="home-btn home-btn--secondary" target="_blank" rel="noopener noreferrer">Visit pilot storefront</a></p>
-      </section>
-
-      <!-- Pricing -->
-      <section id="pricing" class="home-section home-panel home-pricing" aria-labelledby="pricing-heading">
-        <h2 id="pricing-heading" class="home-section-title">Simple pricing</h2>
-        <p class="home-pricing-highlight"><strong>5% commission</strong> on sales from sellers.</p>
-        <p class="home-pricing-note">No maze of tiers—aligns our success with yours. Questions about volume or partnerships? <a href="#get-in-touch">Contact us</a>.</p>
-      </section>
-
-      <!-- Mission / vision (scannable) -->
-      <section class="home-section home-panel home-mission-block" aria-labelledby="mission-heading">
-        <h2 id="mission-heading" class="home-section-title">Why we exist</h2>
-        <ul class="home-mission-list">
-          <li><strong>Mission:</strong> Bringing Main Street online—connecting customers to artisans through local shops so independent businesses survive and thrive.</li>
-          <li><strong>Vision:</strong> Foster human connection and real answers to low-skilled labor displacement as the economy automates.</li>
+      <!-- Single consolidated panel: proof + benefits + pricing + pilot -->
+      <section class="home-panel home-sell-panel" aria-labelledby="sell-panel-heading">
+        <h2 id="sell-panel-heading" class="home-sell-panel-title home-animate" style="--home-order: 0">Everything we build is so <strong>your shop</strong> can sell more online</h2>
+        <ul class="home-stats-row home-animate" style="--home-order: 1" aria-label="Platform results">
+          <li><span class="home-stats-num">$33K+</span> GMV in under 6 months</li>
+          <li><span class="home-stats-num">120</span> sellers onboarded in one month</li>
+          <li><span class="home-stats-num">300+</span> hours saved per shop</li>
+          <li><span class="home-stats-num">54%</span> of online sales across the ecosystem</li>
         </ul>
-      </section>
-
-      <!-- Secondary CTA band -->
-      <section class="home-cta-band home-panel" aria-labelledby="cta-band-heading">
-        <h2 id="cta-band-heading" class="home-visually-hidden">Get started</h2>
-        <p class="home-cta-band-text">Ready to bring your block online—or list your craft through a local partner?</p>
-        <a href="#get-in-touch" class="home-btn home-btn--primary home-btn--large">Book a conversation</a>
+        <ul class="home-sell-bullets home-animate" style="--home-order: 2">
+          <li><strong>Get listed faster</strong> — AI helps with storefronts, product copy, and images so you are not hiring a full ecommerce team.</li>
+          <li><strong>Run the floor, not spreadsheets</strong> — Barcodeless scanning and bulk listing support so inventory stays accurate.</li>
+          <li><strong>Stay on the map</strong> — Help with social posts and promotions while customers check out online for pickup or delivery.</li>
+        </ul>
+        <p class="home-sell-usp home-animate" style="--home-order: 3">You are not a solo listing on a giant marketplace, and you are not stuck on a generic shop island—your store and your artisans stay <strong>one recognizable Main Street brand</strong> online.</p>
+        <div class="home-sell-footer home-animate" style="--home-order: 4" id="pricing">
+          <div class="home-sell-price">
+            <span class="home-sell-price-label">Pricing</span>
+            <strong>5% commission</strong> on seller sales. <a href="#get-in-touch">Ask about your shop</a>.
+          </div>
+          <div class="home-sell-pilot">
+            <span class="home-sell-price-label">Live example</span>
+            Pilot partner <a href="https://4goodvibes.shop/" target="_blank" rel="noopener noreferrer">4 Good Vibes</a> — a real shop selling local makers online.
+          </div>
+        </div>
       </section>
 
       <!-- Contact -->
-      <section class="home-contact landing-contact landing-tan-block" id="get-in-touch">
+      <section class="home-contact landing-contact landing-tan-block home-animate" style="--home-order: 0" id="get-in-touch">
         <h2>Contact</h2>
-        <p class="home-contact-lead">Tell us whether you run a shop, make goods, or want to shop local—we will route you to the right next step.</p>
+        <p class="home-contact-lead">Run a shop or supply one? Tell us your name and location—we will follow up. <a href="directory.html">Shoppers: browse stores here</a>.</p>
         <form id="landing-contact-form" class="landing-contact-form">
           <div class="landing-contact-row">
             <div class="landing-contact-field">
@@ -247,10 +210,10 @@
     </main>
 
     <footer class="site-footer site-footer--over-map site-footer--home" role="contentinfo">
-      <div class="site-footer-grid">
+      <div class="site-footer-grid home-animate" style="--home-order: 0">
         <div class="site-footer-brand">
           <p class="site-footer-name">Main Street</p>
-          <p class="site-footer-tagline">Local shops, artisans, and neighbors—connected online.</p>
+          <p class="site-footer-tagline">Storefronts for local retailers—sell online with your makers.</p>
         </div>
         <div class="site-footer-col">
           <p class="site-footer-heading">Explore</p>
@@ -269,11 +232,6 @@
             <li><a href="terms.html">Terms &amp; Conditions</a></li>
           </ul>
         </div>
-        <div class="site-footer-col">
-          <p class="site-footer-heading">Website</p>
-          <p class="site-footer-contact"><a href="https://www.undergraduation.com/" target="_blank" rel="noopener noreferrer">www.undergraduation.com</a></p>
-          <p class="site-footer-meta">Leadership: Blake Mauri (CEO), Arjun Singh (COO)</p>
-        </div>
       </div>
       <p class="site-footer-inner site-footer-copy">© Main Street. Boston area first; serving U.S. local indie retail.</p>
     </footer>
@@ -281,6 +239,7 @@
 
   <script src="js/header.js"></script>
   <script src="js/map-bg.js"></script>
+  <script src="js/home-animate.js"></script>
   <script src="js/auth.js"></script>
   <script>
     (function () {
