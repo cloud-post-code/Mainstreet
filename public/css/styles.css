@@ -2576,6 +2576,11 @@ body {
   padding: clamp(1.5rem, 3.5vw, 2rem);
 }
 
+.home-feelings--pillars {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
 .home-feelings-block {
   display: grid;
   grid-template-columns: 1fr;
@@ -2590,8 +2595,13 @@ body {
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
 }
 
+.home-feelings-block--pillars {
+  max-width: none;
+  width: 100%;
+}
+
 @media (min-width: 640px) {
-  .home-feelings-block {
+  .home-feelings-block:not(.home-feelings-block--pillars) {
     grid-template-columns: auto 1fr;
     gap: clamp(1.35rem, 3.5vw, 2rem);
     max-width: 48rem;
@@ -2667,9 +2677,110 @@ body {
 }
 
 @media (min-width: 640px) {
-  .home-feelings-title--unified {
+  .home-feelings-content:not(.home-feelings-content--pillars) .home-feelings-title--unified {
     text-align: left;
   }
+}
+
+.home-feelings-content--pillars .home-feelings-title--unified {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.home-feelings-pillars {
+  --home-feelings-rail-bg: #e8e0d5;
+  list-style: none;
+  margin: 0;
+  padding: 2.35rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem 0.75rem;
+  position: relative;
+  max-width: 100%;
+}
+
+@media (min-width: 720px) {
+  .home-feelings-pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 0.75rem;
+    align-items: start;
+  }
+
+  .home-feelings-pillars::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: calc(1.125rem - 1px);
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      rgba(29, 118, 30, 0.85) 0%,
+      rgba(29, 118, 30, 0.35) 50%,
+      rgba(29, 118, 30, 0.85) 100%
+    );
+    border-radius: 3px;
+    z-index: 0;
+  }
+}
+
+.home-feelings-pillar {
+  margin: 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.35rem;
+}
+
+.home-feelings-pillar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 auto 0.85rem;
+  border-radius: 50%;
+  background: var(--brand-green);
+  color: #fff;
+  box-shadow: 0 0 0 5px var(--home-feelings-rail-bg);
+}
+
+.home-feelings-pillar-icon .material-icons {
+  font-size: 1.15rem !important;
+}
+
+@media (max-width: 719px) {
+  .home-feelings-pillar-icon {
+    box-shadow: none;
+    border-radius: 10px;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .home-feelings-pillar-icon .material-icons {
+    font-size: 1.35rem !important;
+  }
+
+  .home-feelings-pillars {
+    padding-top: 0;
+  }
+}
+
+.home-feelings-pillar-text {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.home-feelings-kicker {
+  margin: 1.25rem 0 1rem;
+  text-align: center;
+  font-size: 0.98rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .home-feelings-body {
@@ -2697,6 +2808,10 @@ body {
   .home-feelings-content .home-feelings-bridge {
     text-align: left;
   }
+}
+
+.home-feelings-content--pillars .home-feelings-bridge {
+  text-align: center;
 }
 
 .home-feelings-bridge {
