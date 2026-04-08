@@ -105,3 +105,191 @@
   padding-top: 1.5rem;
   border-top: 1px solid #ddd;
 }
+
+/* ——— Formal policy document (data deletion page) ——— */
+.page-deletion-policy {
+  background: #e8e6e1;
+}
+
+.page-deletion-policy .legal-doc-page {
+  max-width: 50rem;
+  padding-top: 2rem;
+  padding-bottom: 3.5rem;
+}
+
+.legal-doc-sheet {
+  background: #fff;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.08);
+  padding: clamp(1.75rem, 4.5vw, 2.85rem) clamp(1.25rem, 4vw, 2.75rem);
+}
+
+.legal-doc-masthead {
+  text-align: center;
+  padding-bottom: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.legal-doc-entity {
+  margin: 0 0 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+.legal-doc-rule {
+  width: 4.5rem;
+  height: 3px;
+  margin: 0 auto 1rem;
+  background: var(--brand-green, #1d761e);
+  border-radius: 1px;
+}
+
+.legal-doc-kind {
+  margin: 0 0 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5c5c5c;
+}
+
+.legal-doc-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.85rem;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.legal-doc-subtitle {
+  margin: 0 auto 1.5rem;
+  max-width: 38rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .legal-doc-subtitle {
+    text-align: center;
+  }
+}
+
+.legal-doc-meta {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 auto;
+  max-width: 28rem;
+  padding: 1rem 1.15rem;
+  background: #f7f7f5;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  text-align: left;
+}
+
+.legal-doc-meta-row {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 480px) {
+  .legal-doc-meta-row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}
+
+.legal-doc-meta dt {
+  margin: 0;
+  font-weight: 700;
+  color: #333;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legal-doc-meta dd {
+  margin: 0;
+  color: #222;
+  word-break: break-word;
+}
+
+.legal-doc-meta a {
+  color: var(--brand-green, #1d761e);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.legal-doc-meta a:hover {
+  text-decoration: underline;
+}
+
+.page-deletion-policy .legal-doc-body {
+  font-size: 0.9375rem;
+}
+
+.legal-doc-body .legal-doc-h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 2rem 0 0.85rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #111;
+}
+
+.legal-doc-body .legal-doc-h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-doc-h2-num {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--brand-green, #1d761e);
+}
+
+.legal-doc-list li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-doc-callout {
+  margin: 1.25rem 0 1.5rem;
+  padding: 1rem 1.1rem 1.05rem;
+  background: rgba(29, 118, 30, 0.06);
+  border: 1px solid rgba(29, 118, 30, 0.2);
+  border-radius: 8px;
+  border-left: 4px solid var(--brand-green, #1d761e);
+}
+
+.legal-doc-callout p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.62;
+  color: #2a2a2a;
+}
+
+.legal-doc-disclaimer {
+  margin: 2.25rem 0 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: #555;
+}
