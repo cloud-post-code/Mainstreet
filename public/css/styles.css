@@ -2522,6 +2522,388 @@ body {
   padding: clamp(1.25rem, 3vw, 1.75rem);
 }
 
+/* Homepage — relief-led narrative (shopmainstreet.co) */
+.home-hero--relief {
+  padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.home-hero--relief .home-hero-copy {
+  margin-bottom: clamp(1.25rem, 3vw, 1.85rem);
+}
+
+.home-hero-whisper {
+  margin: 1.1rem 0 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(26, 26, 26, 0.52);
+  text-align: left;
+  max-width: 22rem;
+  line-height: 1.45;
+}
+
+.home-hero--relief .home-street-strip {
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.85rem) 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+}
+
+.home-problem-feelings {
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.home-feelings-list {
+  list-style: none;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-feeling-card {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
+  border-left: 4px solid var(--problem-accent, #e07020);
+}
+
+.home-feeling-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.home-feelings-bridge {
+  margin: 0 auto;
+  max-width: 36rem;
+  text-align: center;
+  font-size: clamp(1.02rem, 2.2vw, 1.12rem);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--text-dark);
+}
+
+.home-how-simple {
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.home-how-prelude {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-green);
+  margin: 0 0 0.85rem;
+}
+
+.home-steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 38rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.home-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.home-step-num {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--brand-green);
+  border-radius: 50%;
+}
+
+.home-step-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.home-step-text {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.home-proof {
+  background: linear-gradient(165deg, #3d2f26 0%, #2a211c 45%, #352a24 100%);
+  color: #f5f0e8;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.home-proof-inner {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-proof-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+  font-weight: 700;
+  margin: 0 0 0.65rem;
+  line-height: 1.3;
+  color: #fdf8f0;
+}
+
+.home-proof-sub {
+  margin: 0 0 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(245, 240, 232, 0.88);
+}
+
+.home-proof-stats {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .home-proof-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.15rem;
+  }
+}
+
+.home-proof-stat {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 1.15rem 1rem;
+  text-align: center;
+}
+
+.home-proof-num {
+  display: block;
+  font-size: clamp(1.85rem, 5vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--brand-gold);
+  margin-bottom: 0.35rem;
+}
+
+.home-proof-label {
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: rgba(245, 240, 232, 0.92);
+}
+
+.home-proof-cta-wrap {
+  margin: 0 0 1.25rem;
+}
+
+.home-proof-link {
+  color: var(--brand-gold);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.home-proof-link:hover {
+  text-decoration: underline;
+}
+
+.home-proof-note {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(245, 240, 232, 0.65);
+}
+
+.home-compare--empathy .home-section-title {
+  margin-bottom: 1.25rem;
+}
+
+.home-compare-table {
+  width: 100%;
+  margin: 0 0 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.home-compare-thead {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .home-compare-thead {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.home-compare-th {
+  padding: 0.75rem 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .home-compare-th {
+    border-bottom: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .home-compare-th:last-child {
+    border-right: none;
+  }
+}
+
+.home-compare-th--us {
+  color: var(--brand-green);
+}
+
+.home-compare-tbody .home-compare-row {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .home-compare-tbody .home-compare-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.home-compare-cell {
+  padding: 1rem 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .home-compare-cell {
+    border-bottom: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .home-compare-cell:last-child {
+    border-right: none;
+  }
+}
+
+.home-compare-cell--us {
+  background: rgba(29, 118, 30, 0.09);
+  font-weight: 500;
+}
+
+.home-compare-honest {
+  margin: 0 auto;
+  max-width: 38rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.home-relief-items {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 38rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.home-relief-line {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+  padding: 1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-green);
+}
+
+.home-pricing-simple {
+  text-align: center;
+  padding: clamp(1.85rem, 4vw, 2.75rem);
+}
+
+.home-pricing-line {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-dark);
+}
+
+.home-pricing-line--emph {
+  font-weight: 800;
+  color: var(--brand-green);
+  margin-bottom: 1.25rem;
+}
+
+.home-pricing-ask {
+  color: var(--brand-green);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.home-pricing-ask:hover {
+  text-decoration: underline;
+}
+
+.home-contact-cta--closing .home-contact-cta-heading {
+  max-width: 24rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.35;
+}
+
+.home-contact-cta--closing .home-contact-cta-text {
+  max-width: 26rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-closing-whisper {
+  margin: 1.1rem 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 .home-hero-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.65rem, 4.5vw, 2.35rem);
@@ -2638,7 +3020,9 @@ body {
   font-size: clamp(1.35rem, 3vw, 1.65rem);
   font-weight: 800;
   text-align: center;
-  margin: 0 0 0.5rem;
+  margin: 0 auto 1rem;
+  max-width: 40rem;
+  line-height: 1.28;
   color: var(--text-dark);
 }
 
@@ -2903,8 +3287,21 @@ body {
   .home-hero-note {
     text-align: center;
   }
+  .home-hero-whisper {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .home-hero-cta {
     justify-content: center;
+  }
+  .home-step {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .home-step-num {
+    margin-bottom: 0.25rem;
   }
   .home-how-block {
     align-items: center;
@@ -2915,6 +3312,10 @@ body {
   }
   .home-problem-card {
     text-align: center;
+  }
+  .home-contact-cta--closing .home-btn {
+    margin-left: auto;
+    margin-right: auto;
   }
   .home-btn {
     width: 100%;
