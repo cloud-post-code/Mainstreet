@@ -1994,7 +1994,7 @@ body {
   color: var(--brand-green);
 }
 
-/* Now & then strip: sits at top of hero (divider below images, not above) */
+/* Now & then strip: divider below images separates from headline when strip is first */
 .home-hero .home-street-strip {
   margin: 0 0 1.5rem;
   padding: 0 0 1.35rem;
@@ -2528,7 +2528,20 @@ body {
 }
 
 .home-hero--relief .home-hero-copy {
+  margin-top: clamp(1.15rem, 3vw, 1.65rem);
   margin-bottom: clamp(1.25rem, 3vw, 1.85rem);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.home-hero--relief .home-hero-title,
+.home-hero--relief .home-hero-lead {
+  text-align: center;
+}
+
+.home-hero--relief .home-hero-cta {
+  justify-content: center;
 }
 
 .home-hero-whisper {
@@ -2542,15 +2555,43 @@ body {
   line-height: 1.45;
 }
 
+.home-hero--relief .home-hero-whisper {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .home-hero--relief .home-street-strip {
   margin: 0;
-  padding: clamp(1.25rem, 3vw, 1.85rem) 0 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: none;
+  padding: 0 0 clamp(1.15rem, 3vw, 1.65rem);
+  border-top: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .home-problem-feelings {
   padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.home-feelings-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 1.95rem);
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto 1.4rem;
+  max-width: 34rem;
+  line-height: 1.28;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+}
+
+.home-feelings-title::after {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 3px;
+  margin: 0.9rem auto 0;
+  background: var(--brand-green);
+  border-radius: 2px;
 }
 
 .home-feelings-list {
@@ -2583,24 +2624,22 @@ body {
   margin: 0 auto;
   max-width: 36rem;
   text-align: center;
-  font-size: clamp(1.02rem, 2.2vw, 1.12rem);
+  font-size: clamp(1.08rem, 2.4vw, 1.22rem);
   font-weight: 700;
   line-height: 1.55;
   color: var(--text-dark);
 }
 
-.home-how-simple {
-  padding: clamp(1.75rem, 4vw, 2.5rem);
+.home-feelings-you {
+  color: var(--brand-green);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
 }
 
-.home-how-prelude {
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--brand-green);
-  margin: 0 0 0.85rem;
+.home-how-simple {
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .home-steps {
@@ -2611,6 +2650,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
+}
+
+.home-steps--timeline {
+  gap: 1.65rem;
+  margin-top: 0.5rem;
+  padding: 0.35rem 0 0.35rem 1.35rem;
+  border-left: 4px solid rgba(29, 118, 30, 0.45);
+  border-radius: 0 0 0 4px;
 }
 
 .home-step {
