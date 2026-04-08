@@ -3,6 +3,7 @@
   --brand-green: #1d761e;
   --brand-cream: #fefff5;
   --brand-gold: #f8cf0a;
+  --problem-accent: #e07020;
   --text-dark: #1a1a1a;
   --text-muted: #555;
 }
@@ -2018,10 +2019,84 @@ body {
   padding: clamp(1.25rem, 3vw, 1.85rem);
 }
 
+/* Problem stats → bridge → How it works (hero) */
+.home-problem {
+  width: 100%;
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.home-problem-title {
+  margin-bottom: 1rem;
+}
+
+.home-problem-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .home-problem-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+}
+
+.home-problem-card {
+  margin: 0;
+  padding: 1.1rem 1rem 1.15rem 1.1rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 5px solid var(--problem-accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+}
+
+.home-problem-stat {
+  display: block;
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--brand-green);
+  margin-bottom: 0.4rem;
+}
+
+.home-problem-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-dark);
+}
+
+.home-problem-footnote {
+  margin: 0.9rem auto 0;
+  max-width: 34rem;
+  text-align: center;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.home-problem-bridge {
+  margin: clamp(1.35rem, 3.5vw, 2rem) auto 0;
+  max-width: 36rem;
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.14rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
 /* How it works: icon cards under hero */
 .home-how-blocks {
   width: 100%;
-  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  margin-top: clamp(1.35rem, 3vw, 2rem);
   padding-top: clamp(1.25rem, 3vw, 1.75rem);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -2837,6 +2912,9 @@ body {
   }
   .home-how-block-icon-wrap {
     margin-inline: auto;
+  }
+  .home-problem-card {
+    text-align: center;
   }
   .home-btn {
     width: 100%;
