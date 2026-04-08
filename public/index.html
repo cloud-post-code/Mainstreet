@@ -152,32 +152,192 @@
         </div>
       </section>
 
-      <!-- Section 3: How it works — timeline -->
-      <section class="home-panel home-how-simple home-animate" style="--home-order: 0" aria-labelledby="how-heading">
-        <h2 id="how-heading" class="home-section-title">Here’s all we ask of you.</h2>
-        <ol class="home-steps home-steps--timeline">
-          <li class="home-step home-animate" style="--home-order: 1">
-            <span class="home-step-num" aria-hidden="true">1</span>
-            <div class="home-step-body">
-              <h3 class="home-step-title">Tell us about your shop.</h3>
-              <p class="home-step-text">We get to know your space, your makers, and your catalog. You talk. We listen.</p>
+      <!-- Section 3: How it works — by role -->
+      <section class="home-panel home-personas home-animate" style="--home-order: 0" aria-labelledby="personas-heading">
+        <div class="home-personas-intro">
+          <h2 id="personas-heading" class="home-section-title">How it works for you</h2>
+          <p class="home-personas-deck">Shops, makers, and buyers each carry a different load. Here’s the path we support—and the headaches we take off your list.</p>
+        </div>
+
+        <div class="home-personas-tabs" role="tablist" aria-label="Choose your role">
+          <button type="button" role="tab" id="tab-store" class="home-persona-tab is-active" aria-selected="true" aria-controls="panel-store" tabindex="0">Store</button>
+          <button type="button" role="tab" id="tab-artisans" class="home-persona-tab" aria-selected="false" aria-controls="panel-artisans" tabindex="-1">Artisans</button>
+          <button type="button" role="tab" id="tab-customers" class="home-persona-tab" aria-selected="false" aria-controls="panel-customers" tabindex="-1">Customers</button>
+        </div>
+
+        <div class="home-personas-panels">
+          <div id="panel-store" role="tabpanel" aria-labelledby="tab-store" class="home-persona-panel is-active home-animate" style="--home-order: 1">
+            <h3 class="home-persona-headline">Run the shop—not the website.</h3>
+            <p class="home-persona-lead">You stay on the floor with customers. We handle the listing, imaging, inventory, and the seasonal refresh so your online door stays open.</p>
+
+            <div class="home-persona-flows" aria-label="Store workflow">
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">Set up</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Open your shop page</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Bring your makers on</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Makers</span> List what they sell—in-store and from their studio</div>
+                </div>
+              </div>
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">Sales</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Share the word—social, email, in-store</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Customers</span> Browse and order like they know you</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You &amp; makers</span> Ship or hand off—clear roles, one checkout</div>
+                </div>
+              </div>
             </div>
-          </li>
-          <li class="home-step home-animate" style="--home-order: 2">
-            <span class="home-step-num" aria-hidden="true">2</span>
-            <div class="home-step-body">
-              <h3 class="home-step-title">We set it up with you.</h3>
-              <p class="home-step-text">Our AI handles the heavy lifting—listings, images, inventory, barcoding. We’re there every step of the way to help you and your sellers.</p>
+
+            <ul class="home-persona-points">
+              <li class="home-persona-point home-animate" style="--home-order: 2">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">inventory_2</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Too much to list and keep current</strong>
+                  <p class="home-persona-point-text">Bulk listing help, barcode-friendly inventory, and photo support so the catalog you already carry shows up online without nights at the keyboard.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 3">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">campaign</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Promotions never get out the door</strong>
+                  <p class="home-persona-point-text">Seasonal home pages and ad drafts you can approve in minutes—built from what you already sell, not from a blank template.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 4">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">groups</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Many makers, one messy online story</strong>
+                  <p class="home-persona-point-text">One storefront that still feels like your shop—each maker visible, fulfillment rules that match how you actually work together.</p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="home-persona-cta-wrap">
+              <a href="contact.html" class="home-btn home-btn--primary home-persona-cta">Talk to us about your shop <span aria-hidden="true">→</span></a>
+            </p>
+          </div>
+
+          <div id="panel-artisans" role="tabpanel" aria-labelledby="tab-artisans" class="home-persona-panel home-animate" style="--home-order: 1" hidden>
+            <h3 class="home-persona-headline">Sell through the shop that already believes in you.</h3>
+            <p class="home-persona-lead">You make the work. The shop brings foot traffic and trust. Main Street carries that same relationship online—without you running a second store alone.</p>
+
+            <div class="home-persona-flows" aria-label="Artisan workflow">
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">Set up</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Shop</span> Invites you in</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Add your goods and how you ship</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Live</span> Your line sits next to the shop’s—same look, same trust</div>
+                </div>
+              </div>
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">Sales</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Shop</span> Spreads the word</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Customers</span> Order your pieces</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Ship direct—aligned with the shop’s rules</div>
+                </div>
+              </div>
             </div>
-          </li>
-          <li class="home-step home-animate" style="--home-order: 3">
-            <span class="home-step-num" aria-hidden="true">3</span>
-            <div class="home-step-body">
-              <h3 class="home-step-title">You run your shop. We keep it running online.</h3>
-              <p class="home-step-text">Home page automatically tailored to holidays. Advertising automatically completed.</p>
+
+            <ul class="home-persona-points">
+              <li class="home-persona-point home-animate" style="--home-order: 2">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">palette</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Listing everywhere on your own</strong>
+                  <p class="home-persona-point-text">You join through the shop you already wholesale or consign with—one shared catalog instead of rebuilding your story on a dozen sites.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 3">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">photo_camera</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Photos and copy eat your studio time</strong>
+                  <p class="home-persona-point-text">Hands-on help shaping listings that match what buyers see in the shop—so you’re not guessing tags, sizes, and shipping alone.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 4">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">local_shipping</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Orders and handoffs get fuzzy</strong>
+                  <p class="home-persona-point-text">Clear fulfillment paths: you ship, the shop ships, or pickup—customers see one simple checkout; you see what you owe the floor.</p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="home-persona-cta-wrap">
+              <a href="contact.html" class="home-btn home-btn--primary home-persona-cta">Ask your shop to invite you <span aria-hidden="true">→</span></a>
+            </p>
+          </div>
+
+          <div id="panel-customers" role="tabpanel" aria-labelledby="tab-customers" class="home-persona-panel home-animate" style="--home-order: 1" hidden>
+            <h3 class="home-persona-headline">Shop the stores you already love—on your schedule.</h3>
+            <p class="home-persona-lead">Same makers, same curation, none of the “which site was that?” guesswork. Pick up in person, get local delivery, or ship—whatever that shop offers.</p>
+
+            <div class="home-persona-flows" aria-label="Customer workflow">
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">Browse</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Find a familiar local shop</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Explore makers and goods in one place</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Cart</span> See pickup, delivery, or ship options upfront</div>
+                </div>
+              </div>
+              <div class="home-persona-flow">
+                <p class="home-persona-flow-label">After you order</p>
+                <div class="home-persona-flow-row">
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Pay</span> One simple checkout</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">Shop</span> Coordinates makers and packing</div>
+                  <span class="home-persona-flow-arrow" aria-hidden="true">→</span>
+                  <div class="home-persona-flow-card"><span class="home-persona-flow-tag">You</span> Pick up or receive delivery—clear timing</div>
+                </div>
+              </div>
             </div>
-          </li>
-        </ol>
+
+            <ul class="home-persona-points">
+              <li class="home-persona-point home-animate" style="--home-order: 2">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">travel_explore</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Want to buy local but can’t always visit</strong>
+                  <p class="home-persona-point-text">Browse trusted shops online the same way you walk the street—curated inventory, not an endless marketplace scroll.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 3">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">favorite</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Hard to find a maker you met once</strong>
+                  <p class="home-persona-point-text">Makers sit under the shop that introduced you—so the story stays “I found this at my favorite gift shop,” not lost in search results.</p>
+                </div>
+              </li>
+              <li class="home-persona-point home-animate" style="--home-order: 4">
+                <span class="home-persona-point-icon" aria-hidden="true"><span class="material-icons">schedule</span></span>
+                <div class="home-persona-point-body">
+                  <strong class="home-persona-point-title">Pickup vs ship vs delivery is confusing</strong>
+                  <p class="home-persona-point-text">Checkout spells out what’s available for that shop and that cart—no surprise fees or “call us to figure it out” dead ends.</p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="home-persona-cta-wrap">
+              <a href="directory.html" class="home-btn home-btn--primary home-persona-cta">Browse local shops <span aria-hidden="true">→</span></a>
+            </p>
+          </div>
+        </div>
+
+        <aside class="home-personas-impact home-animate" style="--home-order: 5" aria-label="What early partners report">
+          <p class="home-personas-impact-text">Early partners report <strong>300+ hours</strong> saved on listing and imaging work—and a <strong>strong lift in online sales</strong> once their door was open on the web.</p>
+        </aside>
       </section>
 
       <!-- Section 4: Proof — warm dark -->
@@ -260,6 +420,7 @@
   <script src="js/header.js"></script>
   <script src="js/map-bg.js"></script>
   <script src="js/home-animate.js"></script>
+  <script src="js/home-personas.js"></script>
   <script src="js/auth.js"></script>
 </body>
 </html>
