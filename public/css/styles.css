@@ -2572,6 +2572,68 @@ body {
   padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
+.home-feelings--unified {
+  padding: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.home-feelings-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+  align-items: center;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+  .home-feelings-block {
+    grid-template-columns: auto 1fr;
+    gap: clamp(1.35rem, 3.5vw, 2rem);
+    max-width: 48rem;
+  }
+}
+
+.home-feelings-visual {
+  position: relative;
+  width: 5.75rem;
+  height: 5.75rem;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.home-feelings-visual-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(224, 112, 32, 0.5);
+  background: radial-gradient(circle at 35% 30%, rgba(254, 255, 245, 0.9) 0%, rgba(255, 255, 255, 0.4) 100%);
+}
+
+.home-feelings-visual-ring--outer {
+  inset: -0.45rem;
+  border-width: 2px;
+  border-color: rgba(29, 118, 30, 0.28);
+  background: none;
+}
+
+.home-feelings-visual-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.65rem !important;
+  color: var(--brand-green);
+}
+
+.home-feelings-content {
+  min-width: 0;
+}
+
 .home-feelings-title {
   font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(1.5rem, 4vw, 1.95rem);
@@ -2594,36 +2656,52 @@ body {
   border-radius: 2px;
 }
 
-.home-feelings-list {
-  list-style: none;
-  margin: 0 auto 1.5rem;
-  padding: 0;
-  max-width: 40rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.home-feelings-title--unified {
+  margin: 0 0 0.75rem;
+  max-width: none;
+  text-align: center;
 }
 
-.home-feeling-card {
-  margin: 0;
-  padding: 1rem 1.15rem;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 10px;
-  border-left: 4px solid var(--problem-accent, #e07020);
+.home-feelings-title--unified::after {
+  display: none;
 }
 
-.home-feeling-text {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
+@media (min-width: 640px) {
+  .home-feelings-title--unified {
+    text-align: left;
+  }
+}
+
+.home-feelings-body {
+  margin: 0 0 1.05rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--text-dark);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .home-feelings-body {
+    text-align: left;
+  }
+}
+
+.home-feelings-content .home-feelings-bridge {
+  margin: 0;
+  max-width: none;
+  text-align: center;
+  font-size: clamp(1.02rem, 2.2vw, 1.14rem);
+}
+
+@media (min-width: 640px) {
+  .home-feelings-content .home-feelings-bridge {
+    text-align: left;
+  }
 }
 
 .home-feelings-bridge {
   margin: 0 auto;
   max-width: 36rem;
-  text-align: center;
   font-size: clamp(1.08rem, 2.4vw, 1.22rem);
   font-weight: 700;
   line-height: 1.55;
