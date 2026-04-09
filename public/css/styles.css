@@ -2597,8 +2597,20 @@ body {
   padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
 }
 
+.home-hero-headline {
+  text-align: center;
+  margin: 0 auto clamp(1rem, 2.5vw, 1.5rem);
+  max-width: min(52rem, 100%);
+  padding: 0 0.25rem;
+}
+
+.home-hero--relief .home-hero-headline .home-hero-title {
+  margin: 0;
+  color: var(--brand-green);
+}
+
 .home-hero--relief .home-hero-copy {
-  margin-top: clamp(1.15rem, 3vw, 1.65rem);
+  margin-top: clamp(1rem, 2.5vw, 1.35rem);
   margin-bottom: clamp(1.25rem, 3vw, 1.85rem);
   margin-left: auto;
   margin-right: auto;
@@ -2606,7 +2618,6 @@ body {
   max-width: min(52rem, 100%);
 }
 
-.home-hero--relief .home-hero-title,
 .home-hero--relief .home-hero-lead {
   text-align: center;
 }
