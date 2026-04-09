@@ -2703,7 +2703,7 @@ body {
   .home-feelings-pillars {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem 0.75rem;
-    align-items: start;
+    align-items: stretch;
   }
 
   .home-feelings-pillars::before {
@@ -2729,7 +2729,24 @@ body {
   text-align: center;
   position: relative;
   z-index: 1;
-  padding: 0 0.35rem;
+  padding: 0.85rem 0.65rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 2px 14px rgba(42, 33, 28, 0.06);
+}
+
+@media (min-width: 720px) {
+  .home-feelings-pillar {
+    min-height: 7.5rem;
+  }
 }
 
 .home-feelings-pillar-icon {
@@ -2750,6 +2767,10 @@ body {
 }
 
 @media (max-width: 719px) {
+  .home-feelings-pillar {
+    min-height: 5.75rem;
+  }
+
   .home-feelings-pillar-icon {
     box-shadow: none;
     border-radius: 10px;
@@ -2772,6 +2793,12 @@ body {
   line-height: 1.55;
   color: var(--text-dark);
   font-weight: 600;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
 }
 
 .home-feelings-kicker {
