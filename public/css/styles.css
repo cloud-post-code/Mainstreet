@@ -2508,7 +2508,7 @@ body {
   margin-bottom: 1.25rem;
 }
 
-/* One tan sheet: hero + problem + personas (no map gap between) */
+/* One tan sheet: hero through closing CTA (no map gap between sections) */
 .home-tan-continuous {
   background-color: #e8e0d5;
   border-radius: 12px;
