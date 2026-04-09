@@ -2535,7 +2535,8 @@ body {
   text-align: center;
 }
 
-.home-hero--relief .home-hero-title {
+.home-hero--relief .home-hero-title,
+.home-hero--relief .home-hero-lead {
   text-align: center;
 }
 
@@ -3352,8 +3353,19 @@ body {
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-dark);
+  margin: 0 0 0.65rem;
+  text-align: left;
+}
+
+.home-hero-lead {
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--text-dark);
   margin: 0 0 1.25rem;
   text-align: left;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home-hero-copy {
@@ -3716,6 +3728,7 @@ body {
     text-align: center;
   }
   .home-hero-title,
+  .home-hero-lead,
   .home-hero-note {
     text-align: center;
   }
