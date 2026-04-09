@@ -2797,40 +2797,6 @@ body {
   }
 }
 
-.home-feelings-content .home-feelings-bridge {
-  margin: 0;
-  max-width: none;
-  text-align: center;
-  font-size: clamp(1.02rem, 2.2vw, 1.14rem);
-}
-
-@media (min-width: 640px) {
-  .home-feelings-content .home-feelings-bridge {
-    text-align: left;
-  }
-}
-
-.home-feelings-content--pillars .home-feelings-bridge {
-  text-align: center;
-}
-
-.home-feelings-bridge {
-  margin: 0 auto;
-  max-width: 36rem;
-  font-size: clamp(1.08rem, 2.4vw, 1.22rem);
-  font-weight: 700;
-  line-height: 1.55;
-  color: var(--text-dark);
-}
-
-.home-feelings-you {
-  color: var(--brand-green);
-  font-weight: 800;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.12em;
-}
-
 /* Personas: tabs + flows + pain/solution cards */
 .home-personas {
   padding: clamp(1.75rem, 4vw, 2.75rem);
