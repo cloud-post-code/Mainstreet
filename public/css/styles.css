@@ -2508,6 +2508,30 @@ body {
   margin-bottom: 1.25rem;
 }
 
+/* One tan sheet: hero + problem + personas (no map gap between) */
+.home-tan-continuous {
+  background-color: #e8e0d5;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.home-tan-continuous > .home-panel {
+  background: transparent;
+  box-shadow: none;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.home-tan-continuous > .home-panel + .home-panel {
+  padding-top: clamp(0.85rem, 2.2vw, 1.35rem);
+}
+
+.home-tan-continuous > .home-panel:not(:last-child) {
+  padding-bottom: clamp(0.85rem, 2.2vw, 1.35rem);
+}
+
 .home-panel.home-sell-panel {
   display: flex;
   flex-direction: column;
