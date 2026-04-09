@@ -2675,6 +2675,11 @@ body {
   }
 }
 
+.home-feelings-content--pillars {
+  width: 100%;
+  max-width: 100%;
+}
+
 .home-feelings-content--pillars .home-feelings-title--unified {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -2689,7 +2694,9 @@ body {
   grid-template-columns: 1fr;
   gap: 1.35rem 0.75rem;
   position: relative;
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 720px) {
@@ -2697,6 +2704,7 @@ body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem 0.75rem;
     align-items: stretch;
+    justify-items: stretch;
   }
 
   .home-feelings-pillars::before {
@@ -2729,6 +2737,10 @@ body {
   justify-content: flex-start;
   height: 100%;
   min-height: 100%;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  justify-self: stretch;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(0, 0, 0, 0.07);
