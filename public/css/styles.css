@@ -2544,23 +2544,6 @@ body {
   justify-content: center;
 }
 
-.home-hero-whisper {
-  margin: 1.1rem 0 0;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: rgba(26, 26, 26, 0.52);
-  text-align: left;
-  max-width: 22rem;
-  line-height: 1.45;
-}
-
-.home-hero--relief .home-hero-whisper {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .home-hero--relief .home-street-strip {
   margin: 0;
   padding: 0 0 clamp(1.15rem, 3vw, 1.65rem);
@@ -3731,11 +3714,6 @@ body {
   .home-hero-lead,
   .home-hero-note {
     text-align: center;
-  }
-  .home-hero-whisper {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
   .home-hero-cta {
     justify-content: center;
