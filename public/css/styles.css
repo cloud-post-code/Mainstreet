@@ -2532,6 +2532,52 @@ body {
   padding-bottom: clamp(0.85rem, 2.2vw, 1.35rem);
 }
 
+/* Proof + pricing + closing: same tan sheet; proof reads on light (not dark band) */
+.home-tan-continuous .home-proof {
+  background: transparent;
+  color: var(--text-dark);
+  border: none;
+  box-shadow: none;
+}
+
+.home-tan-continuous .home-proof-title {
+  color: var(--text-dark);
+}
+
+.home-tan-continuous .home-proof-sub {
+  color: var(--text-muted);
+}
+
+.home-tan-continuous .home-proof-sub strong {
+  color: var(--text-dark);
+}
+
+.home-tan-continuous .home-proof-stat {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(42, 33, 28, 0.06);
+}
+
+.home-tan-continuous .home-proof-num {
+  color: var(--brand-green);
+}
+
+.home-tan-continuous .home-proof-label {
+  color: var(--text-dark);
+}
+
+.home-tan-continuous .home-proof-link {
+  color: var(--brand-green);
+}
+
+.home-tan-continuous .home-proof-link:hover {
+  color: #145a15;
+}
+
+.home-tan-continuous .home-proof-note {
+  color: var(--text-muted);
+}
+
 .home-panel.home-sell-panel {
   display: flex;
   flex-direction: column;
