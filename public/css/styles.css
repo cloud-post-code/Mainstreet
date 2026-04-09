@@ -3458,9 +3458,9 @@ body {
 
 .home-hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(0.68rem, 2.1vw + 0.42rem, 1.45rem);
+  font-size: clamp(1.35rem, 4vw + 0.35rem, 2.25rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--text-dark);
   margin: 0 0 0.65rem;
