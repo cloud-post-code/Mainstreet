@@ -58,38 +58,6 @@ body {
   text-align: center;
 }
 
-/* Then and Now – two images half and half */
-.landing-then-now-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin: 0 0 1rem;
-  text-align: center;
-}
-
-.landing-then-now {
-  display: flex;
-  gap: 0;
-  margin: 0 0 1.5rem;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.landing-then-now-figure {
-  flex: 1;
-  margin: 0;
-  min-width: 0;
-}
-
-.landing-then-now-image {
-  width: 100%;
-  height: auto;
-  max-height: 320px;
-  object-fit: cover;
-  display: block;
-  vertical-align: middle;
-}
-
 .landing-tan-block {
   background-color: #e8e0d5;
   border-radius: 8px;
@@ -1955,14 +1923,6 @@ body {
     transform: translate3d(0, 0, 0) scale(1);
   }
 
-  html.home-animate-on .landing-then-now .landing-then-now-figure.home-animate--tilt:not(.is-visible):first-of-type {
-    transform: translate3d(0, 1rem, 0) rotate(-1.1deg);
-  }
-
-  html.home-animate-on .landing-then-now .landing-then-now-figure.home-animate--tilt:not(.is-visible):last-of-type {
-    transform: translate3d(0, 1rem, 0) rotate(1.1deg);
-  }
-
   html.home-animate-on .home-animate--tilt.is-visible {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
@@ -1998,24 +1958,6 @@ body {
 .home-hero--retail .home-hero-title em {
   font-style: italic;
   color: var(--brand-green);
-}
-
-/* Now & then strip: divider below images separates from headline when strip is first */
-.home-hero .home-street-strip {
-  margin: 0 0 1.5rem;
-  padding: 0 0 1.35rem;
-  border-top: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.home-street-strip-label {
-  margin: 0 0 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-align: center;
 }
 
 .home-panel.home-compare {
@@ -2647,13 +2589,6 @@ body {
 
 .home-hero--relief .home-hero-cta {
   justify-content: center;
-}
-
-.home-hero--relief .home-street-strip {
-  margin: 0;
-  padding: 0 0 clamp(1.15rem, 3vw, 1.65rem);
-  border-top: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .home-problem-feelings {
@@ -3523,8 +3458,9 @@ body {
 
 .home-hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.65rem, 4.5vw, 2.35rem);
+  font-size: clamp(0.68rem, 2.1vw + 0.42rem, 1.45rem);
   font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1.2;
   color: var(--text-dark);
   margin: 0 0 0.65rem;
