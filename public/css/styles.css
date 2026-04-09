@@ -658,6 +658,12 @@ body {
   border-color: var(--brand-gold);
 }
 
+.site-header .header-actions a.header-btn--shop-local.active {
+  background: var(--brand-gold);
+  color: var(--text-dark);
+  border-color: var(--brand-gold);
+}
+
 /* Auth: Sign In trigger + dropdown panel */
 .auth-wrap {
   position: relative;
@@ -2604,9 +2610,17 @@ body {
   padding: 0 0.25rem;
 }
 
+.home-hero--relief .home-hero-headline {
+  max-width: none;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+}
+
 .home-hero--relief .home-hero-headline .home-hero-title {
   margin: 0;
   color: var(--brand-green);
+  text-align: center;
 }
 
 .home-hero--relief .home-hero-copy {

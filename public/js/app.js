@@ -456,12 +456,14 @@
     renderVisibleCards();
   });
 
-  favoritesLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    showFavoritesOnly = !showFavoritesOnly;
-    favoritesLink.classList.toggle('active', showFavoritesOnly);
-    renderVisibleCards();
-  });
+  if (favoritesLink) {
+    favoritesLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      showFavoritesOnly = !showFavoritesOnly;
+      favoritesLink.classList.toggle('active', showFavoritesOnly);
+      renderVisibleCards();
+    });
+  }
 
   var logoLink = document.getElementById('logo-link');
   if (logoLink) {
